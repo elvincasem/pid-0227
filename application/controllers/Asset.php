@@ -1,0 +1,204 @@
+<?php
+
+class Asset extends CI_Controller
+{
+	public function __construct()
+	{
+		parent::__construct();
+		//model module
+		$this->load->model('asset_model');
+		$this->load->model('settings_model');
+		$this->load->helper('date');
+		//view module
+		 $this->data = array(
+            'title' => 'Asset Management',
+			'purchasesclass' => '',
+			'aprclass' => '',
+			'prclass' => '',
+			'poclass' => '',
+			'receiveclass' => '',
+			'usersclass' => '',
+			'userssubclass' => '',
+			'reportsclass' => '',
+			'assetmanagementclass' => 'active',
+			'recevingassetsclass' => '',
+			'assetclass' => 'active',
+			'propertyclass' => '',
+			'supplymanagementclass' => '',
+			'settingsclass' => '',
+			'requisitionclass' => '',
+			'equipmentclass' => '',
+			'itemsclass' => '',
+			'suppliersclass' => '',
+			'employeesclass' => '',
+			'inventoryclass' => '',
+			'subnavtitle' => 'Asset',
+			'typeahead' => '1',
+			
+			);
+		//javascript module
+		$this->js = array(
+            'jsfile' => 'assetmanagement_asset.js'
+			);
+	}
+	
+	public function index()
+	{
+		$data = $this->data;
+		
+		$js = $this->js;
+
+		
+		
+		$data['assetlist'] = $this->asset_model->getassetlist();
+
+		$this->load->view('inc/header_view');
+		$this->load->view('assetmanagement/asset_view',$data);
+		$this->load->view('inc/footer_view',$js);
+		
+	}
+	
+	public function details($id)
+	{
+		$data = $this->data;
+		$js = $this->js;
+		$data['assetid'] = $id;
+		
+
+		$data['assetdetails'] = $this->asset_model->getassetdetails($id);
+		$data['article'] = $this->settings_model->articlelist();
+		$data['classification'] = $this->settings_model->classificationlist();
+		$data['equipments'] = $this->asset_model->getequipment($id);
+		
+		//display asset
+		$data['subnavtitle'] =$data['assetdetails']['asset_particulars'];
+		$this->load->view('inc/header_view');
+		$this->load->view('assetmanagement/assetdetails_view',$data);
+		$this->load->view('inc/footer_view',$js);
+		
+	}
+	
+	
+	public function saveasset(){
+		
+		$particulars = $this->input->post('particulars');
+		$article = $this->input->post('article');
+		$classification = $this->input->post('classification');
+
+		$this->asset_model->addasset($particulars,$article,$classification);
+		
+		
+	}
+	public function deleteasset(){
+		$assetid = $this->input->post('assetid');
+		$this->db->delete('assets', array('assetid' => $assetid));
+		//$this->db->delete('purchase_receiving_items', array('deliveryid' => $deliveryid));
+		
+	}
+	
+	
+	
+	
+	public function getesinglequipment($equipno){
+		
+		$equipment = $this->asset_model->getsingleequipment($equipno);
+
+		echo json_encode($equipment);
+	}
+	
+	
+	/*
+	
+	
+	
+	
+	public function updateunitprice(){
+		$deliveryitemsid = $this->input->post('deliveryitemsid');
+		$unitprice = $this->input->post('unitprice');
+		
+		$this->receiving_model->updateunitprice($deliveryitemsid,$unitprice);
+	}
+	
+	public function getitemlist(){
+		
+		$items = $this->receiving_model->getitemlist();
+		$tokens = array();
+		foreach($items as $items_array){
+			$tokens[] = $items_array['itemNo'] . "-". $items_array['description'];
+		}
+		echo json_encode($tokens);
+
+	}
+	
+	public function getitemunit(){
+		$itemid = $this->input->post('itemid');
+				
+		$rows = $this->receiving_model->getitemunitlist($itemid);
+		$conversioncount = $this->receiving_model->checkconvertion($itemid);
+		//echo $conversioncount;
+		if($conversioncount>0){
+			$conversionunits = $this->receiving_model->conversionunit($itemid);
+			//$sqlselect2 = "SELECT equiv_unit,base_qty,base_unit FROM items_buom where itemNo=$itemid";
+			//$stmt2 = $conn->prepare($sqlselect2);
+			//$stmt2->execute();
+			//$additional = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+			
+			//$conn = null;
+			$merge = array_merge($rows, $conversionunits); 
+			echo json_encode($merge);
+		}
+		else{
+			echo json_encode($rows);
+			//print_r($rows[0]);
+			//echo json_encode($rows);
+			//echo $sqlselect;
+			//$conn = null;
+		}
+
+		
+	}
+	
+	
+	public function additemreceived(){
+		
+		$deliveryid = $this->input->post('deliveryid');
+		$drno = $this->input->post('drno');
+		$itemid = $this->input->post('itemid');
+		$itemqty = $this->input->post('itemqty');
+		$itemunit = $this->input->post('itemunit');
+		$unitcost = $this->input->post('unitcost');
+		
+		
+		$this->receiving_model->additem($deliveryid,$drno,$itemid,$itemqty,$itemunit,$unitcost);
+		
+		
+	}
+	
+	public function deletedritem(){
+		$deliveryitemsid = $this->input->post('deliveryitemsid');
+		$this->db->delete('purchase_receiving_items', array('deliveryitemsid' => $deliveryitemsid));
+		
+		
+		
+	}
+	
+	
+	public function updatedelivery(){
+		
+		$receivedate = $this->input->post('receiveddate');
+		$drno = $this->input->post('drno');
+		$aprid = $this->input->post('aprid');
+		$poid = $this->input->post('poid');
+		$supplierid = $this->input->post('supplierid');
+		$deliveryid = $this->input->post('deliveryid');
+		$status = $this->input->post('status');
+		$invoiceno = $this->input->post('invoiceno');
+
+		$this->receiving_model->updatedelivery($receivedate,$drno,$aprid,$poid,$supplierid,$deliveryid,$status,$invoiceno);
+
+		
+	}
+	*/
+	
+
+}
