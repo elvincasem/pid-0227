@@ -7,6 +7,8 @@ class Home extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('dashboard_model');
+		$this->load->model('ticket_model');
+		$this->load->helper('date');
 		  $this->data = array(
             'title' => 'Dashboard',
 			'ticketsclass' => '',
@@ -42,11 +44,17 @@ class Home extends CI_Controller
 		$data['accounts'] = "";
 		$data['programapplication'] = "";
 		$data['permits'] = "";*/
+		//echo date('Asia/Manila');
 		$js = $this->js;
 		$data = $this->data;
 		$data['customerscount'] = $this->dashboard_model->gettotalcustomers();
 		$data['openticket'] = $this->dashboard_model->getopenticket();
 		$data['rmaticket'] = $this->dashboard_model->getrmaticket();
+		
+		
+		$data['opentickets'] = $this->ticket_model->getticketliststatus("Open");
+		$data['rmatickets'] = $this->ticket_model->getticketliststatus("RMA");
+		
 		
 		$this->load->view('inc/header_view');
 		

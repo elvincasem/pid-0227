@@ -93,24 +93,26 @@
 									
 									
 					<div class="widget-content widget-content-full">
-						<table class="table table-striped table-borderless remove-margin">
+						<table id="example-datatable" class="table table-striped table-borderless remove-margin">
 						<thead>
 							<th>Title</th>
 							<th class="text-center">Ticket #</th>
 						</thead>
 							<tbody>
-								<tr>
-									<td><a href="javascript:void(0)" class="text-black">No LCD Display</a></td>
-									<td class="text-center" ><span class="text-muted">Ticket#: 1</span></td>
-								</tr>
-								<tr>
-									<td><a href="javascript:void(0)" class="text-black">Ink waste pad cleaning</a></td>
-									<td class="text-center"><span class="text-muted">Ticket#: 2</span></td>
-								</tr>
-								<tr>
-									<td><a href="javascript:void(0)" class="text-black">Blue Screen while working on a Document file</a></td>
-									<td class="text-center"><span class="text-muted">Ticket #: 3</span></td>
-								</tr>
+							<?php
+							
+								foreach($opentickets as $open_ticket):
+								
+								echo "<tr>";
+								echo "<td><a href='ticket/details/".$open_ticket['ticketid']."' class='text-black'>".$open_ticket['title']."</a></td>";
+								echo "<td class='text-center' ><a href='ticket/details/".$open_ticket['ticketid']."' class='text-black'><span class='text-muted'>Ticket#:".$open_ticket['ticketid']."</span></td>";
+								echo "</a></tr>";
+								
+								endforeach;
+							
+							?>
+							
+								
 								
 							</tbody>
 						</table>
@@ -118,7 +120,7 @@
 								</div>
 							</div>
 	
-			<div class="col-sm-6">
+			<div class="col-sm-6 hidden">
 					<div class="widget" >
 						<div class="widget-content themed-background-danger text-light-op">
 							<i class="gi gi-warning_sign fa-chevron-right"></i> <strong> Overdue Tickets</strong>
@@ -126,28 +128,14 @@
 									
 									
 					<div class="widget-content widget-content-full">
-						<table class="table table-striped table-borderless remove-margin">
+						<table id="example-datatable2" class="table table-striped table-borderless remove-margin">
 						<thead>
 							<th>Title</th>
 							<th class="text-center">Ticket</th>
-							<th class="text-center">Due Date</th>
+							<!-- <th class="text-center">Due Date</th> -->
 						</thead>
 							<tbody>
-								<tr>
-									<td><a href="javascript:void(0)" class="text-black">No LCD Display</a></td>
-									<td class="text-center" style="width: 80px;"><span class="text-muted">Ticket#: 1</span></td>
-									<td class="text-center"><span class="text-muted">March 1, 2017</span></td>
-								</tr>
-								<tr>
-									<td><a href="javascript:void(0)" class="text-black">Ink waste pad cleaning</a></td>
-									<td class="text-center" style="width: 80px;"><span class="text-muted">Ticket#: 2</span></td>
-									<td class="text-center"><span class="text-muted">March 1, 2017</span></td>
-								</tr>
-								<tr>
-									<td><a href="javascript:void(0)" class="text-black">Blue Screen while working on a Document file</a></td>
-									<td class="text-center" style="width: 80px;"><span class="text-muted">Ticket #: 3</span></td>
-									<td class="text-center"><span class="text-muted">March 1, 2017</span></td>
-								</tr>
+								
 								
 							</tbody>
 						</table>
@@ -163,13 +151,24 @@
 									
 									
 					<div class="widget-content widget-content-full">
-						<table class="table table-striped table-borderless remove-margin">
+						<table id="example-datatable4" class="table table-striped table-borderless remove-margin">
+						<thead>
+							<th>Title</th>
+							<th class="text-center">Ticket</th>
+							
+						</thead>
 							<tbody>
-								<tr>
-									<td><a href="javascript:void(0)" class="text-black">No LCD Display</a></td>
-									<td class="text-center" style="width: 80px;"><span class="text-muted">Ticket#: 1</span></td>
-									<td class="text-center"><span class="text-muted">John Doe</span></td>
-								</tr>
+								<?php
+								foreach($rmatickets as $rma_ticket):
+								
+								echo "<tr>";
+								echo "<td><a href='ticket/details/".$rma_ticket['ticketid']."' class='text-black'>".$rma_ticket['title']."</a></td>";
+								echo "<td class='text-center' ><a href='ticket/details/".$rma_ticket['ticketid']."' class='text-black'><span class='text-muted'>Ticket#:".$rma_ticket['ticketid']."</span></td>";
+								echo "</a></tr>";
+								
+								endforeach;
+							
+							?>
 								
 								
 							</tbody>
