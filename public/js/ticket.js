@@ -91,7 +91,7 @@ function saveticket(){
 				console.log(response);
 				//location.reload();
 				var lastid = JSON.parse(response);
-				window.location.href = "ticket/details/"+lastid;
+				window.location.href = "details/"+lastid;
 		
 				
 				
@@ -108,4 +108,89 @@ function saveticket(){
 	
 }
 
+function savereply(){
+	
+	//$('#savebutton').prop("disabled", true);    
+	var ticketid = document.getElementById("ticketid").value;
+	var ticket_reply = document.getElementById("ticket-reply").value;
+	if(ticket_reply==""){
+		$.bootstrapGrowl('<h4><strong>Reply field is empty!</strong></h4> <p></p>', {
+				type: 'danger',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}});
+	}else{
+		$.ajax({
+			url: '../savereply',
+			type: 'post',
+			data: {ticketid: ticketid,ticket_reply:ticket_reply},
+			success: function(response) {
+				console.log(response);
+			$('#ticket_timeline').load(document.URL +  ' #ticket_timeline');
+			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Item Updated!</p>', {
+				type: 'success',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}
+			});
+				//location.reload();
+				//var lastid = JSON.parse(response);
+				//window.location.href = "details/"+lastid;
+		
+				
+				
+				//end saveticket
+				
+			}
+		});
+	}
+			
+		
+		
+	
+	
+	
+	
+	
+}
+
+function editticket(){
+	
+	$('#editbutton').prop("disabled", true); 
+	$('#savebutton').prop("disabled", false); 
+	//$('#customerid').prop("disabled", false); 
+	//$('#departmentid').prop("disabled", false); 
+	//$('#categoryid').prop("disabled", false); 
+	$('#status').prop("disabled", false); 
+	//$('#priority').prop("disabled", false); 
+	//$('#duedate').prop("disabled", false); 
+	//$('#assignedto_uid').prop("disabled", false); 
+
+	
+}
+
+function savedetails(){
+	
+	$('#editbutton').prop("disabled", false); 
+	$('#savebutton').prop("disabled", true); 
+	var customerid = document.getElementById("customerid").value;
+	var categoryid = document.getElementById("categoryid").value;
+	var status = document.getElementById("status").value;
+	var departmentid = document.getElementById("departmentid").value;
+	var priority = document.getElementById("priority").value;
+	var duedate = document.getElementById("duedate").value;
+	var assignedto_uid = document.getElementById("assignedto_uid").value;
+
+	
+}
+
+
+function editdescription(){
+	
+	$('#editbutton2').prop("disabled", true); 
+	$('#savebutton2').prop("disabled", false); 
+	$('#title').prop("disabled", false); 
+	$('#description').prop("disabled", false); 
+	
+}
 

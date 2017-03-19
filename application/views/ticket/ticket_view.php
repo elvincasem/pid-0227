@@ -134,45 +134,46 @@
                                     </div>
                                     <!-- END Menu Title -->
 
-                                    <!-- Menu Content -->
-                                    <ul class="nav nav-pills nav-stacked">
-                                        <li class="active">
-                                            <a href="page_app_email.html">
-                                                <span class="badge pull-right">350</span>
-                                                <i class="fa fa-fw fa-ticket icon-push"></i> <strong>All</strong>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)">
-                                                <span class="badge pull-right">5</span>
-                                                <i class="fa fa-fw fa-exclamation-triangle icon-push"></i> <strong>Urgent</strong>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)">
-                                                <span class="badge pull-right">10</span>
-                                                <i class="fa fa-fw fa-folder-open-o icon-push"></i> <strong>Open</strong>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)">
-                                                <span class="badge pull-right">50</span>
-                                                <i class="fa fa-fw fa-folder-o icon-push"></i> <strong>Closed</strong>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)">
-                                                <span class="badge pull-right">8</span>
-                                                <i class="fa fa-fw fa-ban icon-push"></i> <strong>Invalid</strong>
-                                            </a>
-                                        </li>
-                                    </ul>
+<!-- Menu Content -->
+<ul class="nav nav-pills nav-stacked">
+	<li class="<?php echo $allclass;?>">
+		<a href="<?=base_url();?>ticket">
+			<span class="badge pull-right"><?php echo $totaltickets;?></span>
+			<i class="fa fa-fw fa-ticket icon-push"></i> <strong>All</strong>
+		</a>
+	</li>
+	<li class="<?php echo $pickupclass;?>">
+		<a href="<?=base_url();?>ticket/pickup">
+			<span class="badge pull-right"><?php echo $pickuptickets;?></span>
+			<i class="fa fa-fw fa-exclamation-triangle icon-push"></i> <strong>Pickup</strong>
+		</a>
+	</li>
+	<li class="<?php echo $openclass;?>">
+		<a href="<?=base_url();?>ticket/open">
+			<span class="badge pull-right"><?php echo $opentickets;?></span>
+			<i class="fa fa-fw fa-folder-open-o icon-push"></i> <strong>Open</strong>
+		</a>
+	</li>
+	<li class="<?php echo $rmaclass;?>">
+		<a href="<?=base_url();?>ticket/rma">
+			<span class="badge pull-right"><?php echo $rmatickets;?></span>
+			<i class="fa fa-fw fa-gear icon-push"></i> <strong>RMA</strong>
+		</a>
+	</li>
+	<li class="<?php echo $closedclass;?>">
+		<a href="<?=base_url();?>ticket/closed">
+			<span class="badge pull-right"><?php echo $closedtickets;?></span>
+			<i class="fa fa-fw fa-folder-o icon-push"></i> <strong>Closed</strong>
+		</a>
+	</li>
+	
+</ul>
                                     <!-- END Menu Content -->
                                 </div>
                                 <!-- END Menu Block -->
 
                                 <!-- Quick Month Stats Block -->
-                                <div class="block">
+                                <div class="block hidden">
                                     <!-- Quick Month Stats Title -->
                                     <div class="block-title">
                                         <div class="block-options pull-right">
@@ -189,8 +190,9 @@
                                                 <td style="width: 60%;">
                                                     <strong>Total Tickets</strong>
                                                 </td>
-                                                <td>1500</td>
+		<td><?php echo $totaltickets;?></td>
                                             </tr>
+	<?php?>
                                             <tr>
                                                 <td>
                                                     <strong>Total Responses</strong>
@@ -267,19 +269,32 @@
                 </thead>
                 <tbody>
 				<?php
-				
+				$base = base_url();
 				foreach ($tickets as $ticketlist):
+				
+				
 				//$heiname = strtoupper($hei['instname']);
 				echo "<tr class='odd gradeX' >";
 				
 				//echo "<td><a href='receiving/details/".$rrlist['deliveryid']."'>".$rrlist['deliveryid']."</a></td>";
-				echo "<td><a href='#'>Ticket no: ".$ticketlist['ticketid']."</a></td>";
+				echo "<td><a href='".$base."ticket/details/".$ticketlist['ticketid']."'>Ticket #".$ticketlist['ticketid']."</a></td>";
 				
 				echo "<td>".$ticketlist['title']."</a></td>";
 				echo "<td>".$ticketlist['cfname']." ".$ticketlist['clname']."</td>";
 				echo "<td>".$ticketlist['name']."</td>";
 				//echo "<td>".mdate('%F %d, %Y',strtotime($items_list['dateacquired']))."</td>";
-				echo "<td>".$ticketlist['status']."</td>";
+				echo "<td>";
+					if($ticketlist['status']=="Open"){
+						echo "<span class='label label-success'>OPEN</span>";
+					}if($ticketlist['status']=="Pickup"){
+						echo "<span class='label label-warning'>Pickup</span>";
+					}if($ticketlist['status']=="RMA"){
+						echo "<span class='label label-danger'>RMA</span>";
+					}if($ticketlist['status']=="Closed"){
+						echo "<span class='label label-default'>Closed</span>";
+					}
+
+				echo "</td>";
 				echo "<td>".$ticketlist['priority']."</td>";
 			
 			

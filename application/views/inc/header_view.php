@@ -55,6 +55,7 @@
 
         <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
         <link rel="stylesheet" href="<?=base_url()?>public/css/themes.css">
+		<link id="theme-link" rel="stylesheet" href="<?=base_url()?>public/css/themes/social.css">
         <!-- END Stylesheets -->
 
         <!-- Modernizr (browser feature detection library) -->
