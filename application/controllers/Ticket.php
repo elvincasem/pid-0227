@@ -57,6 +57,7 @@ class Ticket extends CI_Controller
 		$data['closedtickets'] = $this->ticket_model->getclosedtickets();
 		
 		$data['categorytickets'] = $this->ticket_model->getcategorytickets();
+		
 		$this->load->view('inc/header_view');
 		$this->load->view('ticket/ticket_view',$data);
 		$this->load->view('inc/footer_view',$js);
@@ -262,6 +263,55 @@ class Ticket extends CI_Controller
 		$uid = $this->session->userdata('uid');
 		
 		$this->ticket_model->savereply($ticketid,$ticket_reply,$uid);
+	}
+	
+	public function updateticket(){
+		
+		$ticketid = $this->input->post('ticketid');
+		$formstatus = $this->input->post('status');
+		$ticketdetails = $this->ticket_model->getticketdetails($ticketid);
+		//print_r($ticketdetails);
+		$uid = $this->session->userdata('uid');
+		
+		if($ticketdetails['status']!=$formstatus){
+			//update with log
+			$remarks_log = "Changed Status from ".$ticketdetails['status']." to " .$formstatus;
+			$this->ticket_model->updateticket($ticketid,$formstatus);
+			$this->ticket_model->logticket($ticketid,$formstatus,$remarks_log,$uid);
+		}else{
+			//do nothing
+		}
+		
+		
+		
+	}
+	
+	public function updatedescription(){
+		
+		$ticketid = $this->input->post('ticketid');
+		$tickettitle = $this->input->post('tickettitle');
+		$ticketdescription = $this->input->post('ticketdescription');
+		$ticketdetails = $this->ticket_model->getticketdetails($ticketid);
+		print_r($ticketdetails);
+		$uid = $this->session->userdata('uid');
+		
+		$this->ticket_model->updatedescription($ticketid,$tickettitle,$ticketdescription);
+		
+		$formstatus = $ticketdetails['status'];
+		
+		if($ticketdetails['title']!=$tickettitle){
+			//update with log
+			$remarks_log = "Changed Title from ".$ticketdetails['title']." to " .$tickettitle;
+			
+			$this->ticket_model->logticket($ticketid,$formstatus,$remarks_log,$uid);
+		}
+		if($ticketdetails['description']!=$ticketdescription){
+			$remarks_log = "Changed Description from ".$ticketdetails['description']." to " .$ticketdescription;
+			$this->ticket_model->logticket($ticketid,$formstatus,$remarks_log,$uid);
+		}
+		
+		
+		
 	}
 	
 	

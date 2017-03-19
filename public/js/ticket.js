@@ -82,7 +82,30 @@ function saveticket(){
 	var description = document.getElementById("description").value;
 	//check duplicate
 	
+		//check blank fields
 		
+		if(customerid=="" && title=="" && description==""){
+			$.bootstrapGrowl('<h4><strong>Required fields must not be empty!</strong></h4> <p>Please select a Customer.</p>', {
+				type: 'danger',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}});
+		}if(title==""){
+			$.bootstrapGrowl('<h4><strong>Required fields must not be empty!</strong></h4> <p>Please enter a Title</p>', {
+				type: 'danger',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}});
+		}if(description==""){
+			$.bootstrapGrowl('<h4><strong>Required fields must not be empty!</strong></h4> <p>Please enter a Description</p>', {
+				type: 'danger',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}});
+		}
+		
+		else{
+			
 			$.ajax({
 			url: 'saveticket',
 			type: 'post',
@@ -99,6 +122,8 @@ function saveticket(){
 				
 			}
 		});
+		}
+			
 		
 		
 	
@@ -189,8 +214,76 @@ function editdescription(){
 	
 	$('#editbutton2').prop("disabled", true); 
 	$('#savebutton2').prop("disabled", false); 
-	$('#title').prop("disabled", false); 
-	$('#description').prop("disabled", false); 
+	$('#tickettitle').prop("disabled", false); 
+	$('#ticketdescription').prop("disabled", false); 
+	
+}
+
+
+function updatedetails(){
+	
+	//$('#savebutton').prop("disabled", true);    
+	var ticketid = document.getElementById("ticketid").value;
+	
+	var status = document.getElementById("status").value;
+	
+	
+		
+			$.ajax({
+			url: '../updateticket',
+			type: 'post',
+			data: {ticketid: ticketid,status:status},
+			success: function(response) {
+				console.log(response);
+				$('#ticket_timeline').load(document.URL +  ' #ticket_timeline');
+			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Item Updated!</p>', {
+				type: 'success',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}
+			});
+			
+			$('#editbutton').prop("disabled", false); 
+			$('#savebutton').prop("disabled", true); 
+			$('#status').prop("disabled", true); 
+				
+			}
+		});
+
+	
+}
+
+function updatedescription(){
+	
+	//$('#savebutton').prop("disabled", true);    
+	var ticketid = document.getElementById("ticketid").value;
+	
+	var tickettitle = document.getElementById("tickettitle").value;
+	var ticketdescription = document.getElementById("ticketdescription").value;
+	
+	
+		
+			$.ajax({
+			url: '../updatedescription',
+			type: 'post',
+			data: {ticketid: ticketid,tickettitle:tickettitle,ticketdescription:ticketdescription},
+			success: function(response) {
+				console.log(response);
+				$('#ticket_timeline').load(document.URL +  ' #ticket_timeline');
+			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Item Updated!</p>', {
+				type: 'success',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}
+			});
+			
+			$('#editbutton').prop("disabled", false); 
+			$('#savebutton').prop("disabled", true); 
+			$('#status').prop("disabled", true); 
+				
+			}
+		});
+
 	
 }
 

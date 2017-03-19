@@ -32,6 +32,9 @@ class Ticket_model extends CI_Model
 	public function getticketdetails($id)
 	{
 		$sql = $this->db->query("SELECT *,(SELECT NAME AS uname FROM tickets LEFT JOIN users ON tickets.addedbyuid = users.uid WHERE tickets.ticketid=".$this->db->escape($id).") AS agentname FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid LEFT JOIN department ON tickets.departmentid = department.departmentid WHERE ticketid=".$this->db->escape($id)."");
+		
+		//echo "SELECT *,(SELECT NAME AS uname FROM tickets LEFT JOIN users ON tickets.addedbyuid = users.uid WHERE tickets.ticketid=".$this->db->escape($id).") AS agentname FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid LEFT JOIN department ON tickets.departmentid = department.departmentid WHERE ticketid=".$this->db->escape($id)."";
+		
 		$ticketd = $sql->result_array();
 		if($ticketd == null){
 			return "error";
@@ -70,8 +73,13 @@ class Ticket_model extends CI_Model
 	
 	public function getticketlog($id)
 	{
-		$sql = $this->db->query("SELECT * FROM 
-((SELECT 'Customer' AS userreplied,CONCAT(customer.cfname,' ',customer.clname) AS user_name, cremarksid AS remarksid, cticketid AS ticketid,cremarks_info AS remarks_info, ctime_stamp AS time_stamp FROM remarks_customer LEFT JOIN customer ON remarks_customer.customerid = customer.customerid) UNION ALL (SELECT 'Agent' AS userreplied,users.name AS user_name, aremarksid AS remarksid, aticketid AS ticketid,aremarks_info AS remarks_info, atime_stamp AS time_stamp FROM remarks_agent LEFT JOIN users ON remarks_agent.uid= users.uid)) ticketlog WHERE ticketlog.ticketid = ".$this->db->escape($id)." ORDER BY time_stamp ASC ");
+		//$sql = $this->db->query("SELECT * FROM ((SELECT 'Customer' AS userreplied,CONCAT(customer.cfname,' ',customer.clname) AS user_name, cremarksid AS remarksid, cticketid AS ticketid,cremarks_info AS remarks_info, ctime_stamp AS time_stamp FROM remarks_customer LEFT JOIN customer ON remarks_customer.customerid = customer.customerid) UNION ALL (SELECT 'Agent' AS userreplied,users.name AS user_name, aremarksid AS remarksid, aticketid AS ticketid,aremarks_info AS remarks_info, atime_stamp AS time_stamp FROM remarks_agent LEFT JOIN users ON remarks_agent.uid= users.uid)) ticketlog WHERE ticketlog.ticketid = ".$this->db->escape($id)." ORDER BY time_stamp ASC ");
+$sql = $this->db->query("SELECT * FROM 
+((SELECT 'Customer' AS userreplied,CONCAT(customer.cfname,' ',customer.clname) AS user_name, cremarksid AS remarksid, cticketid AS ticketid,cremarks_info AS remarks_info, ctime_stamp AS time_stamp FROM remarks_customer LEFT JOIN customer ON remarks_customer.customerid = customer.customerid) UNION ALL (SELECT 'Agent' AS userreplied,users.name AS user_name, aremarksid AS remarksid, aticketid AS ticketid,aremarks_info AS remarks_info, atime_stamp AS time_stamp FROM remarks_agent LEFT JOIN users ON remarks_agent.uid= users.uid) UNION ALL (SELECT 'System' AS userreplied,users.name AS user_name, tlogid AS remarksid, ticketid AS ticketid,remarks AS remarks_info, time_stamp AS time_stamp FROM tickets_log LEFT JOIN users ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$this->db->escape($id)." ORDER BY time_stamp ASC ");
+//echo "SELECT * FROM ((SELECT 'Customer' AS userreplied,CONCAT(customer.cfname,' ',customer.clname) AS user_name, cremarksid AS remarksid, cticketid AS ticketid,cremarks_info AS remarks_info, ctime_stamp AS time_stamp FROM remarks_customer LEFT JOIN customer ON remarks_customer.customerid = customer.customerid) UNION ALL (SELECT 'Agent' AS userreplied,users.name AS user_name, aremarksid AS remarksid, aticketid AS ticketid,aremarks_info AS remarks_info, atime_stamp AS time_stamp FROM remarks_agent LEFT JOIN users ON remarks_agent.uid= users.uid) UNION ALL (SELECT 'System' AS userreplied,users.name AS user_name, tlogid AS remarksid, ticketid AS ticketid,remarks AS remarks_info, time_stamp AS time_stamp FROM tickets_log LEFT JOIN users ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$this->db->escape($id)." ORDER BY time_stamp ASC ";
+
+
+
 		return $sql->result_array();
 		
 		
@@ -173,6 +181,34 @@ class Ticket_model extends CI_Model
 		$sql = $this->db->query("SELECT COUNT(*) as totalnum,categoryvalue FROM tickets LEFT JOIN category ON tickets.categoryid = category.categoryid GROUP BY category.categoryid");
 		return $sql->result_array();
 		
+		
+	}
+	
+	public function updateticket($ticketid,$status)
+	{
+				
+		$sql = "update tickets set status=".$this->db->escape($status)." where ticketid=".$this->db->escape($ticketid)."";
+
+		$this->db->query($sql);
+
+	}
+	
+	public function updatedescription($ticketid,$tickettitle,$ticketdescription)
+	{
+				
+		$sql = "update tickets set title=".$this->db->escape($tickettitle).",description=".$this->db->escape($ticketdescription)." where ticketid=".$this->db->escape($ticketid)."";
+		//echo $sql;
+		$this->db->query($sql);
+
+	}
+	
+	public function logticket($ticketid,$status,$remarks_log,$uid)
+	{
+		
+		$sql = "INSERT INTO tickets_log (ticketid,status,remarks,updatedby) VALUES (".$this->db->escape($ticketid).",".$this->db->escape($status).",".$this->db->escape($remarks_log).",".$this->db->escape($uid).")";
+		$this->db->query($sql);
+		
+					
 		
 	}
 	

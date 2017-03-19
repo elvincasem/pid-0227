@@ -29,7 +29,7 @@
 	<div class="block-title clearfix">
 		
 		<h2>Tickets Details</h2>
-		<div class="pull-right"><button id="editbutton" type="submit" class="btn btn-sm btn-primary" onclick="editticket();"><i class="fa fa-edit"></i> Edit</button>&nbsp;&nbsp;<button type="submit" class="btn btn-sm btn-primary" onclick="savedetails();" id="savebutton" disabled><i class="fa fa-save"></i> Save</button></div>
+		<div class="pull-right"><button id="editbutton" type="submit" class="btn btn-sm btn-primary" onclick="editticket();"><i class="fa fa-edit"></i> Edit</button>&nbsp;&nbsp;<button type="submit" class="btn btn-sm btn-primary" onclick="updatedetails();" id="savebutton" disabled><i class="fa fa-save"></i> Save</button></div>
 	</div>
 	<!-- END Menu Title -->
 
@@ -169,18 +169,17 @@
                             <select id="addedbyuid" name="example-select2" class="select-select2" style="width: 100%;" data-placeholder="Choose one.." disabled>
 							
 							<?php
-							//echo "<option value='".$itemsdetails['category']."'>".$itemsdetails['category']."</option>";
 							
-							/*foreach ($article as $article_list):
+							foreach ($agentlist as $agent_list):
 								
-							if($article_list['articlename']==$assetdetails['asset_article']){
+							if($agent_list['uid']==$ticketdetails['addedbyuid']){
 									$selectedarticle = "selected='selected'";
 								}else{
 									$selectedarticle = "";
 								}
-								echo "<option value='".$article_list['articlename']."' $selectedarticle>".$article_list['articlename']."</option>";
+								echo "<option value='".$agent_list['uid']."' $selectedarticle>".$agent_list['name']."</option>";
 							
-							endforeach;*/
+							endforeach;
 							?>
 							</select>
 			</li>
@@ -219,11 +218,11 @@
 									
  <div class="tab-content" id="ticket_timeline">
                                         <!-- Tickets List -->
-										<div class="pull-right"><button id="editbutton2" type="submit" class="btn btn-sm btn-primary" onclick="editdescription();"><i class="fa fa-edit"></i> Edit</button>&nbsp;&nbsp;<button type="submit" class="btn btn-sm btn-primary" onclick="savedescription();" id="savebutton2" disabled><i class="fa fa-save"></i> Save</button></div>
+										<div class="pull-right"><button id="editbutton2" type="submit" class="btn btn-sm btn-primary" onclick="editdescription();"><i class="fa fa-edit"></i> Edit</button>&nbsp;&nbsp;<button type="submit" class="btn btn-sm btn-primary" onclick="updatedescription();" id="savebutton2" disabled><i class="fa fa-save"></i> Save</button></div>
 			<p>
-				<label>Title</label><input class="form-control" type="text" value="<?php echo $ticketdetails['title'];?>" disabled id="title">
+				<label>Title</label><input class="form-control" type="text" value="<?php echo $ticketdetails['title'];?>" disabled id="tickettitle">
 				<label>Description</label>
-				<textarea class="form-control" type="text"  disabled id="description"><?php echo $ticketdetails['description'];?></textarea>
+				<textarea class="form-control" type="text"  disabled id="ticketdescription"><?php echo $ticketdetails['description'];?></textarea>
 			</p>
 		   <?php
 			if($ticketdetails['status']=="Open"){
@@ -256,7 +255,9 @@
 		echo "<a href='page_ready_user_profile.html' class='pull-left'>";
 			if($ticket_log['userreplied']=="Agent"){
 				echo "<img src='".$base."public/img/agent_icon.png' alt='Avatar' class='img-circle' style='width:100%;'>";
-			}else{
+			}if($ticket_log['userreplied']=="System"){
+				echo "<img src='".$base."public/img/system_icon.png' alt='Avatar' class='img-circle' style='width:100%;'>";
+			}if($ticket_log['userreplied']=="Customer"){
 				echo "<img src='".$base."public/img/customer_icon.png' alt='Avatar' class='img-circle' style='width:100%;'>";
 			}
 		echo "</a>";

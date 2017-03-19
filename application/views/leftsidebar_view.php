@@ -49,10 +49,10 @@
                                     <a href="#" class="sidebar-nav-menu "><i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-table sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Reports</span></a>
                                     <ul>
 										<li class="<?php //echo $userssubclass;?>">
-                                            <a href="<?=base_url()?>users" ><i class="gi gi-user sidebar-nav-icon"></i>Ticket by Category</a>
+                                            <a href="<?=base_url()?>#" ><i class="gi gi-user sidebar-nav-icon"></i>Ticket by Category</a>
                                         </li>
 										<li class="<?php //echo $userssubclass;?>">
-                                            <a href="<?=base_url()?>users" ><i class="gi gi-user sidebar-nav-icon"></i>Ticket by Department</a>
+                                            <a href="<?=base_url()?>#" ><i class="gi gi-user sidebar-nav-icon"></i>Ticket by Department</a>
                                         </li>
 										
 										
