@@ -8,6 +8,9 @@ class Ticket extends CI_Controller
 		//model module
 		//$this->load->model('ticket_model');
 		$this->load->model('ticket_model');
+		$timezonedb = "SET time_zone = 'Asia/Manila'";
+		$this->db->query($timezonedb);
+		
 		$this->load->helper('date');
 		$this->session;
 		//view module
