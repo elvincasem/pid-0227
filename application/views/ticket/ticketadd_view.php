@@ -277,19 +277,51 @@
 						
 						
 						<h4 class="sub-header"></h4>
-						<label class="col-md-2 control-label" for="state-normal">Title*</label>
-                        <div class="col-md-4">
-                             <input type="text" id="title" name="state-normal" class="form-control" tabindex="0" vtabindex="2" placeholder="Title">
+				<div class="col-lg-12">
+						<label class="col-md-2 control-label" for="state-normal">Problem*</label>
+                        <div class="col-md-3">
+							<textarea class="form-control" id="title"></textarea>
+                            
 							
                         </div>
-							<div class="row"></div>
-						<label class="col-md-2 control-label" for="state-normal">Ticket Description*</label>
-                        <div class="col-md-4">
-                            <textarea id="description" class="form-control" placeholder="Ticket description here." ></textarea>
+						<label class="col-md-2 control-label" for="state-normal">Unit Description</label>
+                        <div class="col-md-3">
+                             <input type="text" id="description" class="form-control">
+							
+                        </div>
+						<div class="row"></div>
+						<label class="col-md-2 control-label" for="state-normal">History</label>
+                        <div class="col-md-3">
+							<textarea class="form-control" id="title"></textarea>
+                            
+							
+                        </div>
+						
+						<label class="col-md-2 control-label" for="state-normal">Serial Number</label>
+                        <div class="col-md-3">
+                             <input type="text" id="title" name="state-normal" class="form-control" tabindex="0" vtabindex="2">
+							
+                        </div>
+				</div>
+				
+
+				<div class="col-lg-12">
+						
+						<div class="row"></div>
+						<label class="col-md-2 control-label" for="state-normal">Special Instruction</label>
+                        <div class="col-md-3">
+                             <textarea id="description" class="form-control" ></textarea>
+							
                         </div>
 						
 						<div class="row"></div>
-						 <div class="col-md-7 pull-right">
+						
+				</div>
+							<div class="row"></div>
+						
+						
+						<div class="row"></div>
+						 <div class="col-md-3 pull-right">
 								<button id="savedrbutton" class="btn btn-primary" title="Save Ticket" onclick="saveticket();" ><i class="fa fa-floppy-o"></i> Save</button>
 						 </div>
 						

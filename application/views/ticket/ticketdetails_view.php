@@ -184,6 +184,15 @@
 							</select>
 			</li>
 			<li>
+				<label class=" control-label" for="state-normal">Date Created</label>
+                        <br>
+                             <?php 
+							 
+							echo  mdate('%F %d, %Y at %h:%i %a',strtotime($ticketdetails['time_stamp']));
+							 ?>
+							 
+			</li>
+			<li>
 				<div class="pull-right"></div>
 			</li>
 		</ul>
