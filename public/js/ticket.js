@@ -78,20 +78,24 @@ function saveticket(){
 	var priority = document.getElementById("priority").value;
 	var duedate = document.getElementById("duedate").value;
 	var assignedto_uid = document.getElementById("assignedto_uid").value;
-	var title = document.getElementById("title").value;
+	var problem = document.getElementById("problem").value;
 	var description = document.getElementById("description").value;
+	var history = document.getElementById("history").value;
+	var serialno = document.getElementById("serialno").value;
+	var special_instruction = document.getElementById("special_instruction").value;
+	
 	//check duplicate
 	
 		//check blank fields
 		
-		if(customerid=="" && title=="" && description==""){
+		if(customerid==""){
 			$.bootstrapGrowl('<h4><strong>Required fields must not be empty!</strong></h4> <p>Please select a Customer.</p>', {
 				type: 'danger',
 				delay: 3000,
 				allow_dismiss: true,
 				offset: {from: 'top', amount: 20}});
-		}if(title==""){
-			$.bootstrapGrowl('<h4><strong>Required fields must not be empty!</strong></h4> <p>Please enter a Title</p>', {
+		}if(problem==""){
+			$.bootstrapGrowl('<h4><strong>Required fields must not be empty!</strong></h4> <p>Please enter a Problem</p>', {
 				type: 'danger',
 				delay: 3000,
 				allow_dismiss: true,
@@ -102,14 +106,12 @@ function saveticket(){
 				delay: 3000,
 				allow_dismiss: true,
 				offset: {from: 'top', amount: 20}});
-		}
-		
-		else{
+		}else{
 			
 			$.ajax({
 			url: 'saveticket',
 			type: 'post',
-			data: {customerid: customerid,categoryid:categoryid,status:status,departmentid:departmentid,priority:priority,duedate:duedate,assignedto_uid:assignedto_uid,title:title,description:description},
+			data: {customerid: customerid,categoryid:categoryid,status:status,departmentid:departmentid,priority:priority,duedate:duedate,assignedto_uid:assignedto_uid,problem:problem,description:description,history:history,serialno:serialno,special_instruction:special_instruction},
 			success: function(response) {
 				console.log(response);
 				//location.reload();
@@ -214,8 +216,11 @@ function editdescription(){
 	
 	$('#editbutton2').prop("disabled", true); 
 	$('#savebutton2').prop("disabled", false); 
-	$('#tickettitle').prop("disabled", false); 
+	$('#problem').prop("disabled", false); 
 	$('#ticketdescription').prop("disabled", false); 
+	$('#serialno').prop("disabled", false); 
+	$('#history').prop("disabled", false); 
+	$('#special_instruction').prop("disabled", false); 
 	
 }
 
@@ -258,15 +263,18 @@ function updatedescription(){
 	//$('#savebutton').prop("disabled", true);    
 	var ticketid = document.getElementById("ticketid").value;
 	
-	var tickettitle = document.getElementById("tickettitle").value;
+	var problem = document.getElementById("problem").value;
 	var ticketdescription = document.getElementById("ticketdescription").value;
+	var serialno = document.getElementById("serialno").value;
+	var history = document.getElementById("history").value;
+	var special_instruction = document.getElementById("special_instruction").value;
 	
 	
 		
 			$.ajax({
 			url: '../updatedescription',
 			type: 'post',
-			data: {ticketid: ticketid,tickettitle:tickettitle,ticketdescription:ticketdescription},
+			data: {ticketid: ticketid,problem:problem,ticketdescription:ticketdescription,serialno:serialno,history:history,special_instruction:special_instruction},
 			success: function(response) {
 				console.log(response);
 				$('#ticket_timeline').load(document.URL +  ' #ticket_timeline');

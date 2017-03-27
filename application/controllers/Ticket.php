@@ -248,10 +248,14 @@ class Ticket extends CI_Controller
 		$priority = $this->input->post('priority');
 		$duedate = $this->input->post('duedate');
 		$assignedto_uid = $this->input->post('assignedto_uid');
-		$title = $this->input->post('title');
+		$problem = $this->input->post('problem');
 		$description = $this->input->post('description');
+		$history = $this->input->post('history');
+		$serialno = $this->input->post('serialno');
+		$special_instruction = $this->input->post('special_instruction');
 		
-		$this->ticket_model->saveticket($addedbyuid,$customerid,$categoryid,$status,$departmentid,$priority,$duedate,$assignedto_uid,$title,$description);
+		
+		$this->ticket_model->saveticket($addedbyuid,$customerid,$categoryid,$status,$departmentid,$priority,$duedate,$assignedto_uid,$problem,$description,$history,$serialno,$special_instruction);
 	}
 	
 	public function checkduplicatecustomer(){
@@ -292,24 +296,41 @@ class Ticket extends CI_Controller
 	public function updatedescription(){
 		
 		$ticketid = $this->input->post('ticketid');
-		$tickettitle = $this->input->post('tickettitle');
+		$problem = $this->input->post('problem');
 		$ticketdescription = $this->input->post('ticketdescription');
+		$serialno = $this->input->post('serialno');
+		$history = $this->input->post('history');
+		$special_instruction = $this->input->post('special_instruction');
+		
+		
 		$ticketdetails = $this->ticket_model->getticketdetails($ticketid);
-		print_r($ticketdetails);
+		//print_r($ticketdetails);
 		$uid = $this->session->userdata('uid');
 		
-		$this->ticket_model->updatedescription($ticketid,$tickettitle,$ticketdescription);
+		$this->ticket_model->updatedescription($ticketid,$problem,$ticketdescription,$serialno,$history,$special_instruction);
 		
 		$formstatus = $ticketdetails['status'];
 		
-		if($ticketdetails['title']!=$tickettitle){
+		if($ticketdetails['problem']!=$problem){
 			//update with log
-			$remarks_log = "Changed Title from ".$ticketdetails['title']." to " .$tickettitle;
+			$remarks_log = "Changed Problem from ".$ticketdetails['problem']." to " .$problem;
 			
 			$this->ticket_model->logticket($ticketid,$formstatus,$remarks_log,$uid);
 		}
 		if($ticketdetails['description']!=$ticketdescription){
 			$remarks_log = "Changed Description from ".$ticketdetails['description']." to " .$ticketdescription;
+			$this->ticket_model->logticket($ticketid,$formstatus,$remarks_log,$uid);
+		}
+		if($ticketdetails['serialno']!=$serialno){
+			$remarks_log = "Changed serial no. from ".$ticketdetails['serialno']." to " .$serialno;
+			$this->ticket_model->logticket($ticketid,$formstatus,$remarks_log,$uid);
+		}
+		if($ticketdetails['history']!=$history){
+			$remarks_log = "Changed history from ".$ticketdetails['history']." to " .$history;
+			$this->ticket_model->logticket($ticketid,$formstatus,$remarks_log,$uid);
+		}
+		if($ticketdetails['special_instruction']!=$special_instruction){
+			$remarks_log = "Changed History from ".$ticketdetails['special_instruction']." to " .$special_instruction;
 			$this->ticket_model->logticket($ticketid,$formstatus,$remarks_log,$uid);
 		}
 		

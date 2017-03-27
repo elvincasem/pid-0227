@@ -138,7 +138,7 @@
                         <div class="col-md-4">
 						
                             <select id="customerid" name="example-select2" class="select-select2" style="width: 73%;" data-placeholder="Choose one.." >
-							<option></option>
+							
 							<?php
 							//echo "<option value='".$itemsdetails['category']."'>".$itemsdetails['category']."</option>";
 							
@@ -280,26 +280,26 @@
 				<div class="col-lg-12">
 						<label class="col-md-2 control-label" for="state-normal">Problem*</label>
                         <div class="col-md-3">
-							<textarea class="form-control" id="title"></textarea>
+							<textarea class="form-control" id="problem" placeholder="Required Field"></textarea>
                             
 							
                         </div>
-						<label class="col-md-2 control-label" for="state-normal">Unit Description</label>
+						<label class="col-md-2 control-label" for="state-normal">Unit Description*</label>
                         <div class="col-md-3">
-                             <input type="text" id="description" class="form-control">
+                             <input type="text" id="description" class="form-control" placeholder="Required Field">
 							
                         </div>
 						<div class="row"></div>
 						<label class="col-md-2 control-label" for="state-normal">History</label>
                         <div class="col-md-3">
-							<textarea class="form-control" id="title"></textarea>
+							<textarea class="form-control" id="history"></textarea>
                             
 							
                         </div>
 						
 						<label class="col-md-2 control-label" for="state-normal">Serial Number</label>
                         <div class="col-md-3">
-                             <input type="text" id="title" name="state-normal" class="form-control" tabindex="0" vtabindex="2">
+                             <input type="text" id="serialno" name="state-normal" class="form-control" tabindex="0" vtabindex="2">
 							
                         </div>
 				</div>
@@ -310,7 +310,7 @@
 						<div class="row"></div>
 						<label class="col-md-2 control-label" for="state-normal">Special Instruction</label>
                         <div class="col-md-3">
-                             <textarea id="description" class="form-control" ></textarea>
+                             <textarea id="special_instruction" class="form-control" ></textarea>
 							
                         </div>
 						

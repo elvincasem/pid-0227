@@ -14,10 +14,10 @@ class Ticket_model extends CI_Model
 		
 	}
 	
-	public function saveticket($addedbyuid,$customerid,$categoryid,$status,$departmentid,$priority,$duedate,$assignedto_uid,$title,$description)
+	public function saveticket($addedbyuid,$customerid,$categoryid,$status,$departmentid,$priority,$duedate,$assignedto_uid,$problem,$description,$history,$serialno,$special_instruction)
 	{
 		
-		$sql = "INSERT INTO tickets (categoryid,status,priority,customerid,assignedto_uid,title,description,departmentid,addedbyuid,due_date) VALUES (".$this->db->escape($categoryid).",".$this->db->escape($status).",".$this->db->escape($priority).",".$this->db->escape($customerid).",".$this->db->escape($assignedto_uid).",".$this->db->escape($title).",".$this->db->escape($description).",".$this->db->escape($departmentid).",".$this->db->escape($addedbyuid).",".$this->db->escape($duedate).")";
+		$sql = "INSERT INTO tickets (categoryid,status,priority,customerid,assignedto_uid,problem,description,departmentid,history,special_instruction,serialno,addedbyuid,due_date) VALUES (".$this->db->escape($categoryid).",".$this->db->escape($status).",".$this->db->escape($priority).",".$this->db->escape($customerid).",".$this->db->escape($assignedto_uid).",".$this->db->escape($problem).",".$this->db->escape($description).",".$this->db->escape($departmentid).",".$this->db->escape($history).",".$this->db->escape($special_instruction).",".$this->db->escape($serialno).",".$this->db->escape($addedbyuid).",".$this->db->escape($duedate).")";
 		$this->db->query($sql);
 		
 		$sqlselect = $this->db->query("SELECT MAX(ticketid) AS lastid FROM tickets");
@@ -193,10 +193,10 @@ $sql = $this->db->query("SELECT * FROM
 
 	}
 	
-	public function updatedescription($ticketid,$tickettitle,$ticketdescription)
+	public function updatedescription($ticketid,$problem,$ticketdescription,$serialno,$history,$special_instruction)
 	{
 				
-		$sql = "update tickets set title=".$this->db->escape($tickettitle).",description=".$this->db->escape($ticketdescription)." where ticketid=".$this->db->escape($ticketid)."";
+		$sql = "update tickets set problem=".$this->db->escape($problem).",description=".$this->db->escape($ticketdescription).",serialno=".$this->db->escape($serialno).",history=".$this->db->escape($history).",special_instruction=".$this->db->escape($special_instruction)." where ticketid=".$this->db->escape($ticketid)."";
 		//echo $sql;
 		$this->db->query($sql);
 

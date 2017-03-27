@@ -229,9 +229,15 @@
                                         <!-- Tickets List -->
 										<div class="pull-right"><button id="editbutton2" type="submit" class="btn btn-sm btn-primary" onclick="editdescription();"><i class="fa fa-edit"></i> Edit</button>&nbsp;&nbsp;<button type="submit" class="btn btn-sm btn-primary" onclick="updatedescription();" id="savebutton2" disabled><i class="fa fa-save"></i> Save</button></div>
 			<p>
-				<label>Title</label><input class="form-control" type="text" value="<?php echo $ticketdetails['title'];?>" disabled id="tickettitle">
+				<label>Problem</label><textarea class="form-control" id="problem" disabled><?php echo $ticketdetails['problem'];?></textarea> 
 				<label>Description</label>
-				<textarea class="form-control" type="text"  disabled id="ticketdescription"><?php echo $ticketdetails['description'];?></textarea>
+				<textarea class="form-control"  disabled id="ticketdescription"><?php echo $ticketdetails['description'];?></textarea>
+				<label>Serial No</label>
+				<input type="text" class="form-control"   disabled id="serialno" value="<?php echo $ticketdetails['serialno']?>">
+				<label>History</label>
+				<textarea class="form-control"   disabled id="history"><?php echo $ticketdetails['history'];?></textarea>
+				<label>Special Instruction</label>
+				<textarea class="form-control" disabled id="special_instruction"><?php echo $ticketdetails['special_instruction'];?></textarea>
 			</p>
 		   <?php
 			if($ticketdetails['status']=="Open"){

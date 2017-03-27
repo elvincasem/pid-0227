@@ -279,7 +279,7 @@
 				//echo "<td><a href='receiving/details/".$rrlist['deliveryid']."'>".$rrlist['deliveryid']."</a></td>";
 				echo "<td><a href='".$base."ticket/details/".$ticketlist['ticketid']."'>Ticket #".$ticketlist['ticketid']."</a></td>";
 				
-				echo "<td>".$ticketlist['title']."</a></td>";
+				echo "<td>".$ticketlist['problem']."</a></td>";
 				echo "<td>".$ticketlist['cfname']." ".$ticketlist['clname']."</td>";
 				echo "<td>".$ticketlist['name']."</td>";
 				//echo "<td>".mdate('%F %d, %Y',strtotime($items_list['dateacquired']))."</td>";

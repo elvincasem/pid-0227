@@ -104,7 +104,7 @@
 								foreach($opentickets as $open_ticket):
 								
 								echo "<tr>";
-								echo "<td><a href='ticket/details/".$open_ticket['ticketid']."' class='text-black'>".$open_ticket['title']."</a></td>";
+								echo "<td><a href='ticket/details/".$open_ticket['ticketid']."' class='text-black'>".$open_ticket['problem']."</a></td>";
 								echo "<td class='text-center' ><a href='ticket/details/".$open_ticket['ticketid']."' class='text-black'><span class='text-muted'>Ticket#:".$open_ticket['ticketid']."</span></td>";
 								echo "</a></tr>";
 								
@@ -162,7 +162,7 @@
 								foreach($rmatickets as $rma_ticket):
 								
 								echo "<tr>";
-								echo "<td><a href='ticket/details/".$rma_ticket['ticketid']."' class='text-black'>".$rma_ticket['title']."</a></td>";
+								echo "<td><a href='ticket/details/".$rma_ticket['ticketid']."' class='text-black'>".$rma_ticket['problem']."</a></td>";
 								echo "<td class='text-center' ><a href='ticket/details/".$rma_ticket['ticketid']."' class='text-black'><span class='text-muted'>Ticket#:".$rma_ticket['ticketid']."</span></td>";
 								echo "</a></tr>";
 								
