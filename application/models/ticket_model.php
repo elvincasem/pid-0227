@@ -127,7 +127,6 @@ $sql = $this->db->query("SELECT * FROM
 	
 	public function savereply($ticketid,$ticket_reply,$uid)
 	{
-		
 		$sql = "INSERT INTO remarks_agent (aticketid,aremarks_info,uid) VALUES (".$this->db->escape($ticketid).",".$this->db->escape($ticket_reply).",".$this->db->escape($uid).")";
 		$this->db->query($sql);
 		

@@ -35,6 +35,8 @@
 
 		<!-- Menu Content -->
 		<input type="hidden" id="ticketid" value="<?php echo $ticketid;?>">
+		<input type="hidden" id="cemail" value="<?php echo $ticketdetails['cemail'];?>">
+		<input type="hidden" id="cmobileno" value="<?php echo $ticketdetails['cmobileno'];?>">
 		<ul class="nav nav-pills nav-stacked">
 			<li class="active">
 				<label class="control-label" for="state-normal">Customer Name</label>
@@ -307,7 +309,7 @@
 		<div class="media-body">
 			
 				<textarea id="ticket-reply" name="tickets-reply" class="form-control" rows="5" placeholder="Enter your reply"></textarea>
-				<i>Notify Customer: </i><br><input type="checkbox"> Email <input type="checkbox"> SMS <input type="checkbox"> Mobile App<br>
+				<i>Notify Customer: </i><br><input type="checkbox" id="email_notif"> Email <input type="checkbox" id="sms_notif"> SMS <input type="checkbox" id="mobile_notif"> Mobile App<br>
 				<button type="submit" class="btn btn-sm btn-primary" onclick="savereply();"><i class="fa fa-reply"></i> Save Reply</button>
 			
 		</div>

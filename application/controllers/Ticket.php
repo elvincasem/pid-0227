@@ -8,6 +8,7 @@ class Ticket extends CI_Controller
 		//model module
 		//$this->load->model('ticket_model');
 		$this->load->model('ticket_model');
+		$this->load->library('phpmailer');
 		$timezonedb = "SET time_zone = 'Asia/Manila'";
 		$this->db->query($timezonedb);
 		
@@ -206,6 +207,7 @@ class Ticket extends CI_Controller
 		$data['ticketid'] = $id;
 		$data['ticketdetails'] = $this->ticket_model->getticketdetails($id);
 		
+		//print_r($data['ticketdetails']);
 		if($data['ticketdetails']=="error"){
 			show_404();
 		}else{
@@ -267,9 +269,27 @@ class Ticket extends CI_Controller
 	public function savereply(){
 		$ticketid = $this->input->post('ticketid');
 		$ticket_reply = $this->input->post('ticket_reply');
+		$sms = $this->input->post('sms');
+		$emailclient = $this->input->post('emailclient');
+		$cemail = $this->input->post('cemail');
+		$cmobileno = $this->input->post('cmobileno');
 		$uid = $this->session->userdata('uid');
 		
+		//save reply to database
 		$this->ticket_model->savereply($ticketid,$ticket_reply,$uid);
+		
+		//notify via sms
+		if($sms == "yes"){
+			$sms_to = 
+			$this->send_sms($cmobileno,$ticketid,$ticket_reply);
+		}
+		
+		if($emailclient =="yes"){
+			$email = $cemail;
+			$subject = "Ticket #:".$ticketid." Update";
+			$body = "Ticket Details :".$ticket_reply;
+			$this->send_email($email,$subject,$body);
+		}
 	}
 	
 	public function updateticket(){
@@ -338,6 +358,66 @@ class Ticket extends CI_Controller
 		
 	}
 	
+	public function send_sms($sms_to,$ticketid,$ticket_reply){
+		
+			$sms_from = "INFO";
+			//$sms_to = "09468147457";
+			$user = "APINTJ0GF12MD";
+			$pass = "APINTJ0GF12MDNTJ0G";
+			$sms_msg = "Ticket id #:".$ticketid."\n".$ticket_reply;
+			 $query_string = "api.aspx?apiusername=".$user."&apipassword=".$pass;
+			$query_string .= "&senderid=".rawurlencode($sms_from)."&mobileno=".rawurlencode($sms_to);
+			$query_string .= "&message=".rawurlencode(stripslashes($sms_msg));        
+			$url = "http://gateway.onewaysms.ph:10001/".$query_string;
+			//echo $url;   
+			//file($url);    
+			
+			// create a new cURL resource
+
+                        
+			$fd = @implode ('', file ($url));    
+			//print_r($ch);
+                        
+                        
+                        //echo $url;
+                        if ($fd)  
+                        {           
+                        print_r($fd);            
+				    if ($fd > 0) {
+					Print("MT ID : " . $fd);
+					$ok = "success";
+				    }        
+				    else {
+					print("Please refer to API on Error : " . $fd);
+					$ok = "fail";
+				    }
+                        }           
+                        else      
+                        {                       
+                                    // no contact with gateway                      
+                                    $ok = "fail";       
+                        }          
+                        return $ok; 
+	}	
+	
+	public function send_email($email,$subject,$body){
+
+ 
+      //$subject = '';
+      $name = 'Helpdesk System';
+      //$email = 'elvin.casem@gmail.com';
+      //$body = "This is body text for test email to combine CodeIgniter and PHPmailer";
+      $this->phpmailer->AddAddress($email);
+      $this->phpmailer->IsMail();
+      $this->phpmailer->From = 'info@helpdesk.evenlyten.com';
+      $this->phpmailer->FromName = 'Helpdesk Admin';
+      $this->phpmailer->IsHTML(true);
+      $this->phpmailer->Subject = $subject;
+      $this->phpmailer->Body = $body;
+      $this->phpmailer->Send();
+ 
+  
+	}
 	
 	
 	

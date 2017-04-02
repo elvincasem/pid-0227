@@ -1,72 +1,4 @@
-function savecustomer(){
-	
-	//$('#savebutton').prop("disabled", true);    
-	var cemail = document.getElementById("cemail").value;
-	var clname = document.getElementById("clname").value;
-	var cfname = document.getElementById("cfname").value;
-	var cmname = document.getElementById("cmname").value;
-	var caddress = document.getElementById("caddress").value;
-	var cmobileno = document.getElementById("cmobileno").value;
-	var cotherno = document.getElementById("cotherno").value;
-	var cpassword = document.getElementById("cpassword").value;
-	//check duplicate
-	if(cfname ==""){
-		$.bootstrapGrowl('<h4><strong>First Name is empty.</strong></h4> <p> Please enter the required field.</p>', {
-		type: 'warning',
-		delay: 3000,
-		allow_dismiss: true,
-		offset: {from: 'top', amount: 20}
-		})
-	}else if(cemail ==""){
-		$.bootstrapGrowl('<h4><strong>Email is empty.</strong></h4> <p> Please enter the required field.</p>', {
-		type: 'warning',
-		delay: 3000,
-		allow_dismiss: true,
-		offset: {from: 'top', amount: 20}
-		})
-	}else{
-		
-			$.ajax({
-			url: 'checkduplicatecustomer',
-			type: 'post',
-			data: {cemail: cemail},
-			success: function(response) {
-				console.log(response);
-				//location.reload();
-				
-				if(response==0){
-					$.ajax({
-						url: 'savecustomer',
-						type: 'post',
-						data: {cemail: cemail,clname:clname,cfname:cfname,cmname:cmname,caddress:caddress,cmobileno:cmobileno,cotherno:cotherno,cpassword:cpassword},
-						success: function(response) {
-							console.log(response);
-							location.reload();
-							
-						}
-					});
-				}else{
-					$.bootstrapGrowl('<h4><strong>Email already in use.</strong></h4> <p> Please enter other email.</p>', {
-					type: 'warning',
-					delay: 3000,
-					allow_dismiss: true,
-					offset: {from: 'top', amount: 20}
-				});
-				}
-				
-				
-				//end savecustomer
-				
-			}
-		});
-		
-		
-	}
-	
-	
-	
-	
-}
+
 
 function saveticket(){
 	
@@ -140,6 +72,25 @@ function savereply(){
 	//$('#savebutton').prop("disabled", true);    
 	var ticketid = document.getElementById("ticketid").value;
 	var ticket_reply = document.getElementById("ticket-reply").value;
+	var cemail = document.getElementById("cemail").value;
+	var cmobileno = document.getElementById("cmobileno").value;
+	
+	var smsbox = document.getElementById("sms_notif");
+	if(smsbox.checked==true){
+			var sms = "yes";
+	}else{
+		//alert("No SMS");
+		var sms = "no";
+	}
+	
+	var emailbox = document.getElementById("email_notif");
+	if(emailbox.checked==true){
+		var emailclient = "yes";
+	}else{
+		//alert("No SMS");
+		var emailclient = "no";
+	}
+	
 	if(ticket_reply==""){
 		$.bootstrapGrowl('<h4><strong>Reply field is empty!</strong></h4> <p></p>', {
 				type: 'danger',
@@ -150,7 +101,7 @@ function savereply(){
 		$.ajax({
 			url: '../savereply',
 			type: 'post',
-			data: {ticketid: ticketid,ticket_reply:ticket_reply},
+			data: {ticketid: ticketid,ticket_reply:ticket_reply,emailclient:emailclient,sms:sms,cemail:cemail,cmobileno:cmobileno},
 			success: function(response) {
 				console.log(response);
 			$('#ticket_timeline').load(document.URL +  ' #ticket_timeline');
@@ -160,6 +111,8 @@ function savereply(){
 				allow_dismiss: true,
 				offset: {from: 'top', amount: 20}
 			});
+				
+			
 				//location.reload();
 				//var lastid = JSON.parse(response);
 				//window.location.href = "details/"+lastid;
@@ -170,6 +123,8 @@ function savereply(){
 				
 			}
 		});
+		//alert(smsbox);
+		
 	}
 			
 		

@@ -20,44 +20,52 @@
    <div class="col-lg-12">
             <!-- Partial Responsive Block -->
 			
-			 <!-- Regular Modal -->
-                <div id="adddeliverymodal" class="modal bg" role="dialog" aria-hidden="true">
+			<!-- Regular Modal -->
+                <div id="newcustomermodal" class="modal bg" role="dialog" aria-hidden="true">
+				<input type="hidden" id="customerid">
                     <div class="modal-dialog modal-md">
                         <div class="modal-content">
                            <div class="modal-header">
 								
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-								<h3 class="modal-title"><strong>Add Item</strong></h3>
+								<h3 class="modal-title"><strong>New Customer</strong></h3>
                                 
                             </div> 
                             <div class="modal-body">
                                 <div class="form-group">
-						<label class="col-md-3 control-label text-right">Employee Number</label>
+						<label class="col-md-3 control-label text-right">Email Address*</label>
                         <div class="col-md-7">
-                            <input type="text" id="empno" name="state-normal" class="form-control" tabindex="0" value="">
+                            <input type="text" id="cemail" name="state-normal" class="form-control" tabindex="0" value="">
                         </div>	
 						<div class="row"></div>
 						<label class="col-md-3 control-label text-right">Last Name</label>
                         <div class="col-md-7">
-                            <input type="text" id="lname" name="state-normal" class="form-control" tabindex="0" value="">
+                            <input type="text" id="clname" name="state-normal" class="form-control" tabindex="0" value="">
                         </div>	
-						<label class="col-md-3 control-label text-right">First Name</label>
+						<label class="col-md-3 control-label text-right">First Name*</label>
                         <div class="col-md-7">
-                            <input type="text" id="fname" name="state-normal" class="form-control" tabindex="0" value="">
+                            <input type="text" id="cfname" name="state-normal" class="form-control" tabindex="0" value="">
                         </div>	
 						<label class="col-md-3 control-label text-right">Middle Name</label>
                         <div class="col-md-7">
-                            <input type="text" id="mname" name="state-normal" class="form-control col-xs-1" tabindex="0" value="">
+                            <input type="text" id="cmname" name="state-normal" class="form-control col-xs-1" tabindex="0" value="">
                         </div>	
-						<label class="col-md-3 control-label text-right">Extension</label>
+						<label class="col-md-3 control-label text-right">Address</label>
                         <div class="col-md-7">
-                            <input type="text" id="extension" name="state-normal" class="form-control col-xs-1" tabindex="0" value="">
+                            <input type="text" id="caddress" name="state-normal" class="form-control col-xs-1" tabindex="0" value="">
                         </div>	
-						<label class="col-md-3 control-label text-right">Designation</label>
+						<label class="col-md-3 control-label text-right">Mobile No.</label>
                         <div class="col-md-7">
-                            <input type="text" id="designation" name="state-normal" class="form-control col-xs-1" tabindex="0" value="">
+                            <input type="text" id="cmobileno" name="state-normal" class="form-control col-xs-1" tabindex="0" value="">
                         </div>	
-						
+						<label class="col-md-3 control-label text-right">Other No.</label>
+                        <div class="col-md-7">
+                            <input type="text" id="cotherno" name="state-normal" class="form-control col-xs-1" tabindex="0" value="">
+                        </div>	
+						<label class="col-md-3 control-label text-right">Password</label>
+                        <div class="col-md-7">
+                            <input type="text" id="cpassword" name="state-normal" class="form-control col-xs-1" tabindex="0" value="">
+                        </div>	
 	
 								
 						<div class="row"></div>
@@ -78,19 +86,21 @@
 								
                             </div>
                             <div class="modal-footer">
-							<button type="button" id="savebutton" class="btn btn-effect-ripple btn-primary" onclick="saveemployee();">Save Employee</button>
+							<button type="button" id="savebutton" class="btn btn-effect-ripple btn-primary" onclick="savecustomer();">Save Customer</button>
+							<button type="button" id="updatebutton" class="btn btn-effect-ripple btn-primary" onclick="updatecustomer();" disabled>Update</button>
 							
                                 <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
                 </div>
+				
 		
             
 	<div class="block full">
         <div class="block-title">
 		<h5>Customers List</h5>
-			<button type="button" id="adddelivery" class="hidden pull-right btn btn-effect-ripple btn-primary" href="#adddeliverymodal" data-toggle="modal">Add Item</button>
+			<button type="button" id="adddelivery" class="pull-right btn btn-effect-ripple btn-primary" href="#newcustomermodal" data-toggle="modal" onclick="addcustomer();">Add Customer</button>
 			<?php //print_r($heidirectory);?>
         </div>
         <div class="table-responsive">
@@ -118,7 +128,7 @@
 				echo "<tr class='odd gradeX' >";
 
 				
-				echo "<td><a href='#".$cust_list['customerid']."'>".$cust_list['cfname']." ".$cust_list['clname']."</a></td>";
+				echo "<td><a href='#newcustomermodal' data-toggle='modal' onclick='editcustomer(".$cust_list['customerid'].");'>".$cust_list['cfname']." ".$cust_list['clname']."</a></td>";
 				echo "<td>".$cust_list['caddress']."</td>";
 				echo "<td>".$cust_list['cmobileno']."</td>";
 				echo "<td>".$cust_list['cemail']."</td>";

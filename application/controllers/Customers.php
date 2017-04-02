@@ -7,6 +7,7 @@ class Customers extends CI_Controller
 		parent::__construct();
 		//model module
 		$this->load->model('customers_model');
+		//$this->load->model('customers_model');
 		$this->load->helper('date');
 		//view module
 		 $this->data = array(
@@ -27,7 +28,7 @@ class Customers extends CI_Controller
 			);
 		//javascript module
 		$this->js = array(
-            'jsfile' => 'settings_employees.js'
+            'jsfile' => 'customer.js'
 			);
 	}
 	
@@ -44,6 +45,51 @@ class Customers extends CI_Controller
 		$this->load->view('inc/footer_view',$js);
 		
 	}
+	
+	public function savecustomer(){
+		$cemail = $this->input->post('cemail');
+		$clname = $this->input->post('clname');
+		$cfname = $this->input->post('cfname');
+		$cmname = $this->input->post('cmname');
+		$caddress = $this->input->post('caddress');
+		$cmobileno = $this->input->post('cmobileno');
+		$cotherno = $this->input->post('cotherno');
+		$cpassword = $this->input->post('cpassword');
+		
+		$this->customers_model->savecustomer($cemail,$clname,$cfname,$cmname,$caddress,$cmobileno,$cotherno,$cpassword);
+	}
+	
+	public function checkduplicatecustomer(){
+		$cemail = $this->input->post('cemail');
+		echo $this->customers_model->checkemail($cemail);
+		
+	}
+	
+	
+	public function getcustomerdetails($customerid){
+		//$customerid = $this->input->post('customerid');
+		
+		echo json_encode($this->customers_model->getcustomerdetails($customerid));
+	}
+	
+	public function updatecustomer(){
+		$customerid = $this->input->post('customerid');
+		$cemail = $this->input->post('cemail');
+		$clname = $this->input->post('clname');
+		$cfname = $this->input->post('cfname');
+		$cmname = $this->input->post('cmname');
+		$caddress = $this->input->post('caddress');
+		$cmobileno = $this->input->post('cmobileno');
+		$cotherno = $this->input->post('cotherno');
+		$cpassword = $this->input->post('cpassword');
+		
+		$this->customers_model->updatecustomer($customerid,$cemail,$clname,$cfname,$cmname,$caddress,$cmobileno,$cotherno,$cpassword);
+	}
+	
+	
+	
+	
+	
 	
 
 	
