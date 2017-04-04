@@ -84,6 +84,7 @@ function savereply(){
 	}
 	
 	var emailbox = document.getElementById("email_notif");
+	
 	if(emailbox.checked==true){
 		var emailclient = "yes";
 	}else{

@@ -365,10 +365,10 @@ class Ticket extends CI_Controller
 			$user = "APINTJ0GF12MD";
 			$pass = "APINTJ0GF12MDNTJ0G";
 			$sms_msg = "Ticket id #:".$ticketid."\n".$ticket_reply;
-			 $query_string = "api.aspx?apiusername=".$user."&apipassword=".$pass;
+			 $query_string = "?apiusername=".$user."&apipassword=".$pass;
 			$query_string .= "&senderid=".rawurlencode($sms_from)."&mobileno=".rawurlencode($sms_to);
-			$query_string .= "&message=".rawurlencode(stripslashes($sms_msg));        
-			$url = "http://gateway.onewaysms.ph:10001/".$query_string;
+			 $query_string .= "&message=".rawurlencode(stripslashes($sms_msg)) . "&languagetype=1";        
+			$url = "http://gateway80.onewaysms.ph/api2.aspx".$query_string;
 			//echo $url;   
 			//file($url);    
 			

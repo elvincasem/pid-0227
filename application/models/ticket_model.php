@@ -7,7 +7,8 @@ class Ticket_model extends CI_Model
 	
 	public function savecustomer($cemail,$clname,$cfname,$cmname,$caddress,$cmobileno,$cotherno,$cpassword)
 	{
-		
+		//for online time on saving
+		$this->db->query("SET SESSION time_zone = '+8:00';");
 		$sql = "INSERT INTO customer (cemail,clname,cfname,cmname,caddress,cmobileno,cotherno,cpassword) VALUES (".$this->db->escape($cemail).",".$this->db->escape($clname).",".$this->db->escape($cfname).",".$this->db->escape($cmname).",".$this->db->escape($caddress).",".$this->db->escape($cmobileno).",".$this->db->escape($cotherno).",".$this->db->escape($cpassword).")";
 		$this->db->query($sql);
 				
@@ -16,7 +17,8 @@ class Ticket_model extends CI_Model
 	
 	public function saveticket($addedbyuid,$customerid,$categoryid,$status,$departmentid,$priority,$duedate,$assignedto_uid,$problem,$description,$history,$serialno,$special_instruction)
 	{
-		
+		//for online time on saving
+		$this->db->query("SET SESSION time_zone = '+8:00';");
 		$sql = "INSERT INTO tickets (categoryid,status,priority,customerid,assignedto_uid,problem,description,departmentid,history,special_instruction,serialno,addedbyuid,due_date) VALUES (".$this->db->escape($categoryid).",".$this->db->escape($status).",".$this->db->escape($priority).",".$this->db->escape($customerid).",".$this->db->escape($assignedto_uid).",".$this->db->escape($problem).",".$this->db->escape($description).",".$this->db->escape($departmentid).",".$this->db->escape($history).",".$this->db->escape($special_instruction).",".$this->db->escape($serialno).",".$this->db->escape($addedbyuid).",".$this->db->escape($duedate).")";
 		$this->db->query($sql);
 		
@@ -127,6 +129,8 @@ $sql = $this->db->query("SELECT * FROM
 	
 	public function savereply($ticketid,$ticket_reply,$uid)
 	{
+		//for online time on saving
+		$this->db->query("SET SESSION time_zone = '+8:00';");
 		$sql = "INSERT INTO remarks_agent (aticketid,aremarks_info,uid) VALUES (".$this->db->escape($ticketid).",".$this->db->escape($ticket_reply).",".$this->db->escape($uid).")";
 		$this->db->query($sql);
 		
@@ -203,7 +207,8 @@ $sql = $this->db->query("SELECT * FROM
 	
 	public function logticket($ticketid,$status,$remarks_log,$uid)
 	{
-		
+		//for online time on saving
+		$this->db->query("SET SESSION time_zone = '+8:00';");
 		$sql = "INSERT INTO tickets_log (ticketid,status,remarks,updatedby) VALUES (".$this->db->escape($ticketid).",".$this->db->escape($status).",".$this->db->escape($remarks_log).",".$this->db->escape($uid).")";
 		$this->db->query($sql);
 		
