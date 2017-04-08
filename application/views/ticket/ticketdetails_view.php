@@ -227,9 +227,10 @@
                                     <!-- END Tickets Title -->
 									
 									
- <div class="tab-content" id="ticket_timeline">
+ <div class="tab-content" >
                                         <!-- Tickets List -->
 										<div class="pull-right"><button id="editbutton2" type="submit" class="btn btn-sm btn-primary" onclick="editdescription();"><i class="fa fa-edit"></i> Edit</button>&nbsp;&nbsp;<button type="submit" class="btn btn-sm btn-primary" onclick="updatedescription();" id="savebutton2" disabled><i class="fa fa-save"></i> Save</button></div>
+	
 			<p>
 				<label>Problem</label><textarea class="form-control" id="problem" disabled><?php echo $ticketdetails['problem'];?></textarea> 
 				<label>Description</label>
@@ -258,7 +259,7 @@
 		   ?>
 		   
                                            
-<ul class="media-list media-feed push">
+<ul class="media-list media-feed push" id="ticket_timeline">
 	<!-- Ticket -->
 	
 	
@@ -283,10 +284,25 @@
 				<span class='text-muted pull-right'>
 					<small>".$ticket_log['time_stamp']."</small>
 				</span>
-				<small><a href='page_ready_user_profile.html'>".$ticket_log['user_name']."</a></small>
+				<small><a href='#'>".$ticket_log['user_name']."</a></small>
 			</p>";
-			
-		echo "<p>".$ticket_log['remarks_info']."</p>";
+		
+		
+		
+		if($ticket_log['replytype']=="TEXT"){
+			echo "<p>".$ticket_log['remarks_info']."</p>";
+		}
+		if(substr($ticket_log['replytype'], 0, strpos($ticket_log['replytype'], '/'))=="image"){
+			$base = base_url();
+				echo "<a href='".$base."uploads/".$ticket_log['remarks_info']."' data-toggle='lightbox-image'><img src='".$base."uploads/".$ticket_log['remarks_info']."' alt='image'></a>";
+		}
+		if(substr($ticket_log['replytype'], 0, strpos($ticket_log['replytype'], '/'))=="video"){
+				echo "<video width='320' height='240' controls>
+  <source src='".$base."uploads/".$ticket_log['remarks_info']."' type='".$ticket_log['replytype']."'>
+
+</video>";
+		}
+		
 			
 			
 		echo "</div>";
@@ -297,22 +313,89 @@
 	
 	?>
 	
-	
+
 	<!-- END Ticket -->
 
-	<!-- Replies -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</ul>
+<!-- reply section -->
+<ul>
+<!-- Replies -->
 
 	<li class="media">
-		<a href="page_ready_user_profile.html" class="pull-left">
-			<img src="<?php echo base_url();?>public/img/placeholders/avatars/avatar.jpg" alt="Avatar" class="img-circle">
-		</a>
-		<div class="media-body">
+	<!-- reply tabs -->
+	
+		<div class="block full">
+			<!-- Block Tabs Title -->
+			<div class="block-title">
+				
+				<ul class="nav nav-tabs" data-toggle="tabs">
+					<li class="active"><a href="#block-tabs-home">Text</a></li>
+					<li><a href="#block-tabs-profile">Image/Video</a></li>
+					
+				</ul>
+			</div>
+			<!-- END Block Tabs Title -->
+
+			<!-- Tabs Content -->
+			<div class="tab-content">
+				<div class="tab-pane active" id="block-tabs-home">
+				<!-- first tab -->
+				
+				<a href="#" class="pull-left">
+					<img src="<?php echo base_url();?>public/img/placeholders/avatars/avatar.jpg" alt="Avatar" class="img-circle">
+				</a>
+				<div class="media-body">
+					
+						<textarea id="ticket-reply" name="tickets-reply" class="form-control" rows="5" placeholder="Enter your reply"></textarea>
+						<i>Notify Customer: </i><br><input type="checkbox" id="email_notif"> Email <input type="checkbox" id="sms_notif"> SMS <input type="checkbox" id="mobile_notif"> Mobile App<br>
+						<button type="submit" class="btn btn-sm btn-primary" onclick="savereply();"><i class="fa fa-reply"></i> Save Reply</button>
+					
+				</div>
+				
+				
+				
+				<!-- end first tab -->
+				
+				
+				
+				</div>
+				<div class="tab-pane" id="block-tabs-profile">
+				
 			
-				<textarea id="ticket-reply" name="tickets-reply" class="form-control" rows="5" placeholder="Enter your reply"></textarea>
-				<i>Notify Customer: </i><br><input type="checkbox" id="email_notif"> Email <input type="checkbox" id="sms_notif"> SMS <input type="checkbox" id="mobile_notif"> Mobile App<br>
-				<button type="submit" class="btn btn-sm btn-primary" onclick="savereply();"><i class="fa fa-reply"></i> Save Reply</button>
-			
+	<?php echo form_open_multipart('ticket/do_upload');?> 
+					   <form action = "" method = "">
+						 <input type="hidden" id="ticketfileid" name="ticketfileid" value="<?php echo $ticketid;?>">
+						 <?php
+							if($status=="yes"){
+								echo "<img style='width:100%; float:left;' src='$fileurl'>";
+							}
+						 ?>
+						 
+						 
+						 <input class=""  type = "file" name = "assetimage" id = "assetimage" size = "20" /> 
+						
+						 <input class="btn btn-primary" type = "submit" value = "Upload"/>
+							
+					  </form> 
+					
+				
+				</div>
+				<div class="tab-pane" id="block-tabs-settings">Settings..</div>
+			</div>
+			<!-- END Tabs Content -->
 		</div>
+		<!-- END Block Tabs -->
+		<!-- end tabs -->
+		
 	</li>
 	<!-- END Replies -->
 </ul>
@@ -333,64 +416,7 @@
 							
 							
    </div>
-	<div class="block full hidden">
-        <div class="block-title">
-		<h5>Items</h5>
-			<button type="button" id="adddelivery" class="hidden pull-right btn btn-effect-ripple btn-primary" href="#adddeliverymodal" data-toggle="modal" >Add Item</button>
-			<?php //print_r($heidirectory);?>
-        </div>
-        <div class="table-responsive">
-            <table id="example-datatable" class="table table-striped table-bordered table-vcenter table-hover">
-                <thead>
-                    <tr style="text-align:center;">
-                        
-                        <!-- <th style="width:100px;">Delivery ID</th>-->
-                        <th>Ticket No.</th>
-						<th>Title</th>
-                        <th>Customer</th>
-                        <th>Agent</th>
-                        <th>Status</th>
-                        <th>Priority</th>
-						<th></th>
-                    </tr>
-                </thead>
-                <tbody>
-				<?php
-				
-				foreach ($tickets as $ticketlist):
-				//$heiname = strtoupper($hei['instname']);
-				echo "<tr class='odd gradeX' >";
-				
-				//echo "<td><a href='receiving/details/".$rrlist['deliveryid']."'>".$rrlist['deliveryid']."</a></td>";
-				echo "<td><a href='#'>Ticket no: ".$ticketlist['ticketid']."</a></td>";
-				
-				echo "<td>".$ticketlist['title']."</a></td>";
-				echo "<td>".$ticketlist['cfname']." ".$ticketlist['clname']."</td>";
-				echo "<td>".$ticketlist['name']."</td>";
-				//echo "<td>".mdate('%F %d, %Y',strtotime($items_list['dateacquired']))."</td>";
-				echo "<td>".$ticketlist['status']."</td>";
-				echo "<td>".$ticketlist['priority']."</td>";
-			
-			
-				echo "<td class='center'> 
-					
-										
-					<button class='btn btn-danger notification' title='Delete Item' id='notification' onClick='deleteitem(".$ticketlist['ticketid'].")'><i class='fa fa-times'></i></button>
-				</td>";
-				echo "</tr>";
-				
-				endforeach;
-				
-				?>
-				
-				
-				
-				
-                    
-                </tbody>
-            </table>
-        </div>
-    </div>
+	
    </div> <!-- end column -->
 </div> <!-- end row -->
 			

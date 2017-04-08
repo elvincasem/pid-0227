@@ -13,6 +13,9 @@ class Ticket extends CI_Controller
 		$this->db->query($timezonedb);
 		
 		$this->load->helper('date');
+		$this->load->helper('form');
+		$this->load->helper('url');
+		
 		$this->session;
 		//view module
 		 $this->data = array(
@@ -40,6 +43,7 @@ class Ticket extends CI_Controller
 	
 	public function index()
 	{
+		
 		$data = $this->data;
 		$js = $this->js;
 		
@@ -201,6 +205,7 @@ class Ticket extends CI_Controller
 	
 	public function details($id)
 	{
+		
 		$data = $this->data;
 		$js = $this->js;
 		
@@ -220,7 +225,21 @@ class Ticket extends CI_Controller
 		$data['agentlist'] = $this->ticket_model->getagent();
 		$data['ticketlog'] = $this->ticket_model->getticketlog($id);
 		
-		
+		$base = base_url();
+		$fileurl = $base."uploads/".$id.".jpg";
+		 $ch = curl_init($fileurl);    
+        curl_setopt($ch, CURLOPT_NOBODY, true);
+        curl_exec($ch);
+        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        if($code == 404){
+            $data['status'] = "no";
+			$data['fileurl'] = "";
+        }else{
+            $data['status'] = "yes";
+			$data['fileurl'] = $fileurl;
+        }
+        curl_close($ch);
 		
 		$data['subnavtitle'] ="Ticket #: $id";
 		$this->load->view('inc/header_view');
@@ -418,6 +437,36 @@ class Ticket extends CI_Controller
  
   
 	}
+	
+	public function do_upload() { 
+		 $ticketfileid = $this->input->post('ticketfileid');
+		 $time_stamp = now();
+		 //$newfilename = $fileid."jpg";
+         $config['upload_path']   = './uploads/'; 
+         $config['allowed_types'] = 'wmv|flv|mp4|mov|gif|jpg|png|jpeg'; 
+         $config['max_size']      = 100000; 
+         $config['max_width']     = 2048; 
+         $config['max_height']    = 2048;  
+         $config['overwrite']    = true;  
+         $config['file_name']    = $ticketfileid."_".$time_stamp;  
+         //$filename    = $config['file_name'];  
+         $this->load->library('upload', $config);
+			
+         if ( ! $this->upload->do_upload('assetimage')) {
+            $error = array('error' => $this->upload->display_errors()); 
+            $this->load->view('upload_form', $error); 
+         }
+			
+         else { 
+            $data = array('upload_data' => $this->upload->data()); 
+            //$this->load->view('upload_success', $data); 
+			$uid = $this->session->userdata('uid');
+			$filename = $this->upload->data('file_name'); 
+			$file_type = $this->upload->data('file_type'); 
+			$this->ticket_model->savereply_file($ticketfileid,$filename,$uid,$file_type);
+			header('Location:details/'.$ticketfileid);
+         } 
+      }  
 	
 	
 	
