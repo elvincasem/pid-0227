@@ -42,7 +42,7 @@ CREATE TABLE `customer` (
   `cpassword` varchar(300) DEFAULT NULL,
   `time_stamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`customerid`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 /*Data for the table `customer` */
 
@@ -72,12 +72,13 @@ CREATE TABLE `remarks_agent` (
   `aremarks_info` text,
   `atime_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `uid` bigint(20) DEFAULT NULL,
+  `replytype` varchar(500) DEFAULT 'TEXT',
   PRIMARY KEY (`aremarksid`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
 
 /*Data for the table `remarks_agent` */
 
-insert  into `remarks_agent`(`aremarksid`,`aticketid`,`aremarks_info`,`atime_stamp`,`uid`) values (1,3,'started working on it','2017-03-18 18:18:05',7),(2,3,'alright!','2017-03-19 18:49:38',7),(3,3,'ayos!','2017-03-19 18:50:32',7),(4,3,'testing growl','2017-03-19 18:52:58',7),(5,3,'on the spot!','2017-03-19 18:53:10',7),(6,9,'Alright!','2017-03-19 19:20:03',7),(7,9,'okay na rin to','2017-03-19 19:20:10',7),(8,7,'Waiting for delivery','2017-03-19 19:21:55',7),(10,7,'ngayon gumagana na heheh :)','2017-03-19 19:27:58',7),(11,7,'now new line\n\nthis is new line','2017-03-19 19:28:08',7),(12,7,'test\n<br>\nnew line','2017-03-19 19:28:19',7),(13,6,'Reset waste pad ink using software','2017-03-19 22:41:40',7),(14,6,'printing counter okay.','2017-03-19 22:46:38',7),(15,13,'okay ','2017-03-19 23:03:58',7),(16,9,'again','2017-03-20 07:03:04',8),(17,11,'sms','2017-03-30 23:37:24',1),(18,11,'sd','2017-03-30 23:37:31',1),(19,11,'sd','2017-03-30 23:38:12',1),(20,11,'a','2017-03-30 23:38:35',1),(21,11,'aa','2017-03-30 23:39:30',1),(22,11,'dfs','2017-03-30 23:39:34',1),(23,11,'sad','2017-03-30 23:40:00',1),(24,11,'s','2017-03-30 23:40:06',1),(25,3,'this is it!','2017-04-01 22:32:14',1),(26,3,'this is it na talaga!','2017-04-01 22:33:54',1),(27,3,'dsad','2017-04-01 23:21:11',1),(28,3,'Ready for pickup','2017-04-01 23:22:13',1);
+insert  into `remarks_agent`(`aremarksid`,`aticketid`,`aremarks_info`,`atime_stamp`,`uid`,`replytype`) values (1,3,'started working on it','2017-03-18 18:18:05',7,'TEXT'),(2,3,'alright!','2017-03-19 18:49:38',7,'TEXT'),(3,3,'ayos!','2017-03-19 18:50:32',7,'TEXT'),(4,3,'testing growl','2017-03-19 18:52:58',7,'TEXT'),(5,3,'on the spot!','2017-03-19 18:53:10',7,'TEXT'),(6,9,'Alright!','2017-03-19 19:20:03',7,'TEXT'),(7,9,'okay na rin to','2017-03-19 19:20:10',7,'TEXT'),(8,7,'Waiting for delivery','2017-03-19 19:21:55',7,'TEXT'),(10,7,'ngayon gumagana na heheh :)','2017-03-19 19:27:58',7,'TEXT'),(11,7,'now new line\n\nthis is new line','2017-03-19 19:28:08',7,'TEXT'),(12,7,'test\n<br>\nnew line','2017-03-19 19:28:19',7,'TEXT'),(13,6,'Reset waste pad ink using software','2017-03-19 22:41:40',7,'TEXT'),(14,6,'printing counter okay.','2017-03-19 22:46:38',7,'TEXT'),(15,13,'okay ','2017-03-19 23:03:58',7,'TEXT'),(16,9,'again','2017-03-20 07:03:04',8,'TEXT'),(17,11,'sms','2017-03-30 23:37:24',1,'TEXT'),(18,11,'sd','2017-03-30 23:37:31',1,'TEXT'),(19,11,'sd','2017-03-30 23:38:12',1,'TEXT'),(20,11,'a','2017-03-30 23:38:35',1,'TEXT'),(21,11,'aa','2017-03-30 23:39:30',1,'TEXT'),(22,11,'dfs','2017-03-30 23:39:34',1,'TEXT'),(23,11,'sad','2017-03-30 23:40:00',1,'TEXT'),(24,11,'s','2017-03-30 23:40:06',1,'TEXT'),(25,3,'this is it!','2017-04-01 22:32:14',1,'TEXT'),(26,3,'this is it na talaga!','2017-04-01 22:33:54',1,'TEXT'),(27,3,'dsad','2017-04-01 23:21:11',1,'TEXT'),(28,3,'Ready for pickup','2017-04-01 23:22:13',1,'TEXT'),(29,3,'ok','2017-04-02 00:14:45',1,'TEXT'),(30,3,'n','2017-04-02 00:15:14',1,'TEXT'),(31,8,'alright!','2017-04-06 20:26:25',1,'TEXT'),(32,13,'13_1491630923','2017-04-08 13:55:23',1,'TEXT'),(33,3,'3_1491631225','2017-04-08 14:00:25',1,'TEXT'),(36,3,'0','2017-04-08 14:20:37',1,'TEXT'),(37,3,'1','2017-04-08 14:20:59',1,'TEXT'),(41,3,'etst','2017-04-08 16:22:39',1,'TEXT'),(43,3,'3_1491640967.PNG','2017-04-08 16:42:47',1,'image/png'),(44,3,'3_1491641319.flv','2017-04-08 16:48:39',1,'video/x-flv'),(45,3,'3_1491641691.jpg','2017-04-08 16:54:51',1,'image/jpeg'),(46,14,'Parts Ordered. Waiting for delivery','2017-04-08 16:59:22',1,'TEXT'),(47,14,'14_1491642035.jpg','2017-04-08 17:00:35',1,'image/jpeg');
 
 /*Table structure for table `remarks_customer` */
 
@@ -89,12 +90,28 @@ CREATE TABLE `remarks_customer` (
   `cremarks_info` text,
   `ctime_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `customerid` bigint(20) DEFAULT NULL,
+  `creplytype` varchar(500) DEFAULT 'TEXT',
   PRIMARY KEY (`cremarksid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `remarks_customer` */
 
-insert  into `remarks_customer`(`cremarksid`,`cticketid`,`cremarks_info`,`ctime_stamp`,`customerid`) values (1,3,'Thank you for working on it immediately','2017-03-19 18:18:38',10);
+insert  into `remarks_customer`(`cremarksid`,`cticketid`,`cremarks_info`,`ctime_stamp`,`customerid`,`creplytype`) values (1,3,'Thank you for working on it immediately','2017-03-19 18:18:38',10,'TEXT');
+
+/*Table structure for table `remarks_file` */
+
+DROP TABLE IF EXISTS `remarks_file`;
+
+CREATE TABLE `remarks_file` (
+  `fremarksid` bigint(20) NOT NULL AUTO_INCREMENT,
+  `fticketid` bigint(20) DEFAULT NULL,
+  `fremarks_info` varchar(500) DEFAULT NULL,
+  `ftime_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `fuid` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`fremarksid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `remarks_file` */
 
 /*Table structure for table `tickets` */
 
@@ -117,11 +134,11 @@ CREATE TABLE `tickets` (
   `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `due_date` date DEFAULT NULL,
   PRIMARY KEY (`ticketid`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tickets` */
 
-insert  into `tickets`(`ticketid`,`categoryid`,`status`,`priority`,`customerid`,`assignedto_uid`,`problem`,`description`,`history`,`special_instruction`,`serialno`,`departmentid`,`addedbyuid`,`time_stamp`,`due_date`) values (3,1,'Open','Out of Warranty - PC4ME',1,7,'new windows installation','Windows 7 64 bit on desktop',NULL,NULL,NULL,2,1,'2017-03-19 21:26:55','2017-03-20'),(6,4,'Pickup','Under Warranty - PC4ME',1,1,'Epson L120 Reset Ink waste pad','Closed ticket description...',NULL,NULL,NULL,1,1,'2017-03-19 22:46:45','2017-03-20'),(7,3,'RMA','Under Warranty - PC4ME',1,1,'Title 1','Description 2',NULL,NULL,NULL,1,1,'2017-03-19 23:34:56','2017-03-20'),(8,2,'Open','Under Warranty - PC4ME',1,1,'New Title','New description ',NULL,NULL,NULL,1,1,'2017-03-19 22:38:13','2017-03-20'),(9,4,'Closed','Under Warranty - PC4ME',2,1,'test ticket','test ticket only',NULL,NULL,NULL,2,7,'2017-03-20 07:03:33','2017-03-20'),(11,1,'Open','Under Warranty - PC4ME',2,1,'Ticket Problem','Ticket Description  ','history \nhistory 2\nhistory 3','special instruction	','0393748762944444',1,7,'2017-03-26 22:48:56','2017-03-19'),(13,1,'RMA','Under Warranty - PC4ME',2,1,'rma ticket sample','this is a sample description for RMA tickets',NULL,NULL,NULL,1,7,'2017-03-19 23:03:46','2017-03-19');
+insert  into `tickets`(`ticketid`,`categoryid`,`status`,`priority`,`customerid`,`assignedto_uid`,`problem`,`description`,`history`,`special_instruction`,`serialno`,`departmentid`,`addedbyuid`,`time_stamp`,`due_date`) values (3,1,'Pickup','Out of Warranty - PC4ME',1,7,'new windows installation','Windows 7 64 bit on desktop',NULL,NULL,NULL,2,1,'2017-04-08 14:12:20','2017-03-20'),(6,4,'Pickup','Under Warranty - PC4ME',1,1,'Epson L120 Reset Ink waste pad','Closed ticket description...',NULL,NULL,NULL,1,1,'2017-03-19 22:46:45','2017-03-20'),(7,3,'RMA','Under Warranty - PC4ME',1,1,'Title 1','Description 2',NULL,NULL,NULL,1,1,'2017-03-19 23:34:56','2017-03-20'),(8,2,'Open','Under Warranty - PC4ME',1,1,'New Title','New description ',NULL,NULL,NULL,1,1,'2017-03-19 22:38:13','2017-03-20'),(9,4,'Closed','Under Warranty - PC4ME',2,1,'test ticket','test ticket only',NULL,NULL,NULL,2,7,'2017-03-20 07:03:33','2017-03-20'),(11,1,'Open','Under Warranty - PC4ME',2,1,'Ticket Problem','Ticket Description  ','history \nhistory 2\nhistory 3','special instruction	','0393748762944444',1,7,'2017-03-26 22:48:56','2017-03-19'),(13,1,'RMA','Under Warranty - PC4ME',2,1,'rma ticket sample','this is a sample description for RMA tickets',NULL,NULL,NULL,1,7,'2017-03-19 23:03:46','2017-03-19'),(14,1,'Open','Under Warranty - PC4ME',2,7,'Problem with Power Supply','No Power','','','',2,1,'2017-04-08 16:58:59','2017-04-08');
 
 /*Table structure for table `tickets_log` */
 
@@ -135,11 +152,11 @@ CREATE TABLE `tickets_log` (
   `updatedby` bigint(20) DEFAULT NULL,
   `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`tlogid`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tickets_log` */
 
-insert  into `tickets_log`(`tlogid`,`ticketid`,`status`,`remarks`,`updatedby`,`time_stamp`) values (9,8,'RMA','Changed Status from Closed to RMA',7,'2017-03-19 22:07:53'),(10,8,'Open','Changed Status from RMA to Open',7,'2017-03-19 22:08:04'),(11,8,'Pickup','Changed Status from Open to Pickup',7,'2017-03-19 22:09:02'),(12,8,'Closed','Changed Status from Pickup to Closed',7,'2017-03-19 22:14:35'),(13,8,'Open','Changed Status from Closed to Open',7,'2017-03-19 22:15:13'),(30,6,'Closed','Changed Title from Closed Ticket to Epson L120 Reset Ink waste pad',7,'2017-03-19 22:41:14'),(31,6,'Open','Changed Status from Closed to Open',7,'2017-03-19 22:41:23'),(32,6,'Pickup','Changed Status from Open to Pickup',7,'2017-03-19 22:46:46'),(33,13,'RMA','Changed Status from Open to RMA',7,'2017-03-19 23:02:45'),(34,13,'RMA','Changed Title from sad to rma ticket sample',7,'2017-03-19 23:03:46'),(35,13,'RMA','Changed Description from sad to this is a sample description for RMA tickets',7,'2017-03-19 23:03:46'),(36,7,'RMA','Changed Title from  to Title 1',8,'2017-03-19 23:34:56'),(37,7,'RMA','Changed Description from  to Description 2',8,'2017-03-19 23:34:56'),(38,9,'Closed','Changed Status from Open to Closed',8,'2017-03-20 07:03:34'),(39,11,'Open','Changed Description from Ticket Description to Ticket Description 2',1,'2017-03-26 22:47:04'),(40,11,'Open','Changed Description from history \r\nhistory 2 to history \nhistory 2',1,'2017-03-26 22:47:04'),(41,11,'Open','Changed Description from Ticket Description 2 to Ticket Description  ',1,'2017-03-26 22:48:20'),(42,11,'Open','Changed history from history \nhistory 2 to history \nhistory 2\nhistory 3',1,'2017-03-26 22:48:32'),(43,11,'Open','Changed serial no. from 03937487629 to 0393748762944444',1,'2017-03-26 22:48:56');
+insert  into `tickets_log`(`tlogid`,`ticketid`,`status`,`remarks`,`updatedby`,`time_stamp`) values (9,8,'RMA','Changed Status from Closed to RMA',7,'2017-03-19 22:07:53'),(10,8,'Open','Changed Status from RMA to Open',7,'2017-03-19 22:08:04'),(11,8,'Pickup','Changed Status from Open to Pickup',7,'2017-03-19 22:09:02'),(12,8,'Closed','Changed Status from Pickup to Closed',7,'2017-03-19 22:14:35'),(13,8,'Open','Changed Status from Closed to Open',7,'2017-03-19 22:15:13'),(30,6,'Closed','Changed Title from Closed Ticket to Epson L120 Reset Ink waste pad',7,'2017-03-19 22:41:14'),(31,6,'Open','Changed Status from Closed to Open',7,'2017-03-19 22:41:23'),(32,6,'Pickup','Changed Status from Open to Pickup',7,'2017-03-19 22:46:46'),(33,13,'RMA','Changed Status from Open to RMA',7,'2017-03-19 23:02:45'),(34,13,'RMA','Changed Title from sad to rma ticket sample',7,'2017-03-19 23:03:46'),(35,13,'RMA','Changed Description from sad to this is a sample description for RMA tickets',7,'2017-03-19 23:03:46'),(36,7,'RMA','Changed Title from  to Title 1',8,'2017-03-19 23:34:56'),(37,7,'RMA','Changed Description from  to Description 2',8,'2017-03-19 23:34:56'),(38,9,'Closed','Changed Status from Open to Closed',8,'2017-03-20 07:03:34'),(39,11,'Open','Changed Description from Ticket Description to Ticket Description 2',1,'2017-03-26 22:47:04'),(40,11,'Open','Changed Description from history \r\nhistory 2 to history \nhistory 2',1,'2017-03-26 22:47:04'),(41,11,'Open','Changed Description from Ticket Description 2 to Ticket Description  ',1,'2017-03-26 22:48:20'),(42,11,'Open','Changed history from history \nhistory 2 to history \nhistory 2\nhistory 3',1,'2017-03-26 22:48:32'),(43,11,'Open','Changed serial no. from 03937487629 to 0393748762944444',1,'2017-03-26 22:48:56'),(44,3,'RMA','Changed Status from Open to RMA',1,'2017-04-08 14:05:32'),(45,3,'Pickup','Changed Status from RMA to Pickup',1,'2017-04-08 14:08:24'),(46,3,'Open','Changed Status from Pickup to Open',1,'2017-04-08 14:08:49'),(47,3,'Pickup','Changed Status from Open to Pickup',1,'2017-04-08 14:12:20');
 
 /*Table structure for table `tickets_timeline` */
 
