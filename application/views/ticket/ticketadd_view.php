@@ -280,13 +280,14 @@
 				<div class="col-lg-12">
 						<label class="col-md-2 control-label" for="state-normal">Problem*</label>
                         <div class="col-md-3">
-							<textarea class="form-control" id="problem" placeholder="Required Field"></textarea>
+							<textarea class="form-control" id="problem" placeholder="Required Field" style="height:150px;"></textarea>
                             
 							
                         </div>
 						<label class="col-md-2 control-label" for="state-normal">Unit Description*</label>
                         <div class="col-md-3">
-                             <input type="text" id="description" class="form-control" placeholder="Required Field">
+                             
+							 <textarea class="form-control" id="description" style="height:150px;"></textarea>
 							
                         </div>
 						<div class="row"></div>

@@ -298,9 +298,8 @@
 		}
 		if(substr($ticket_log['replytype'], 0, strpos($ticket_log['replytype'], '/'))=="video"){
 				echo "<video width='320' height='240' controls>
-  <source src='".$base."uploads/".$ticket_log['remarks_info']."' type='".$ticket_log['replytype']."'>
-
-</video>";
+  <source src='".$base."uploads/".$ticket_log['remarks_info']."' type='video/mp4'>
+				<source src='".$base."uploads/".$ticket_log['remarks_info']."' type='video/ogg'></video>";
 		}
 		
 			

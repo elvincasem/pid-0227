@@ -86,7 +86,18 @@ class Customers extends CI_Controller
 		$this->customers_model->updatecustomer($customerid,$cemail,$clname,$cfname,$cmname,$caddress,$cmobileno,$cotherno,$cpassword);
 	}
 	
+	public function updatecustomerdeviceid(){
+		$deviceid = $this->input->post('deviceid');
+		$login_email = $this->input->post('login_email');
+		$this->customers_model->updatecustomerdeviceid($deviceid,$login_email);
+	}
 	
+	public function deletecustomer(){
+		$customerid = $this->input->post('customerid');
+		$this->db->delete('customer', array('customerid' => $customerid));
+		
+		
+	}
 	
 	
 	
@@ -104,12 +115,7 @@ class Customers extends CI_Controller
 		$this->employees_model->saveemployee($empno,$lname,$fname,$mname,$extension,$designation);
 	}
 	
-	public function deleteemployee(){
-		$eid = $this->input->post('eid');
-		$this->db->delete('employee', array('eid' => $eid));
-		
-		
-	}
+	
 	
 
 }

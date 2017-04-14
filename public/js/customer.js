@@ -179,3 +179,30 @@ function updatecustomer(){
 	
 	
 }
+
+function deletecustomer(id){
+	
+	var r = confirm("Are your sure you want to delete this customer?");
+    if (r == true) {
+        //alert ("You pressed OK!");
+		var person = prompt("Please enter Administrator Password");
+		if (person =='superadmin') {
+		$.ajax({
+                    url: 'customers/deletecustomer',
+                    type: 'post',
+                    data: {customerid: id},
+                    success: function(response) {
+						location.reload();
+                    }
+                });
+		}else{
+			alert("Invalid Password");
+		}
+		
+    } if(r == false) {
+        //txt = "You pressed Cancel!";
+		
+    }
+	
+}
+

@@ -17,9 +17,15 @@ class Ticket_model extends CI_Model
 	
 	public function saveticket($addedbyuid,$customerid,$categoryid,$status,$departmentid,$priority,$duedate,$assignedto_uid,$problem,$description,$history,$serialno,$special_instruction)
 	{
+		
+		$this->load->helper('date');
+		$now = new DateTime();
+		$now->setTimezone(new DateTimezone('Asia/Manila'));
+		$now_timestamp = $now->format('Y-m-d H:i:s');
+
 		//for online time on saving
-		$this->db->query("SET SESSION time_zone = '+8:00';");
-		$sql = "INSERT INTO tickets (categoryid,status,priority,customerid,assignedto_uid,problem,description,departmentid,history,special_instruction,serialno,addedbyuid,due_date) VALUES (".$this->db->escape($categoryid).",".$this->db->escape($status).",".$this->db->escape($priority).",".$this->db->escape($customerid).",".$this->db->escape($assignedto_uid).",".$this->db->escape($problem).",".$this->db->escape($description).",".$this->db->escape($departmentid).",".$this->db->escape($history).",".$this->db->escape($special_instruction).",".$this->db->escape($serialno).",".$this->db->escape($addedbyuid).",".$this->db->escape($duedate).")";
+		//$this->db->query("SET SESSION time_zone = '+8:00';");
+		$sql = "INSERT INTO tickets (categoryid,status,priority,customerid,assignedto_uid,problem,description,departmentid,history,special_instruction,serialno,addedbyuid,due_date,time_stamp) VALUES (".$this->db->escape($categoryid).",".$this->db->escape($status).",".$this->db->escape($priority).",".$this->db->escape($customerid).",".$this->db->escape($assignedto_uid).",".$this->db->escape($problem).",".$this->db->escape($description).",".$this->db->escape($departmentid).",".$this->db->escape($history).",".$this->db->escape($special_instruction).",".$this->db->escape($serialno).",".$this->db->escape($addedbyuid).",".$this->db->escape($duedate).",'".$now_timestamp."')";
 		$this->db->query($sql);
 		
 		$sqlselect = $this->db->query("SELECT MAX(ticketid) AS lastid FROM tickets");

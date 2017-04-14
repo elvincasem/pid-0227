@@ -57,6 +57,14 @@ class Customers_model extends CI_Model
 				
 		
 	}
+	public function updatecustomerdeviceid($deviceid,$login_email)
+	{
+		
+		$sql = "update customer set deviceid=".$this->db->escape($deviceid)." where cemail=".$this->db->escape($login_email)."";
+		$this->db->query($sql);
+				
+		
+	}
 	
 }
 

@@ -140,7 +140,7 @@
 				echo "<td class='center'> 
 					
 										
-					<button class='btn btn-danger notification' title='Delete User' id='notification' onClick='deletedepartment(".$cust_list['customerid'].")'><i class='fa fa-times'></i></button>
+					<button class='btn btn-danger notification' title='Delete User' id='notification' onClick='deletecustomer(".$cust_list['customerid'].")'><i class='fa fa-times'></i></button>
 				</td>";
 				echo "</tr>";
 				

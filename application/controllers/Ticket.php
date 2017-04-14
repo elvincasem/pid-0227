@@ -445,8 +445,8 @@ class Ticket extends CI_Controller
          $config['upload_path']   = './uploads/'; 
          $config['allowed_types'] = 'wmv|flv|mp4|mov|gif|jpg|png|jpeg'; 
          $config['max_size']      = 100000; 
-         $config['max_width']     = 2048; 
-         $config['max_height']    = 2048;  
+         $config['max_width']     = 5000; 
+         $config['max_height']    = 5000;  
          $config['overwrite']    = true;  
          $config['file_name']    = $ticketfileid."_".$time_stamp;  
          //$filename    = $config['file_name'];  

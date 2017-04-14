@@ -251,3 +251,73 @@ function updatedescription(){
 	
 }
 
+function savecustomer(){
+	
+	//$('#savebutton').prop("disabled", true);    
+	var cemail = document.getElementById("cemail").value;
+	var clname = document.getElementById("clname").value;
+	var cfname = document.getElementById("cfname").value;
+	var cmname = document.getElementById("cmname").value;
+	var caddress = document.getElementById("caddress").value;
+	var cmobileno = document.getElementById("cmobileno").value;
+	var cotherno = document.getElementById("cotherno").value;
+	var cpassword = document.getElementById("cpassword").value;
+	//check duplicate
+	if(cfname ==""){
+		$.bootstrapGrowl('<h4><strong>First Name is empty.</strong></h4> <p> Please enter the required field.</p>', {
+		type: 'warning',
+		delay: 3000,
+		allow_dismiss: true,
+		offset: {from: 'top', amount: 20}
+		})
+	}else if(cemail ==""){
+		$.bootstrapGrowl('<h4><strong>Email is empty.</strong></h4> <p> Please enter the required field.</p>', {
+		type: 'warning',
+		delay: 3000,
+		allow_dismiss: true,
+		offset: {from: 'top', amount: 20}
+		})
+	}else{
+		
+			$.ajax({
+			url: '../customers/checkduplicatecustomer',
+			type: 'post',
+			data: {cemail: cemail},
+			success: function(response) {
+				console.log(response);
+				//location.reload();
+				
+				if(response==0){
+					$.ajax({
+						url: '../customers/savecustomer',
+						type: 'post',
+						data: {cemail: cemail,clname:clname,cfname:cfname,cmname:cmname,caddress:caddress,cmobileno:cmobileno,cotherno:cotherno,cpassword:cpassword},
+						success: function(response) {
+							console.log(response);
+							location.reload();
+							
+						}
+					});
+				}else{
+					$.bootstrapGrowl('<h4><strong>Email already in use.</strong></h4> <p> Please enter other email.</p>', {
+					type: 'warning',
+					delay: 3000,
+					allow_dismiss: true,
+					offset: {from: 'top', amount: 20}
+				});
+				}
+				
+				
+				//end savecustomer
+				
+			}
+		});
+		
+		
+	}
+	
+	
+	
+	
+}
+
