@@ -40,13 +40,14 @@ CREATE TABLE `customer` (
   `cmobileno` varchar(300) DEFAULT NULL,
   `cotherno` varchar(100) DEFAULT NULL,
   `cpassword` varchar(300) DEFAULT NULL,
-  `time_stamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `deviceid` varchar(500) DEFAULT NULL,
+  `customer_time_stamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`customerid`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 /*Data for the table `customer` */
 
-insert  into `customer`(`customerid`,`cemail`,`clname`,`cfname`,`cmname`,`caddress`,`cmobileno`,`cotherno`,`cpassword`,`time_stamp`) values (1,'elvin.casem@gmail.com','Casem','Elvin','E','City of San Fernando, La Union','09468147457','8880336',NULL,'2017-03-05 22:34:08'),(2,'lynnette.cabanban@gmail.com','Cabanban','Christianne Lynnette','G','Caba, La Union','09177770832',NULL,NULL,'2017-03-05 23:09:00'),(10,'juan@gmail.com','Konek','Juan','','','','','','2017-03-18 19:41:12');
+insert  into `customer`(`customerid`,`cemail`,`clname`,`cfname`,`cmname`,`caddress`,`cmobileno`,`cotherno`,`cpassword`,`deviceid`,`customer_time_stamp`) values (1,'elvin.casem@gmail.com','Casem','Elvin','E','City of San Fernando, La Union','09468147457','8880336','1234','12','2017-03-05 22:34:08'),(2,'lynnette.cabanban@gmail.com','Cabanban','Christianne Lynnette','G','Caba, La Union','09177770832',NULL,NULL,NULL,'2017-03-05 23:09:00'),(11,'test@gmail.com','','test','','','','','',NULL,'2017-04-12 12:45:18');
 
 /*Table structure for table `department` */
 
@@ -74,7 +75,7 @@ CREATE TABLE `remarks_agent` (
   `uid` bigint(20) DEFAULT NULL,
   `replytype` varchar(500) DEFAULT 'TEXT',
   PRIMARY KEY (`aremarksid`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `remarks_agent` */
 
@@ -90,7 +91,7 @@ CREATE TABLE `remarks_customer` (
   `customerid` bigint(20) DEFAULT NULL,
   `creplytype` varchar(500) DEFAULT 'TEXT',
   PRIMARY KEY (`cremarksid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `remarks_customer` */
 
@@ -130,9 +131,11 @@ CREATE TABLE `tickets` (
   `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `due_date` date DEFAULT NULL,
   PRIMARY KEY (`ticketid`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tickets` */
+
+insert  into `tickets`(`ticketid`,`categoryid`,`status`,`priority`,`customerid`,`assignedto_uid`,`problem`,`description`,`history`,`special_instruction`,`serialno`,`departmentid`,`addedbyuid`,`time_stamp`,`due_date`) values (15,1,'Open','Under Warranty - PC4ME',1,1,'test','teset','','','',1,1,'2017-04-12 09:57:38','2017-04-12'),(16,1,'Open','Under Warranty - PC4ME',1,1,'again','again','','','',1,1,'2017-04-12 10:01:17','2017-04-12'),(17,1,'Open','Under Warranty - PC4ME',1,1,'','trst','','','',1,1,'2017-04-12 15:13:27','2017-04-12'),(18,1,'Open','Under Warranty - PC4ME',1,1,'','dsd','','','',1,1,'2017-04-12 15:13:49','2017-04-12');
 
 /*Table structure for table `tickets_log` */
 
@@ -146,7 +149,7 @@ CREATE TABLE `tickets_log` (
   `updatedby` bigint(20) DEFAULT NULL,
   `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`tlogid`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tickets_log` */
 

@@ -89,7 +89,24 @@ class Customers extends CI_Controller
 	public function updatecustomerdeviceid(){
 		$deviceid = $this->input->post('deviceid');
 		$login_email = $this->input->post('login_email');
-		$this->customers_model->updatecustomerdeviceid($deviceid,$login_email);
+		$login_password = $this->input->post('login_password');
+		
+		header('Access-Control-Allow-Origin: *'); 
+		header('Content-Type: application/json');
+
+		//check if user existing
+		$customercount = $this->customers_model->checkcustomer($login_email,$login_password);
+//echo json_encode($customercount);
+		$customercount =1;
+		$login_email ="elvin.casem@gmail.com";
+		$deviceid = "12";
+		if($customercount==1){
+			echo json_encode($this->customers_model->updatecustomerdeviceid($deviceid,$login_email));
+		}else{
+			$customer_array = array(0);
+			echo json_encode($customercount);
+		} 
+		
 	}
 	
 	public function deletecustomer(){

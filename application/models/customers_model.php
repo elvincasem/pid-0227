@@ -62,9 +62,23 @@ class Customers_model extends CI_Model
 		
 		$sql = "update customer set deviceid=".$this->db->escape($deviceid)." where cemail=".$this->db->escape($login_email)."";
 		$this->db->query($sql);
+		
+		$sql2 = $this->db->query("SELECT * FROM customer WHERE cemail=".$this->db->escape($login_email)."");
+		return $sql2->result_array();
 				
 		
 	}
+	
+	public function checkcustomer($login_email,$login_password)
+	{
+		//echo $customerid;
+		$sql = $this->db->query("SELECT count(*) as customercount from customer WHERE cemail=".$this->db->escape($login_email)." AND cpassword=".$this->db->escape($login_password)."");
+		$result = $sql->result_array();
+		return $result[0]['customercount'];
+		
+		
+	}
+	
 	
 }
 
