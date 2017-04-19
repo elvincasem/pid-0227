@@ -192,7 +192,7 @@
                                                 </td>
 		<td><?php echo $totaltickets;?></td>
                                             </tr>
-	<?php?>
+	
                                             <tr>
                                                 <td>
                                                     <strong>Total Responses</strong>
