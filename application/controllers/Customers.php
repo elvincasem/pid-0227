@@ -101,6 +101,8 @@ class Customers extends CI_Controller
 		$login_email ="elvin.casem@gmail.com";
 		$deviceid = "12";
 		if($customercount==1){
+
+
 			echo json_encode($this->customers_model->updatecustomerdeviceid($deviceid,$login_email));
 		}else{
 			$customer_array = array(0);

@@ -64,7 +64,9 @@ class Customers_model extends CI_Model
 		$this->db->query($sql);
 		
 		$sql2 = $this->db->query("SELECT * FROM customer WHERE cemail=".$this->db->escape($login_email)."");
-		return $sql2->result_array();
+		$customer_profile = $sql2->result_array();
+		return $customer_profile[0];
+		//return $customer_profile;
 				
 		
 	}

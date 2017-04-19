@@ -379,10 +379,10 @@ class Ticket extends CI_Controller
 	
 	public function send_sms($sms_to,$ticketid,$ticket_reply){
 		
-			$sms_from = "INFO";
+			$sms_from = "PC4Me";
 			//$sms_to = "09468147457";
-			$user = "APINTJ0GF12MD";
-			$pass = "APINTJ0GF12MDNTJ0G";
+			$user = "API6IQVAC8N9H";
+			$pass = "API6IQVAC8N9HTTKG2";
 			$sms_msg = "Ticket id #:".$ticketid."\n".$ticket_reply;
 			 $query_string = "?apiusername=".$user."&apipassword=".$pass;
 			$query_string .= "&senderid=".rawurlencode($sms_from)."&mobileno=".rawurlencode($sms_to);
