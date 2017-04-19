@@ -19,7 +19,173 @@
 <div class="row">
    <div class="col-lg-12">
             <!-- Partial Responsive Block -->
-			
+			<!-- Regular Modal Print PR-->
+                <div id="printticket" class="modal bg" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                           <div class="modal-header">
+								
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								
+                                
+                            </div> 
+                            <div class="modal-body" id="fulldetailsbody">
+                                
+								
+								<!-- Input States Block -->
+            <div class="block">
+                
+
+                <!-- Input States Content -->
+              <style>
+
+tr.noBorder td{
+	border:0;
+}
+.block{font-family:arial; }
+table { page-break-inside:auto;}
+   tr    { page-break-inside:avoid; page-break-after:auto }
+@media print {
+    thead { display: table-header-group; }
+    tfoot { display: table-footer-group; }
+}
+@media screen {
+    /*thead { display: block; }
+    tfoot { display: block; }*/
+}
+</style>
+
+<div style="text-align:center;font-weight:bold;">Helpdesk System</div>
+<br>
+<div>Customer Name: <strong><?php echo $ticketdetails['cfname']." ".$ticketdetails['clname'];?></strong><span style="margin-left:50px;"></span><span>Contact #:  <strong><?php echo $ticketdetails['cmobileno'];?></strong></span> <span style="margin-left:50px;"></span><span>Email:  <strong><?php echo $ticketdetails['cemail'];?></strong></span> </div><br>
+
+<h4>TICKET #: <strong><?php echo $ticketdetails['ticketid'];?></strong></h4>
+
+
+<table border="0" style="width:800px;">
+
+	<tr style="text-align:left;">
+	<td colspan="6">Department: <u><strong><?php echo $ticketdetails['departmentvalue'];?></strong></u></td>
+	<td colspan="6">Category: <u><strong><?php echo $ticketdetails['categoryvalue'];?></strong></u></td>
+	
+	</tr>
+	<tr><td colspan="6">Status: <u><strong><?php echo $ticketdetails['status'];?></strong></u></td>
+	<td colspan="6">Priority: <u><strong><?php echo $ticketdetails['priority'];?></strong></u></td></tr>
+	
+	<tr style="text-align:left;">
+	<td colspan="6">Due Date: <u><strong><?php echo mdate('%F %d, %Y',strtotime($ticketdetails['due_date']));?></strong></u></td>
+	<td colspan="6">Assigned To: <u><strong><?php echo $ticketdetails['name'];?></strong></u></td>
+	</tr>
+	
+	<tr>
+	<td colspan="6">Created by: <u><strong><?php echo $ticketdetails['agentname'];?></strong></u></td>
+	<td colspan="6">Date Created: <u><strong><?php echo  mdate('%F %d, %Y at %h:%i %a',strtotime($ticketdetails['time_stamp']));?></strong></u></td>
+	</tr>
+
+	<tr style="text-align:left;">
+	<td colspan="6">Problem: <u><strong><?php echo $ticketdetails['problem'];?></strong></u></td>
+	<td colspan="6">Description:<u><strong><?php echo $ticketdetails['description'];?></strong></u></td>
+	</tr>
+	<tr style="text-align:left;">
+	<td colspan="6">Serial No: <u><strong><?php echo $ticketdetails['serialno'];?></strong></u></td>
+	<td colspan="6">History: <u><strong><?php echo $ticketdetails['history'];?></strong></u></td>
+	
+	
+	</tr>
+
+	<tr style="text-align:left;">
+	<td colspan="8">Special Instruction: <strong><u><?php echo $ticketdetails['special_instruction'];?></strong></u></td>
+	</tr>
+	
+
+</table>
+<br>
+
+<table border="1" style="border:solid 1px; width:800px;">
+	
+<thead>
+		
+	<tr style="border-right:solid 1px;text-align:center;font-weight:bold;">
+	<td style="width:200px;">Timestamp</td>
+	<td>Agent</td>
+	<td>Description</td>
+	
+	
+	
+	
+	</tr>
+</thead>
+	<tbody>
+	<!-- items here -->
+	<?php
+	
+foreach ($ticketlog as $ticketlog_list):
+				
+				echo "<tr class='odd gradeX'>";
+				echo "<td>". mdate('%F %d, %Y at %h:%i %a',strtotime($ticketlog_list['time_stamp']))."</td>";
+				echo "<td>".$ticketlog_list['user_name']."</td>";
+				echo "<td>";
+				if($ticketlog_list['replytype']=="TEXT"){
+			echo "<p>".$ticketlog_list['remarks_info']."</p>";
+		}
+		if(substr($ticketlog_list['replytype'], 0, strpos($ticketlog_list['replytype'], '/'))=="image"){
+			$base = base_url();
+				echo "<img width='85%' src='".$base."uploads/".$ticketlog_list['remarks_info']."' alt='image'>";
+		}
+		if(substr($ticketlog_list['replytype'], 0, strpos($ticketlog_list['replytype'], '/'))=="video"){
+				echo "<video width='320' height='240' controls>
+  <source src='".$base."uploads/".$ticketlog_list['remarks_info']."' type='video/mp4'>
+				<source src='".$base."uploads/".$ticketlog_list['remarks_info']."' type='video/ogg'></video>";
+		}
+				echo "</td>";
+				
+				echo "</tr>";
+				
+				
+				endforeach;
+				
+				/*
+				if($itemcount <28){
+					for($ctr=$itemcount;$ctr<=32;$ctr++){
+						echo "<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td>
+						</tr>";
+					}
+				}*/
+				?>
+	</tbody>
+	<!-- ff -->
+	<tfoot>
+	
+	
+	
+	
+	<tfoot>
+	
+	
+	
+</table>
+
+
+
+
+                <!-- END Input States Content -->
+            </div>
+            <!-- END Input States Block -->
+								
+								
+								
+                            </div>
+                            <div class="modal-footer">
+								
+                                <button type="button" id="printpo" class="btn btn-effect-ripple btn-primary" onclick="printticketfulldetails();" ><i class="fa fa-print"></i> Print</button>
+                               
+                                <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Regular Modal -->			
+		
 			
    <div class="row">
 		<div class="col-md-4 col-lg-4">
@@ -223,13 +389,17 @@
                                             <li class="hidden"><a href="#tickets-single">#TCK500</a></li>
                                         </ul>
 										
+										
                                     </div>
                                     <!-- END Tickets Title -->
 									
 									
  <div class="tab-content" >
                                         <!-- Tickets List -->
-										<div class="pull-right"><button id="editbutton2" type="submit" class="btn btn-sm btn-primary" onclick="editdescription();"><i class="fa fa-edit"></i> Edit</button>&nbsp;&nbsp;<button type="submit" class="btn btn-sm btn-primary" onclick="updatedescription();" id="savebutton2" disabled><i class="fa fa-save"></i> Save</button></div>
+										<div class="pull-right"><button id="editbutton2" type="submit" class="btn btn-sm btn-primary" onclick="editdescription();"><i class="fa fa-edit"></i> Edit</button>&nbsp;&nbsp;<button type="submit" class="btn btn-sm btn-primary" onclick="updatedescription();" id="savebutton2" disabled><i class="fa fa-save"></i> Save</button>&nbsp;&nbsp;
+									<button href="#printticket" data-toggle="modal" id="editbutton2" type="submit" class="btn btn-sm btn-success pull-right"><i class="fa fa-print"></i> Print</button>
+										
+										</div>
 	
 			<p>
 				<label>Problem</label><textarea class="form-control" id="problem" disabled><?php echo $ticketdetails['problem'];?></textarea> 
