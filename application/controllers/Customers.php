@@ -97,9 +97,9 @@ class Customers extends CI_Controller
 		//check if user existing
 		$customercount = $this->customers_model->checkcustomer($login_email,$login_password);
 //echo json_encode($customercount);
-		$customercount =1;
-		$login_email ="elvin.casem@gmail.com";
-		$deviceid = "12";
+		//$customercount =1;
+		//$login_email ="elvin.casem@gmail.com";
+		//$deviceid = "12";
 		if($customercount==1){
 
 
