@@ -138,16 +138,7 @@ function updatecustomer(){
 		})
 	}else{
 		
-			$.ajax({
-			url: 'customers/checkduplicatecustomer',
-			type: 'post',
-			data: {cemail: cemail},
-			success: function(response) {
-				console.log(response);
-				//location.reload();
-				
-				if(response==0){
-					$.ajax({
+		$.ajax({
 						url: 'customers/updatecustomer',
 						type: 'post',
 						data: {customerid:customerid,cemail: cemail,clname:clname,cfname:cfname,cmname:cmname,caddress:caddress,cmobileno:cmobileno,cotherno:cotherno,cpassword:cpassword},
@@ -157,6 +148,17 @@ function updatecustomer(){
 							
 						}
 					});
+		/*
+			$.ajax({
+			url: 'customers/checkduplicatecustomer',
+			type: 'post',
+			data: {cemail: cemail},
+			success: function(response) {
+				console.log(response);
+				//location.reload();
+				
+				if(response==0){
+					
 				}else{
 					$.bootstrapGrowl('<h4><strong>Email already in use.</strong></h4> <p> Please enter other email.</p>', {
 					type: 'warning',
@@ -170,7 +172,7 @@ function updatecustomer(){
 				//end savecustomer
 				
 			}
-		});
+		}); */
 		
 		
 	}

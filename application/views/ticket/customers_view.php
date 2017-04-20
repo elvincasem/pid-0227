@@ -115,6 +115,7 @@
 						<th>Mobile No</th>
 						<th>Email</th>
 						<th>Other No</th>
+						<th>Device ID</th>
                         
                         
 						<th></th>
@@ -133,6 +134,7 @@
 				echo "<td>".$cust_list['cmobileno']."</td>";
 				echo "<td>".$cust_list['cemail']."</td>";
 				echo "<td>".$cust_list['cotherno']."</td>";
+				echo "<td>".$cust_list['deviceid']."</td>";
 				
 				
 				
