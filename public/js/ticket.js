@@ -74,6 +74,7 @@ function savereply(){
 	var ticket_reply = document.getElementById("ticket-reply").value;
 	var cemail = document.getElementById("cemail").value;
 	var cmobileno = document.getElementById("cmobileno").value;
+	var deviceid = document.getElementById("deviceid").value;
 	
 	var smsbox = document.getElementById("sms_notif");
 	if(smsbox.checked==true){
@@ -92,6 +93,17 @@ function savereply(){
 		var emailclient = "no";
 	}
 	
+	var mobileapp = document.getElementById("mobile_notif");
+	
+	if(mobileapp.checked==true){
+		var mobileappnotif = "yes";
+	}else{
+		//alert("No SMS");
+		var mobileappnotif = "no";
+	}
+	
+	//alert(mobileappnotif);
+	
 	if(ticket_reply==""){
 		$.bootstrapGrowl('<h4><strong>Reply field is empty!</strong></h4> <p></p>', {
 				type: 'danger',
@@ -102,7 +114,7 @@ function savereply(){
 		$.ajax({
 			url: '../savereply',
 			type: 'post',
-			data: {ticketid: ticketid,ticket_reply:ticket_reply,emailclient:emailclient,sms:sms,cemail:cemail,cmobileno:cmobileno},
+			data: {ticketid: ticketid,ticket_reply:ticket_reply,emailclient:emailclient,sms:sms,cemail:cemail,cmobileno:cmobileno,deviceid:deviceid,mobileappnotif:mobileappnotif},
 			success: function(response) {
 				console.log(response);
 			$('#ticket_timeline').load(document.URL +  ' #ticket_timeline');

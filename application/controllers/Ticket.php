@@ -286,21 +286,31 @@ class Ticket extends CI_Controller
 	}
 	
 	public function savereply(){
+		
+		
+		
 		$ticketid = $this->input->post('ticketid');
 		$ticket_reply = $this->input->post('ticket_reply');
 		$sms = $this->input->post('sms');
 		$emailclient = $this->input->post('emailclient');
+		$mobileapp = $this->input->post('mobileappnotif');
+		$deviceid = $this->input->post('deviceid');
 		$cemail = $this->input->post('cemail');
 		$cmobileno = $this->input->post('cmobileno');
 		$uid = $this->session->userdata('uid');
 		
+		
+		
+		
+		
+		
+		//echo $cmobileno;
 		//save reply to database
 		$this->ticket_model->savereply($ticketid,$ticket_reply,$uid);
 		
 		//notify via sms
 		if($sms == "yes"){
-			$sms_to = 
-			$this->send_sms($cmobileno,$ticketid,$ticket_reply);
+			$sms_to = $this->send_sms($cmobileno,$ticketid,$ticket_reply);
 		}
 		
 		if($emailclient =="yes"){
@@ -309,6 +319,17 @@ class Ticket extends CI_Controller
 			$body = "Ticket Details :".$ticket_reply;
 			$this->send_email($email,$subject,$body);
 		}
+		
+		if($mobileapp =="yes"){
+			//$device_id = $deviceid;
+			//$subject = "Ticket #:".$ticketid." Update";
+			//$body = "Ticket Details :".$ticket_reply;
+			$this->send_pushnotif($deviceid,$ticketid,$ticket_reply);
+			//echo $pushnotif;
+		}
+		
+		
+		
 	}
 	
 	public function updateticket(){
@@ -437,6 +458,45 @@ class Ticket extends CI_Controller
  
   
 	}
+	
+	
+	public function send_pushnotif($deviceid,$ticketid,$ticket_reply){
+
+	$notif_message = "Ticket #$ticketid: $ticket_reply";
+     $content = array(
+			"en" => $notif_message
+			);
+		
+		$fields = array(
+			'app_id' => "4786ef01-ffed-4040-ab42-2ce64113ce95",
+			'include_player_ids' => array($deviceid),
+			'data' => array("foo" => "bar"),
+			'contents' => $content
+		);
+		
+		$fields = json_encode($fields);
+    	print("\nJSON sent:\n");
+    	print($fields);
+		
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8',
+												   'Authorization: Basic NGEwMGZmMjItY2NkNy0xMWUzLTk5ZDUtMDAwYzI5NDBlNjJj'));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_HEADER, FALSE);
+		curl_setopt($ch, CURLOPT_POST, TRUE);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+
+		$response = curl_exec($ch);
+		curl_close($ch);
+		
+		return $response;
+ 
+  
+	}
+	
+	
 	
 	public function do_upload() { 
 		 $ticketfileid = $this->input->post('ticketfileid');

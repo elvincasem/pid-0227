@@ -203,6 +203,7 @@ foreach ($ticketlog as $ticketlog_list):
 		<input type="hidden" id="ticketid" value="<?php echo $ticketid;?>">
 		<input type="hidden" id="cemail" value="<?php echo $ticketdetails['cemail'];?>">
 		<input type="hidden" id="cmobileno" value="<?php echo $ticketdetails['cmobileno'];?>">
+		<input type="hidden" id="deviceid" value="<?php echo $ticketdetails['deviceid'];?>">
 		<ul class="nav nav-pills nav-stacked">
 			<li class="active">
 				<label class="control-label" for="state-normal">Customer Name</label>
