@@ -8,8 +8,13 @@ class Ticket_model extends CI_Model
 	public function savecustomer($cemail,$clname,$cfname,$cmname,$caddress,$cmobileno,$cotherno,$cpassword)
 	{
 		//for online time on saving
-		$this->db->query("SET SESSION time_zone = '+8:00';");
-		$sql = "INSERT INTO customer (cemail,clname,cfname,cmname,caddress,cmobileno,cotherno,cpassword) VALUES (".$this->db->escape($cemail).",".$this->db->escape($clname).",".$this->db->escape($cfname).",".$this->db->escape($cmname).",".$this->db->escape($caddress).",".$this->db->escape($cmobileno).",".$this->db->escape($cotherno).",".$this->db->escape($cpassword).")";
+		//$this->db->query("SET SESSION time_zone = '+8:00';");
+		$this->load->helper('date');
+		$now = new DateTime();
+		$now->setTimezone(new DateTimezone('Asia/Manila'));
+		$now_timestamp = $now->format('Y-m-d H:i:s');
+		
+		$sql = "INSERT INTO customer (cemail,clname,cfname,cmname,caddress,cmobileno,cotherno,cpassword,customer_time_stamp) VALUES (".$this->db->escape($cemail).",".$this->db->escape($clname).",".$this->db->escape($cfname).",".$this->db->escape($cmname).",".$this->db->escape($caddress).",".$this->db->escape($cmobileno).",".$this->db->escape($cotherno).",".$this->db->escape($cpassword).",".$this->db->escape($now_timestamp).")";
 		$this->db->query($sql);
 				
 		
@@ -82,8 +87,16 @@ class Ticket_model extends CI_Model
 	public function getticketlog($id)
 	{
 		//$sql = $this->db->query("SELECT * FROM ((SELECT 'Customer' AS userreplied,CONCAT(customer.cfname,' ',customer.clname) AS user_name, cremarksid AS remarksid, cticketid AS ticketid,cremarks_info AS remarks_info, ctime_stamp AS time_stamp FROM remarks_customer LEFT JOIN customer ON remarks_customer.customerid = customer.customerid) UNION ALL (SELECT 'Agent' AS userreplied,users.name AS user_name, aremarksid AS remarksid, aticketid AS ticketid,aremarks_info AS remarks_info, atime_stamp AS time_stamp FROM remarks_agent LEFT JOIN users ON remarks_agent.uid= users.uid)) ticketlog WHERE ticketlog.ticketid = ".$this->db->escape($id)." ORDER BY time_stamp ASC ");
+//$sql = $this->db->query("SELECT * FROM ((SELECT 'Customer' AS userreplied,CONCAT(customer.cfname,' ',customer.clname) AS user_name, cremarksid AS remarksid, cticketid AS ticketid,cremarks_info AS remarks_info, ctime_stamp AS time_stamp, creplytype AS replytype FROM remarks_customer LEFT JOIN customer ON remarks_customer.customerid = customer.customerid) UNION ALL (SELECT 'Agent' AS userreplied,users.name AS user_name, aremarksid AS remarksid, aticketid AS ticketid,aremarks_info AS remarks_info, atime_stamp AS time_stamp, replytype AS replytype FROM remarks_agent LEFT JOIN users ON remarks_agent.uid= users.uid) UNION ALL (SELECT 'System' AS userreplied,users.name AS user_name, tlogid AS remarksid, ticketid AS ticketid,remarks AS remarks_info, time_stamp AS time_stamp,'TEXT' AS replytype FROM tickets_log LEFT JOIN users ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$this->db->escape($id)." ORDER BY time_stamp ASC ");
 $sql = $this->db->query("SELECT * FROM 
-((SELECT 'Customer' AS userreplied,CONCAT(customer.cfname,' ',customer.clname) AS user_name, cremarksid AS remarksid, cticketid AS ticketid,cremarks_info AS remarks_info, ctime_stamp AS time_stamp, creplytype AS replytype FROM remarks_customer LEFT JOIN customer ON remarks_customer.customerid = customer.customerid) UNION ALL (SELECT 'Agent' AS userreplied,users.name AS user_name, aremarksid AS remarksid, aticketid AS ticketid,aremarks_info AS remarks_info, atime_stamp AS time_stamp, replytype AS replytype FROM remarks_agent LEFT JOIN users ON remarks_agent.uid= users.uid) UNION ALL (SELECT 'System' AS userreplied,users.name AS user_name, tlogid AS remarksid, ticketid AS ticketid,remarks AS remarks_info, time_stamp AS time_stamp,'TEXT' AS replytype FROM tickets_log LEFT JOIN users ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$this->db->escape($id)." ORDER BY time_stamp ASC ");
+((SELECT 'Customer' AS userreplied,CONCAT(customer.cfname,' ',customer.clname) AS user_name, cremarksid AS remarksid, cticketid AS ticketid,cremarks_info AS remarks_info, ctime_stamp AS time_stamp, creplytype AS replytype, '0' AS n_email,'0' AS n_sms,'0' AS n_mobile  FROM remarks_customer 
+LEFT JOIN customer ON remarks_customer.customerid = customer.customerid) 
+UNION ALL 
+(SELECT 'Agent' AS userreplied,users.name AS user_name, aremarksid AS remarksid, aticketid AS ticketid,aremarks_info AS remarks_info, atime_stamp AS time_stamp, replytype AS replytype,n_email,n_sms,n_mobile FROM remarks_agent 
+LEFT JOIN users ON remarks_agent.uid= users.uid) 
+UNION ALL 
+(SELECT 'System' AS userreplied,users.name AS user_name, tlogid AS remarksid, ticketid AS ticketid,remarks AS remarks_info, time_stamp AS time_stamp,'TEXT' AS replytype, '0' AS n_email,'0' AS n_sms,'0' AS n_mobile FROM tickets_log LEFT JOIN users 
+ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$this->db->escape($id)." ORDER BY time_stamp ASC ");
 //echo "SELECT * FROM ((SELECT 'Customer' AS userreplied,CONCAT(customer.cfname,' ',customer.clname) AS user_name, cremarksid AS remarksid, cticketid AS ticketid,cremarks_info AS remarks_info, ctime_stamp AS time_stamp FROM remarks_customer LEFT JOIN customer ON remarks_customer.customerid = customer.customerid) UNION ALL (SELECT 'Agent' AS userreplied,users.name AS user_name, aremarksid AS remarksid, aticketid AS ticketid,aremarks_info AS remarks_info, atime_stamp AS time_stamp FROM remarks_agent LEFT JOIN users ON remarks_agent.uid= users.uid) UNION ALL (SELECT 'System' AS userreplied,users.name AS user_name, tlogid AS remarksid, ticketid AS ticketid,remarks AS remarks_info, time_stamp AS time_stamp FROM tickets_log LEFT JOIN users ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$this->db->escape($id)." ORDER BY time_stamp ASC ";
 
 
@@ -133,21 +146,50 @@ $sql = $this->db->query("SELECT * FROM
 	
 	
 	
-	public function savereply($ticketid,$ticket_reply,$uid)
+	public function savereply($ticketid,$ticket_reply,$uid,$sms,$emailclient,$mobileapp)
 	{
 		//for online time on saving
 		$this->db->query("SET SESSION time_zone = '+8:00';");
-		$sql = "INSERT INTO remarks_agent (aticketid,aremarks_info,uid) VALUES (".$this->db->escape($ticketid).",".$this->db->escape($ticket_reply).",".$this->db->escape($uid).")";
+		
+		$this->load->helper('date');
+		$now = new DateTime();
+		$now->setTimezone(new DateTimezone('Asia/Manila'));
+		$now_timestamp = $now->format('Y-m-d H:i:s');
+		
+		if($sms=="yes"){
+			$n_sms = 1;
+		}else{
+			$n_sms = 0;
+		}
+		if($emailclient=="yes"){
+			$n_email = 1;
+		}else{
+			$n_email = 0;
+		}
+		if($mobileapp=="yes"){
+			$n_mobile = 1;
+		}else{
+			$n_mobile = 0;
+		}
+		
+		
+		$sql = "INSERT INTO remarks_agent (aticketid,aremarks_info,uid,atime_stamp,n_email,n_sms,n_mobile) VALUES (".$this->db->escape($ticketid).",".$this->db->escape($ticket_reply).",".$this->db->escape($uid).",".$this->db->escape($now_timestamp).",".$this->db->escape($n_email).",".$this->db->escape($n_sms).",".$this->db->escape($n_mobile).")";
 		$this->db->query($sql);
 		
-					
+				echo $sql;	
 		
 	}
 	public function savereply_file($ticketid,$ticket_reply,$uid,$file_type)
 	{
 		//for online time on saving
 		$this->db->query("SET SESSION time_zone = '+8:00';");
-		$sql = "INSERT INTO remarks_agent (aticketid,aremarks_info,uid,replytype) VALUES (".$this->db->escape($ticketid).",".$this->db->escape($ticket_reply).",".$this->db->escape($uid).",".$this->db->escape($file_type).")";
+		
+		$this->load->helper('date');
+		$now = new DateTime();
+		$now->setTimezone(new DateTimezone('Asia/Manila'));
+		$now_timestamp = $now->format('Y-m-d H:i:s');
+		
+		$sql = "INSERT INTO remarks_agent (aticketid,aremarks_info,uid,replytype,atime_stamp) VALUES (".$this->db->escape($ticketid).",".$this->db->escape($ticket_reply).",".$this->db->escape($uid).",".$this->db->escape($file_type).",".$this->db->escape($now_timestamp).")";
 		$this->db->query($sql);
 		
 					
@@ -225,7 +267,12 @@ $sql = $this->db->query("SELECT * FROM
 	{
 		//for online time on saving
 		$this->db->query("SET SESSION time_zone = '+8:00';");
-		$sql = "INSERT INTO tickets_log (ticketid,status,remarks,updatedby) VALUES (".$this->db->escape($ticketid).",".$this->db->escape($status).",".$this->db->escape($remarks_log).",".$this->db->escape($uid).")";
+		$this->load->helper('date');
+		$now = new DateTime();
+		$now->setTimezone(new DateTimezone('Asia/Manila'));
+		$now_timestamp = $now->format('Y-m-d H:i:s');
+		
+		$sql = "INSERT INTO tickets_log (ticketid,status,remarks,updatedby,time_stamp) VALUES (".$this->db->escape($ticketid).",".$this->db->escape($status).",".$this->db->escape($remarks_log).",".$this->db->escape($uid).",".$this->db->escape($now_timestamp).")";
 		$this->db->query($sql);
 		
 					

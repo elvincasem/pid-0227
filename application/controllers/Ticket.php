@@ -306,7 +306,7 @@ class Ticket extends CI_Controller
 		
 		//echo $cmobileno;
 		//save reply to database
-		$this->ticket_model->savereply($ticketid,$ticket_reply,$uid);
+		$this->ticket_model->savereply($ticketid,$ticket_reply,$uid,$sms,$emailclient,$mobileapp);
 		
 		//notify via sms
 		if($sms == "yes"){

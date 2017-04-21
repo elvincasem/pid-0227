@@ -474,6 +474,15 @@ foreach ($ticketlog as $ticketlog_list):
 		}
 		
 			
+			if($ticket_log['n_email']==1){
+				echo "<i class='fa fa-envelope'></i> ";
+			}
+			if($ticket_log['n_sms']==1){
+				echo "<i class='fa fa-comment'></i> ";
+			}
+			if($ticket_log['n_mobile']==1){
+				echo "<i class='fa fa-mobile'></i> ";
+			}
 			
 		echo "</div>";
 	echo "</li>";
