@@ -22,13 +22,15 @@ class Home extends CI_Controller
 			'usersclass' => '',
 			'userssubclass' => '',
 			'departmentsclass' => '',
+			'templateclass' => '',
 			'categoryclass' => '',
 			'subnavtitle' => 'Dashboard'
 			);
 			
 			$this->js = array(
             'jsfile' => null,
-			'typeahead' => '0'
+			'typeahead' => '0',
+			'datatablescript' => null
 			);
 	}
 	
@@ -54,6 +56,7 @@ class Home extends CI_Controller
 		
 		$data['opentickets'] = $this->ticket_model->getticketliststatus("Open");
 		$data['rmatickets'] = $this->ticket_model->getticketliststatus("RMA");
+		$data['pickuptickets'] = $this->ticket_model->getticketliststatus("Pickup");
 		
 		
 		$this->load->view('inc/header_view');
