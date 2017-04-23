@@ -28,7 +28,8 @@ class Customers extends CI_Controller
 			);
 		//javascript module
 		$this->js = array(
-            'jsfile' => 'customer.js'
+            'jsfile' => 'customer.js',
+			'datatablescript' => null
 			);
 	}
 	

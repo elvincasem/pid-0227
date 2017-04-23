@@ -71,7 +71,7 @@
                             <div class="col-sm-6 col-lg-3">
                                 <a href="javascript:void(0)" class="widget">
                                     <div class="widget-content widget-content-mini text-right clearfix">
-                                        <div class="widget-icon pull-left themed-background-warning">
+                                        <div class="widget-icon pull-left themed-background-danger">
                                             <i class="gi gi-file text-light-op"></i>
                                         </div>
                                         <h2 class="widget-heading h3 text-danger">
@@ -145,7 +145,7 @@
 							
 				<div class="col-sm-6">
 					<div class="widget" >
-						<div class="widget-content themed-background-warning text-light-op">
+						<div class="widget-content themed-background-danger text-light-op">
 							<i class="gi gi-file fa-chevron-right"></i> <strong> RMA Tickets</strong>
 						</div>
 									
@@ -153,7 +153,7 @@
 					<div class="widget-content widget-content-full">
 						<table id="example-datatable4" class="table table-striped table-borderless remove-margin">
 						<thead>
-							<th>Title</th>
+							<th>Customer</th>
 							<th class="text-center">Ticket</th>
 							
 						</thead>
@@ -175,27 +175,40 @@
 						</table>
 					</div>
 								</div>
-							</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="widget" >
+						<div class="widget-content themed-background-warning text-light-op">
+							<i class="gi gi-file fa-chevron-right"></i> <strong> Pickup Tickets</strong>
+						</div>
+									
+									
+					<div class="widget-content widget-content-full">
+						<table id="example-datatable4" class="table table-striped table-borderless remove-margin">
+						<thead>
+							<th>Customer</th>
+							<th class="text-center">Ticket</th>
 							
+						</thead>
+							<tbody>
+								<?php
+								foreach($pickuptickets as $pickup_ticket):
+								
+								echo "<tr>";
+								echo "<td><a href='ticket/details/".$pickup_ticket['ticketid']."' class='text-black'>".$pickup_ticket['cfname']." ".$pickup_ticket['clname']."</a></td>";
+								echo "<td class='text-center' ><a href='ticket/details/".$pickup_ticket['ticketid']."' class='text-black'><span class='text-muted'>Ticket#:".$pickup_ticket['ticketid']."</span></td>";
+								echo "</a></tr>";
+								
+								endforeach;
 							
-							<!--<div class="col-sm-6">
-                                        <a href="javascript:void(0)" class="widget">
-                                            <div class="widget-content themed-background-info text-light-op">
-                                                <i class="fa fa-fw fa-chevron-right"></i> <strong>Satisfied with the Service Received</strong>
-                                            </div>
-                                            <div class="widget-content themed-background-muted text-center">
-                                                <i class="fa fa-thumbs-o-up fa-3x text-info"></i>
-												<h3>Strongly Agree</h3>
-                                            </div>
-                                            <div class="widget-content text-center">
-                                                <strong><h2><span data-toggle="counter" data-to="<?php 
-										//echo $totalstrongly->totalstrong;
-										?>"></span> / <?php 
-										//echo $totalsatisfied->totalsatisfied;
-										?></strong></h2>
-                                            </div>
-                                        </a>
-							</div> -->
+							?>
+								
+								
+							</tbody>
+						</table>
+					</div>
+								</div>
+				</div>
 							
 							<div class="row">
 							</div>

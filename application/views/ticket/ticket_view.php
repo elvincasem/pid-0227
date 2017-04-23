@@ -253,7 +253,7 @@
                                         <div class="tab-pane active" id="tickets-list">
                                             <div class="block-content-full">
                                                 <div class="table-responsive remove-margin-bottom">
-                                                    <table id="example-datatable" class="table table-striped table-bordered table-vcenter table-hover">
+                                                    <table id="datatable-ticket" class="table table-striped table-bordered table-vcenter table-hover">
                 <thead>
                     <tr style="text-align:center;">
                         
@@ -382,7 +382,7 @@
 				//echo "<td><a href='receiving/details/".$rrlist['deliveryid']."'>".$rrlist['deliveryid']."</a></td>";
 				echo "<td><a href='#'>Ticket no: ".$ticketlist['ticketid']."</a></td>";
 				
-				echo "<td>".$ticketlist['title']."</a></td>";
+				echo "<td>".$ticketlist['problem']."</a></td>";
 				echo "<td>".$ticketlist['cfname']." ".$ticketlist['clname']."</td>";
 				echo "<td>".$ticketlist['name']."</td>";
 				//echo "<td>".mdate('%F %d, %Y',strtotime($items_list['dateacquired']))."</td>";

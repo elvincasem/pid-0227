@@ -31,6 +31,11 @@
 			
 			echo "<script src='".base_url()."public/js/$jsfile'></script>";
 		}
+		echo "\n";
+		if($datatablescript!=null){
+			
+			echo $datatablescript;
+		}
 		?>
 		
 		<?php
@@ -43,6 +48,8 @@
     }
 }*/
 ?>
+
+
 
     </body>
 </html>

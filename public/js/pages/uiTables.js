@@ -17,6 +17,11 @@ var UiTables = function() {
                 pageLength: 10,
                 lengthMenu: [[5, 10, 20, 50], [5, 10, 20, 50]]
             });
+			/*$('#datatable-ticket').dataTable({
+				columnDefs: [ { orderable: false, targets: [ 0 ] } ],
+                pageLength: 10,
+                lengthMenu: [[5, 10, 20, 50], [5, 10, 20, 50]]
+            });*/
 			$('#example-datatable1').dataTable({
                 //columnDefs: [ { orderable: false, targets: [ 4 ] } ],
                 pageLength: 10,
