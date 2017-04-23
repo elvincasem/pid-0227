@@ -176,7 +176,7 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 		$sql = "INSERT INTO remarks_agent (aticketid,aremarks_info,uid,atime_stamp,n_email,n_sms,n_mobile) VALUES (".$this->db->escape($ticketid).",".$this->db->escape($ticket_reply).",".$this->db->escape($uid).",".$this->db->escape($now_timestamp).",".$this->db->escape($n_email).",".$this->db->escape($n_sms).",".$this->db->escape($n_mobile).")";
 		$this->db->query($sql);
 		
-				echo $sql;	
+				//echo $sql;	
 		
 	}
 	public function savereply_file($ticketid,$ticket_reply,$uid,$file_type)
