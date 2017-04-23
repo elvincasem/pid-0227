@@ -29,6 +29,7 @@ class Ticket extends CI_Controller
 			'usersclass' => '',
 			'userssubclass' => '',
 			'departmentsclass' => '',
+			'templateclass' => '',
 			'categoryclass' => '',
 			'subnavtitle' => 'Ticket #:'
 			
@@ -198,6 +199,7 @@ class Ticket extends CI_Controller
 		$data['category'] = $this->ticket_model->getcategory();
 		$data['departments'] = $this->ticket_model->getdepartment();
 		$data['agentlist'] = $this->ticket_model->getagent();
+		$data['templatelist'] = $this->ticket_model->gettemplate();
 
 		$this->load->view('inc/header_view');
 		$this->load->view('ticket/ticketadd_view',$data);

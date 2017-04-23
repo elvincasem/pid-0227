@@ -91,7 +91,58 @@
                         </div>
                     </div>
                 </div>
-				
+	<!-- Regular Modal -->
+                <div id="templatemodal" class="modal bg" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                           <div class="modal-header">
+								
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h3 class="modal-title"><strong>Template Problems</strong></h3>
+                                
+                            </div> 
+                            <div class="modal-body">
+                                <div class="form-group">
+						
+                        <div class="col-md-12">
+                             <select id="templatedescription" name="example-select2" class="select-select2" style="width: 100%;" data-placeholder="Choose one.." >
+							 <?php
+							 foreach ($templatelist as $temp_list):
+								
+							
+								echo "<option value='".$temp_list['templatedescription']."'>".$temp_list['templatedescription']."</option>";
+							
+							endforeach;
+							?>
+							 </select>
+                        </div>	
+						
+						<div class="row"></div>
+						
+							
+					</div>
+								
+								<!-- Input States Block -->
+            <div class="block">
+                
+
+                <!-- Input States Content -->
+
+                <!-- END Input States Content -->
+            </div>
+            <!-- END Input States Block -->
+								
+								
+								
+                            </div>
+                            <div class="modal-footer">
+							<button type="button" id="savebutton" class="btn btn-effect-ripple btn-primary" onclick="insertproblem();">Insert</button>
+							
+                                <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="closebutton">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>			
 			
 				
 				
@@ -278,7 +329,7 @@
 						
 						<h4 class="sub-header"></h4>
 				<div class="col-lg-12">
-						<label class="col-md-2 control-label" for="state-normal">Problem*</label>
+						<label class="col-md-2 control-label" for="state-normal">Problem*<br><a href="#templatemodal"  data-toggle="modal" ><i class="fa fa-files-o"></i> Template</a></label>
                         <div class="col-md-3">
 							<textarea class="form-control" id="problem" placeholder="Required Field" style="height:150px;"></textarea>
                             

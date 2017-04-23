@@ -143,6 +143,13 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 		
 		
 	}
+	public function gettemplate()
+	{
+		$sql = $this->db->query("SELECT * FROM template");
+		return $sql->result_array();
+		
+		
+	}
 	
 	
 	

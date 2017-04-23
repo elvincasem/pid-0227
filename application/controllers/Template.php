@@ -1,12 +1,12 @@
 <?php
 
-class Category extends CI_Controller
+class Template extends CI_Controller
 {
 	public function __construct()
 	{
 		parent::__construct();
 		//model module
-		$this->load->model('category_model');
+		$this->load->model('template_model');
 		$this->load->helper('date');
 		//view module
 		 $this->data = array(
@@ -20,15 +20,15 @@ class Category extends CI_Controller
 			'usersclass' => '',
 			'userssubclass' => '',
 			'departmentsclass' => '',
-			'templateclass' => '',
-			'categoryclass' => 'active',
-			'subnavtitle' => 'Category',
+			'templateclass' => 'active',
+			'categoryclass' => '',
+			'subnavtitle' => 'Template',
 			'typeahead' => '1',
 			
 			);
 		//javascript module
 		$this->js = array(
-            'jsfile' => 'settings_category.js',
+            'jsfile' => 'settings_template.js',
 			'datatablescript' => null
 			);
 	}
@@ -39,29 +39,29 @@ class Category extends CI_Controller
 		$js = $this->js;
 
 		
-		$data['categorylist'] = $this->category_model->getcategory();
+		$data['templates'] = $this->template_model->gettemplatelist();
 
 		$this->load->view('inc/header_view');
-		$this->load->view('settings/category_view',$data);
+		$this->load->view('settings/template_view',$data);
 		$this->load->view('inc/footer_view',$js);
 		
 	}
 	
 
 	
-	public function savecategory(){
-		$categoryname = $this->input->post('categoryname');
-		if($categoryname!=null){
-			$this->category_model->savecategory($categoryname);
+	public function savetemplate(){
+		$templatedescription = $this->input->post('templatedescription');
+		if($templatedescription!=null){
+			$this->template_model->savetemplate($templatedescription);
 		}
 		
 	}
 	
-	public function deletecategory(){
+	public function deletedepartment(){
 		
-		$categoryid = $this->input->post('categoryid');
-		if($categoryid!=null){
-			$this->db->delete('category', array('categoryid' => $categoryid));
+		$templateid = $this->input->post('templateid');
+		if($templateid!=null){
+			$this->db->delete('template', array('templateid' => $templateid));
 		}
 		
 		

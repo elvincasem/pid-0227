@@ -37,7 +37,8 @@ class Employees extends CI_Controller
 			);
 		//javascript module
 		$this->js = array(
-            'jsfile' => 'settings_employees.js'
+            'jsfile' => 'settings_employees.js',
+			'datatablescript' => null
 			);
 	}
 	

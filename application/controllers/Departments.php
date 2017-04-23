@@ -20,6 +20,7 @@ class Departments extends CI_Controller
 			'usersclass' => '',
 			'userssubclass' => '',
 			'departmentsclass' => 'active',
+			'templateclass' => '',
 			'categoryclass' => '',
 			'subnavtitle' => 'Departments',
 			'typeahead' => '1',
@@ -27,7 +28,8 @@ class Departments extends CI_Controller
 			);
 		//javascript module
 		$this->js = array(
-            'jsfile' => 'settings_department.js'
+            'jsfile' => 'settings_department.js',
+			'datatablescript' => null
 			);
 	}
 	

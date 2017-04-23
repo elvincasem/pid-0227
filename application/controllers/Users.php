@@ -17,13 +17,15 @@ class Users extends CI_Controller
 			'usersclass' => 'active',
 			'userssubclass' => 'active',
 			'departmentsclass' => '',
+			'templateclass' => '',
 			'categoryclass' => '',
 			'subnavtitle' => 'Users'
 			);
 			
 		//javascript module
 		$this->js = array(
-            'jsfile' => ''
+            'jsfile' => '',
+			'datatablescript' => null
 			);
 	}
 	

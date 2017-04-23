@@ -347,3 +347,11 @@ function printticketfulldetails()
 }
 
 
+function insertproblem(){
+	var closebutton = document.getElementById("closebutton");
+	var problem_desc = document.getElementById("templatedescription").value;
+	var problem_box = document.getElementById("problem");
+	
+	problem_box.innerHTML = problem_desc;
+	closebutton.click();
+}
