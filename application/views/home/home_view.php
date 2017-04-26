@@ -162,7 +162,7 @@
 								foreach($rmatickets as $rma_ticket):
 								
 								echo "<tr>";
-								echo "<td><a href='ticket/details/".$rma_ticket['ticketid']."' class='text-black'>".$open_ticket['cfname']." ".$open_ticket['clname']."</a></td>";
+								echo "<td><a href='ticket/details/".$rma_ticket['ticketid']."' class='text-black'>".$rma_ticket['cfname']." ".$rma_ticket['clname']."</a></td>";
 								echo "<td class='text-center' ><a href='ticket/details/".$rma_ticket['ticketid']."' class='text-black'><span class='text-muted'>Ticket#:".$rma_ticket['ticketid']."</span></td>";
 								echo "</a></tr>";
 								
@@ -184,7 +184,7 @@
 									
 									
 					<div class="widget-content widget-content-full">
-						<table id="example-datatable4" class="table table-striped table-borderless remove-margin">
+						<table id="example-datatable5" class="table table-striped table-borderless remove-margin">
 						<thead>
 							<th>Customer</th>
 							<th class="text-center">Ticket</th>
