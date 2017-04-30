@@ -9,6 +9,7 @@ function savecustomer(){
 	var cmobileno = document.getElementById("cmobileno").value;
 	var cotherno = document.getElementById("cotherno").value;
 	var cpassword = document.getElementById("cpassword").value;
+	var ccompany = document.getElementById("ccompany").value;
 	//check duplicate
 	if(cfname ==""){
 		$.bootstrapGrowl('<h4><strong>First Name is empty.</strong></h4> <p> Please enter the required field.</p>', {
@@ -17,14 +18,14 @@ function savecustomer(){
 		allow_dismiss: true,
 		offset: {from: 'top', amount: 20}
 		})
-	}else if(cemail ==""){
+	}/*else if(cemail ==""){
 		$.bootstrapGrowl('<h4><strong>Email is empty.</strong></h4> <p> Please enter the required field.</p>', {
 		type: 'warning',
 		delay: 3000,
 		allow_dismiss: true,
 		offset: {from: 'top', amount: 20}
 		})
-	}else{
+	}*/else{
 		
 			$.ajax({
 			url: 'customers/checkduplicatecustomer',
@@ -38,7 +39,7 @@ function savecustomer(){
 					$.ajax({
 						url: 'customers/savecustomer',
 						type: 'post',
-						data: {cemail: cemail,clname:clname,cfname:cfname,cmname:cmname,caddress:caddress,cmobileno:cmobileno,cotherno:cotherno,cpassword:cpassword},
+						data: {cemail: cemail,clname:clname,cfname:cfname,cmname:cmname,caddress:caddress,cmobileno:cmobileno,cotherno:cotherno,cpassword:cpassword,ccompany:ccompany},
 						success: function(response) {
 							console.log(response);
 							location.reload();
@@ -103,6 +104,7 @@ function editcustomer(customerid){
 			document.getElementById("cmobileno").value = data.cmobileno;
 			document.getElementById("cotherno").value = data.cotherno;
 			document.getElementById("cpassword").value = data.cpassword;
+			document.getElementById("ccompany").value = data.ccompany;
 			
 			
 		}  
@@ -121,6 +123,7 @@ function updatecustomer(){
 	var cmobileno = document.getElementById("cmobileno").value;
 	var cotherno = document.getElementById("cotherno").value;
 	var cpassword = document.getElementById("cpassword").value;
+	var ccompany = document.getElementById("ccompany").value;
 	//check duplicate
 	if(cfname ==""){
 		$.bootstrapGrowl('<h4><strong>First Name is empty.</strong></h4> <p> Please enter the required field.</p>', {
@@ -129,19 +132,19 @@ function updatecustomer(){
 		allow_dismiss: true,
 		offset: {from: 'top', amount: 20}
 		})
-	}else if(cemail ==""){
+	}/*else if(cemail ==""){
 		$.bootstrapGrowl('<h4><strong>Email is empty.</strong></h4> <p> Please enter the required field.</p>', {
 		type: 'warning',
 		delay: 3000,
 		allow_dismiss: true,
 		offset: {from: 'top', amount: 20}
 		})
-	}else{
+	}*/else{
 		
 		$.ajax({
 						url: 'customers/updatecustomer',
 						type: 'post',
-						data: {customerid:customerid,cemail: cemail,clname:clname,cfname:cfname,cmname:cmname,caddress:caddress,cmobileno:cmobileno,cotherno:cotherno,cpassword:cpassword},
+						data: {customerid:customerid,cemail: cemail,clname:clname,cfname:cfname,cmname:cmname,caddress:caddress,cmobileno:cmobileno,cotherno:cotherno,cpassword:cpassword,ccompany:ccompany},
 						success: function(response) {
 							console.log(response);
 							location.reload();
@@ -208,3 +211,37 @@ function deletecustomer(id){
 	
 }
 
+function showticket(customerid){
+	//$('#savebutton').prop("disabled", true);    
+	//$('#updatebutton').prop("disabled", false); 
+	
+	//alert(customerid);
+	$.ajax({
+		url: 'customers/getcustomertickets/'+customerid,
+		type: 'post',
+		//data: {customerid : customerid},
+		success: function(response) {
+			//console.log(response);
+			 var data = JSON.parse(response);
+			 
+			 var tablebody = document.getElementById("modalbody");
+				tablebody.innerHTML="";
+			 //alert(data.length);
+			 $("#modalbody").innerHTML = "<table>";
+			for(var ctr=0;ctr<data.length; ctr++){
+				
+				
+				//$('#tablebody').append("<tr id=\"contact\">...</tr>");
+				//$("#tablebody").append( "<tr><td>Ticket#:</td></tr>");
+				//document.getElementById("testid").innerHTML = "<tr><td>test</td></tr>";
+				$("#modalbody").append( "<a href='ticket/details/"+data[ctr].ticketid+"'>Ticket#: "+data[ctr].ticketid+"; "+data[ctr].problem+"; </a>Status: "+data[ctr].status+" <br>"); 
+				//alert(data[ctr].ticketid);
+				//$('#tablebody tbody tr:last').after("<td>Ticket#: "+data[ctr].ticketid+"</td><td>"+data[ctr].problem+"</td><td>"+data[ctr].status+"</td><td>"+data[ctr].priority+"</td>");
+				console.log(data[ctr].ticketid);
+				console.log(ctr);
+			}
+			$("#modalbody").innerHTML = "</table>";
+			
+		}  
+	});
+}

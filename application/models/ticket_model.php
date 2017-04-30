@@ -44,7 +44,7 @@ class Ticket_model extends CI_Model
 	
 	public function getticketdetails($id)
 	{
-		$sql = $this->db->query("SELECT *,(SELECT NAME AS uname FROM tickets LEFT JOIN users ON tickets.addedbyuid = users.uid WHERE tickets.ticketid=".$this->db->escape($id).") AS agentname FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid LEFT JOIN department ON tickets.departmentid = department.departmentid LEFT JOIN category ON tickets.categoryid = category.categoryid WHERE ticketid=".$this->db->escape($id)."");
+		$sql = $this->db->query("SELECT *,(SELECT NAME AS uname FROM tickets LEFT JOIN users ON tickets.addedbyuid = users.uid WHERE tickets.ticketid=".$this->db->escape($id).") AS agentname FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid WHERE ticketid=".$this->db->escape($id)."");
 		
 		//echo "SELECT *,(SELECT NAME AS uname FROM tickets LEFT JOIN users ON tickets.addedbyuid = users.uid WHERE tickets.ticketid=".$this->db->escape($id).") AS agentname FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid LEFT JOIN department ON tickets.departmentid = department.departmentid WHERE ticketid=".$this->db->escape($id)."";
 		
@@ -68,17 +68,26 @@ class Ticket_model extends CI_Model
 		
 	}
 	
-	public function getticketlist()
+	public function getticketlist($filtercategory)
 	{
-		$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid");
+		if($filtercategory=="All"){
+			$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid");
+		}else{
+			$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid WHERE categoryid=".$this->db->escape($filtercategory)."");
+		}
+		
 		return $sql->result_array();
 		
 		
 	}
 	
-	public function getticketliststatus($status)
+	public function getticketliststatus($status,$filtercategory)
 	{
-		$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid where status=".$this->db->escape($status)."");
+		if($filtercategory=="All"){
+			$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid where status=".$this->db->escape($status)."");
+		}else{
+			$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid where status=".$this->db->escape($status)." AND categoryid=".$this->db->escape($filtercategory)."");
+		}
 		return $sql->result_array();
 		
 		
@@ -256,6 +265,31 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 	{
 				
 		$sql = "update tickets set status=".$this->db->escape($status)." where ticketid=".$this->db->escape($ticketid)."";
+
+		$this->db->query($sql);
+
+	}
+	public function updateticket_agent($ticketid,$assignedto_uid)
+	{
+				
+		$sql = "update tickets set assignedto_uid=".$this->db->escape($assignedto_uid)." where ticketid=".$this->db->escape($ticketid)."";
+
+		$this->db->query($sql);
+
+	}
+	public function updateticket_priority($ticketid,$priority)
+	{
+				
+		$sql = "update tickets set priority=".$this->db->escape($priority)." where ticketid=".$this->db->escape($ticketid)."";
+
+		$this->db->query($sql);
+
+	}
+	
+	public function updateticket_due($ticketid,$duedate)
+	{
+				
+		$sql = "update tickets set due_date=".$this->db->escape($duedate)." where ticketid=".$this->db->escape($ticketid)."";
 
 		$this->db->query($sql);
 

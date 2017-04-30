@@ -48,6 +48,7 @@ class Login extends CI_Controller
 			$this->session->set_userdata('username', $info[0]['username']);
 			$this->session->set_userdata('name', $info[0]['name']);
 			$this->session->set_userdata('uid', $info[0]['uid']);
+			$this->session->set_userdata('usertype', md5($info[0]['usertype']));
 			//echo $this->session->userdata('name');
 			header('Location:../home');
 		}

@@ -173,56 +173,70 @@
                                 <!-- END Menu Block -->
 
                                 <!-- Quick Month Stats Block -->
-                                <div class="block hidden">
+                                <div class="block">
                                     <!-- Quick Month Stats Title -->
                                     <div class="block-title">
                                         <div class="block-options pull-right">
                                             <a href="javascript:void(0)" class="btn btn-effect-ripple btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
                                         </div>
-                                        <h2>Quick Stats</h2>
+                                        <h2>Filter</h2>
                                     </div>
                                     <!-- END Quick Month Stats Title -->
 
                                     <!-- Quick Month Stats Content -->
                                     <table class="table table-striped table-borderless table-vcenter">
                                         <tbody>
-                                            <tr>
-                                                <td style="width: 60%;">
-                                                    <strong>Total Tickets</strong>
+                                          
+											<tr>
+                                                <td style="text-align:center;">
+                                                    <strong>Date Added</strong>
                                                 </td>
-		<td><?php echo $totaltickets;?></td>
+		
                                             </tr>
 	
                                             <tr>
-                                                <td>
-                                                    <strong>Total Responses</strong>
+										<form method="post">
+												<td  style="width: 100%;"><div class="input-group input-daterange" data-date-format="yyyy-mm-dd">
+                                                    <input type="text" id="date1" name="example-daterange1" class="form-control" placeholder="From">
+                                                    
+                                                    <input type="text" id="date2" name="example-daterange2" class="form-control" placeholder="To">
+                                                </div></td>
+											</tr>
+											<tr>
+                                                <td style="text-align:center;">
+                                                    <strong>Category</strong>
+													
                                                 </td>
-                                                <td>2590</td>
+		
                                             </tr>
+	
                                             <tr>
-                                                <td>
-                                                    <strong>Forum Tickets</strong>
+												<td  style="width: 100%;"><select id="filter_category" name="filter_category" class="select-select2" style="width: 100%;" data-placeholder="Choose one.." >
+							<option value="All">All</option>
+							<?php
+							
+							
+							foreach ($category as $category_list):
+								if($category_list['categoryvalue']==$filter_category){
+									$selected = "selected='selected'";
+								}else{
+									$selected="";
+								}	
+								echo "<option value='".$category_list['categoryvalue']."' $selected>".$category_list['categoryvalue']."</option>";
+							
+							endforeach;
+							?>
+							</select></td>
+											</tr>
+											
+											<tr>
+                                                <td style="text-align:center;">
+                                                     <button type="submit" class="btn btn-effect-ripple btn-primary">Filter</button>
                                                 </td>
-                                                <td>320</td>
+		</form>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <strong>Email Tickets</strong>
-                                                </td>
-                                                <td>200</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <strong>Contact Form Tickets</strong>
-                                                </td>
-                                                <td>70</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <strong>Avg Response Time</strong>
-                                                </td>
-                                                <td>2 hrs</td>
-                                            </tr>
+	
+											
                                         </tbody>
                                     </table>
                                     <!-- END Quick Month Stats Content -->
@@ -259,10 +273,11 @@
                         
                         <!-- <th style="width:100px;">Delivery ID</th>-->
                         <th>Ticket No.</th>
-						<th>Title</th>
+						<th>Problem</th>
                         <th>Customer</th>
                         <th>Agent</th>
                         <th>Status</th>
+                        <th>Category</th>
                         <th>Priority</th>
 						<th></th>
                     </tr>
@@ -295,6 +310,7 @@
 					}
 
 				echo "</td>";
+				echo "<td>".$ticketlist['categoryid']."</td>";
 				echo "<td>".$ticketlist['priority']."</td>";
 			
 			

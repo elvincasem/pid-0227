@@ -58,10 +58,10 @@
                                         <div class="widget-icon pull-left themed-background-danger">
                                             <i class="gi gi-warning_sign text-light-op"></i>
                                         </div>
-                                        <h2 class="widget-heading h3 text-warning">
-                                            <strong><span data-toggle="counter" data-to="<?php 
-										//echo $totalprograms->programtotal;
-										?>">0</span></strong>
+										<h2 class="widget-heading h3 text-danger">
+                                            <strong><span data-toggle="counter" data-to=""><?php 
+										echo $orverdueticketcount['totaloverdue'];
+										?></span></strong>
                                         </h2>
                                         <span class="text-muted">Overdue Tickets</span>
                                     </div>

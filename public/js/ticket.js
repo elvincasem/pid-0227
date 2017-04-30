@@ -151,15 +151,24 @@ function savereply(){
 
 function editticket(){
 	
+	
+	
 	$('#editbutton').prop("disabled", true); 
 	$('#savebutton').prop("disabled", false); 
 	//$('#customerid').prop("disabled", false); 
 	//$('#departmentid').prop("disabled", false); 
 	//$('#categoryid').prop("disabled", false); 
 	$('#status').prop("disabled", false); 
-	//$('#priority').prop("disabled", false); 
-	//$('#duedate').prop("disabled", false); 
-	//$('#assignedto_uid').prop("disabled", false); 
+	$('#priority').prop("disabled", false); 
+	$('#assignedto_uid').prop("disabled", false); 
+	
+	//admin control
+	if(document.getElementById("utype").value=="21232f297a57a5a743894a0e4a801fc3"){
+		alert(document.getElementById("utype").value);
+		$('#duedate').prop("disabled", false); 
+	}
+	
+	
 
 	
 }
@@ -197,15 +206,19 @@ function updatedetails(){
 	
 	//$('#savebutton').prop("disabled", true);    
 	var ticketid = document.getElementById("ticketid").value;
-	
 	var status = document.getElementById("status").value;
+	var duedate = document.getElementById("duedate").value;
+	var priority = document.getElementById("priority").value;
+	var assignedto_uid = document.getElementById("assignedto_uid").value;
 	
 	
+		//update ticket details
 		
+
 			$.ajax({
 			url: '../updateticket',
 			type: 'post',
-			data: {ticketid: ticketid,status:status},
+			data: {ticketid: ticketid,status:status,duedate:duedate,priority:priority,assignedto_uid:assignedto_uid},
 			success: function(response) {
 				console.log(response);
 				$('#ticket_timeline').load(document.URL +  ' #ticket_timeline');
@@ -219,9 +232,17 @@ function updatedetails(){
 			$('#editbutton').prop("disabled", false); 
 			$('#savebutton').prop("disabled", true); 
 			$('#status').prop("disabled", true); 
+			$('#assignedto_uid').prop("disabled", true); 
+			$('#priority').prop("disabled", true); 
 				
 			}
 		});
+		
+	
+	
+	
+	
+	
 
 	
 }
@@ -274,6 +295,7 @@ function savecustomer(){
 	var cmobileno = document.getElementById("cmobileno").value;
 	var cotherno = document.getElementById("cotherno").value;
 	var cpassword = document.getElementById("cpassword").value;
+	var ccompany = document.getElementById("ccompany").value;
 	//check duplicate
 	if(cfname ==""){
 		$.bootstrapGrowl('<h4><strong>First Name is empty.</strong></h4> <p> Please enter the required field.</p>', {
@@ -282,14 +304,14 @@ function savecustomer(){
 		allow_dismiss: true,
 		offset: {from: 'top', amount: 20}
 		})
-	}else if(cemail ==""){
+	}/*else if(cemail ==""){
 		$.bootstrapGrowl('<h4><strong>Email is empty.</strong></h4> <p> Please enter the required field.</p>', {
 		type: 'warning',
 		delay: 3000,
 		allow_dismiss: true,
 		offset: {from: 'top', amount: 20}
 		})
-	}else{
+	}*/else{
 		
 			$.ajax({
 			url: '../customers/checkduplicatecustomer',
@@ -303,7 +325,7 @@ function savecustomer(){
 					$.ajax({
 						url: '../customers/savecustomer',
 						type: 'post',
-						data: {cemail: cemail,clname:clname,cfname:cfname,cmname:cmname,caddress:caddress,cmobileno:cmobileno,cotherno:cotherno,cpassword:cpassword},
+						data: {cemail: cemail,clname:clname,cfname:cfname,cmname:cmname,caddress:caddress,cmobileno:cmobileno,cotherno:cotherno,cpassword:cpassword,ccompany:ccompany},
 						success: function(response) {
 							console.log(response);
 							location.reload();

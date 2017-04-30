@@ -31,7 +31,7 @@
                             </div> 
                             <div class="modal-body">
                                 <div class="form-group">
-						<label class="col-md-3 control-label text-right">Email Address*</label>
+						<label class="col-md-3 control-label text-right">Email Address</label>
                         <div class="col-md-7">
                             <input type="text" id="cemail" name="state-normal" class="form-control" tabindex="0" value="">
                         </div>	
@@ -47,6 +47,10 @@
 						<label class="col-md-3 control-label text-right">Middle Name</label>
                         <div class="col-md-7">
                             <input type="text" id="cmname" name="state-normal" class="form-control col-xs-1" tabindex="0" value="">
+                        </div>
+						<label class="col-md-3 control-label text-right">Company</label>
+                        <div class="col-md-7">
+                            <input type="text" id="ccompany" name="state-normal" class="form-control col-xs-1" tabindex="0" value="">
                         </div>	
 						<label class="col-md-3 control-label text-right">Address</label>
                         <div class="col-md-7">
@@ -221,7 +225,7 @@
 							foreach ($category as $category_list):
 								
 							
-								echo "<option value='".$category_list['categoryid']."'>".$category_list['categoryvalue']."</option>";
+								echo "<option value='".$category_list['categoryvalue']."'>".$category_list['categoryvalue']."</option>";
 							
 							endforeach;
 							?>
@@ -254,7 +258,7 @@
 							foreach ($departments as $department_list):
 								
 							
-							echo "<option value='".$department_list['departmentid']."'>".$department_list['departmentvalue']."</option>";
+							echo "<option value='".$department_list['departmentvalue']."'>".$department_list['departmentvalue']."</option>";
 							
 							endforeach;
 							?>

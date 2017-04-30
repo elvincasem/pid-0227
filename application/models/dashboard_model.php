@@ -29,6 +29,19 @@ class Dashboard_model extends CI_Model
 			return $resultarray[0];
 		
 	}
+	public function getoverduecount()
+	{
+		$this->load->helper('date');
+		$now = new DateTime();
+		$now->setTimezone(new DateTimezone('Asia/Manila'));
+		$now_timestamp = $now->format('Y-m-d');
+		
+		
+			$result = $this->db->query("SELECT COUNT(*) as totaloverdue FROM tickets WHERE due_date < '$now_timestamp' AND STATUS ='Open'");
+			$resultarray = $result->result_array();
+			return $resultarray[0];
+		
+	}
 	
 	
 	

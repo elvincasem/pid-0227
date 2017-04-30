@@ -52,11 +52,12 @@ class Home extends CI_Controller
 		$data['customerscount'] = $this->dashboard_model->gettotalcustomers();
 		$data['openticket'] = $this->dashboard_model->getopenticket();
 		$data['rmaticket'] = $this->dashboard_model->getrmaticket();
+		$data['orverdueticketcount'] = $this->dashboard_model->getoverduecount();
 		
 		
-		$data['opentickets'] = $this->ticket_model->getticketliststatus("Open");
-		$data['rmatickets'] = $this->ticket_model->getticketliststatus("RMA");
-		$data['pickuptickets'] = $this->ticket_model->getticketliststatus("Pickup");
+		$data['opentickets'] = $this->ticket_model->getticketliststatus("Open","All");
+		$data['rmatickets'] = $this->ticket_model->getticketliststatus("RMA","All");
+		$data['pickuptickets'] = $this->ticket_model->getticketliststatus("Pickup","All");
 		
 		
 		$this->load->view('inc/header_view');

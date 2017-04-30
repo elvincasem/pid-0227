@@ -57,8 +57,9 @@ class Customers extends CI_Controller
 		$cmobileno = $this->input->post('cmobileno');
 		$cotherno = $this->input->post('cotherno');
 		$cpassword = $this->input->post('cpassword');
+		$ccompany = $this->input->post('ccompany');
 		
-		$this->customers_model->savecustomer($cemail,$clname,$cfname,$cmname,$caddress,$cmobileno,$cotherno,$cpassword);
+		$this->customers_model->savecustomer($cemail,$clname,$cfname,$cmname,$caddress,$cmobileno,$cotherno,$cpassword,$ccompany);
 	}
 	
 	public function checkduplicatecustomer(){
@@ -73,6 +74,11 @@ class Customers extends CI_Controller
 		
 		echo json_encode($this->customers_model->getcustomerdetails($customerid));
 	}
+	public function getcustomertickets($customerid){
+		//$customerid = $this->input->post('customerid');
+		
+		echo json_encode($this->customers_model->getcustomertickets($customerid));
+	}
 	
 	public function updatecustomer(){
 		$customerid = $this->input->post('customerid');
@@ -84,8 +90,9 @@ class Customers extends CI_Controller
 		$cmobileno = $this->input->post('cmobileno');
 		$cotherno = $this->input->post('cotherno');
 		$cpassword = $this->input->post('cpassword');
+		$ccompany = $this->input->post('ccompany');
 		
-		$this->customers_model->updatecustomer($customerid,$cemail,$clname,$cfname,$cmname,$caddress,$cmobileno,$cotherno,$cpassword);
+		$this->customers_model->updatecustomer($customerid,$cemail,$clname,$cfname,$cmname,$caddress,$cmobileno,$cotherno,$cpassword,$ccompany);
 	}
 	
 	public function updatecustomerdeviceid(){

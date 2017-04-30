@@ -50,7 +50,12 @@ class Ticket extends CI_Controller
 		$data = $this->data;
 		$js = $this->js;
 		
-		$data['subnavtitle'] ="Ticket List: All";
+		$data['filter_category'] = $this->input->post('filter_category');
+		if($data['filter_category']==""){
+			$data['filter_category']="All";
+		}
+		//echo $filter_category;
+		$data['subnavtitle'] ="Ticket List: All, Category:".$data['filter_category']."";
 
 		$data['ticketlistclass'] = 'active';
 		$data['allclass'] ="active";
@@ -58,9 +63,13 @@ class Ticket extends CI_Controller
 		$data['openclass'] ="";
 		$data['rmaclass'] ="";
 		$data['closedclass'] ="";
+		
+		
 		//get all tickets
-		$data['tickets'] = $this->ticket_model->getticketlist();
-				
+		$data['tickets'] = $this->ticket_model->getticketlist($data['filter_category']);
+		
+		//getcount
+		$data['category'] = $this->ticket_model->getcategory();
 		$data['totaltickets'] = $this->ticket_model->gettotaltickets();
 		$data['pickuptickets'] = $this->ticket_model->getpickuptickets();
 		$data['rmatickets'] = $this->ticket_model->getrmatickets();
@@ -74,19 +83,26 @@ class Ticket extends CI_Controller
 		$this->load->view('inc/footer_view',$js);
 		
 	}
+	
+		
 	public function closed()
 	{
 		$data = $this->data;
 		$js = $this->js;
 		
-		$data['subnavtitle'] ="Ticket List: RMA";
+		$data['filter_category'] = $this->input->post('filter_category');
+		if($data['filter_category']==""){
+			$data['filter_category']="All";
+		}
+		
+		$data['subnavtitle'] ="Ticket List: Closed, Category:".$data['filter_category']."";
 		$data['ticketlistclass'] = 'active';
 		$data['allclass'] ="";
 		$data['pickupclass'] ="";
 		$data['openclass'] ="";
 		$data['rmaclass'] ="";
 		$data['closedclass'] ="active";
-		$data['tickets'] = $this->ticket_model->getticketliststatus("Closed");
+		$data['tickets'] = $this->ticket_model->getticketliststatus("Closed",$data['filter_category']);
 				
 				
 		$data['totaltickets'] = $this->ticket_model->gettotaltickets();
@@ -95,7 +111,7 @@ class Ticket extends CI_Controller
 		$data['opentickets'] = $this->ticket_model->getopentickets();
 		$data['closedtickets'] = $this->ticket_model->getclosedtickets();
 		
-		
+		$data['category'] = $this->ticket_model->getcategory();
 		$data['categorytickets'] = $this->ticket_model->getcategorytickets();
 		$this->load->view('inc/header_view');
 		$this->load->view('ticket/ticket_view',$data);
@@ -107,14 +123,19 @@ class Ticket extends CI_Controller
 		$data = $this->data;
 		$js = $this->js;
 		
-		$data['subnavtitle'] ="Ticket List: RMA";
+		$data['filter_category'] = $this->input->post('filter_category');
+		if($data['filter_category']==""){
+			$data['filter_category']="All";
+		}
+		
+		$data['subnavtitle'] ="Ticket List: Open, Category:".$data['filter_category']."";
 		$data['ticketlistclass'] = 'active';
 		$data['allclass'] ="";
 		$data['pickupclass'] ="";
 		$data['openclass'] ="active";
 		$data['rmaclass'] ="";
 		$data['closedclass'] ="";
-		$data['tickets'] = $this->ticket_model->getticketliststatus("Open");
+		$data['tickets'] = $this->ticket_model->getticketliststatus("Open",$data['filter_category']);
 				
 				
 		$data['totaltickets'] = $this->ticket_model->gettotaltickets();
@@ -123,7 +144,7 @@ class Ticket extends CI_Controller
 		$data['opentickets'] = $this->ticket_model->getopentickets();
 		$data['closedtickets'] = $this->ticket_model->getclosedtickets();
 		
-		
+		$data['category'] = $this->ticket_model->getcategory();
 		$data['categorytickets'] = $this->ticket_model->getcategorytickets();
 		$this->load->view('inc/header_view');
 		$this->load->view('ticket/ticket_view',$data);
@@ -135,14 +156,19 @@ class Ticket extends CI_Controller
 		$data = $this->data;
 		$js = $this->js;
 		
-		$data['subnavtitle'] ="Ticket List: RMA";
+		$data['filter_category'] = $this->input->post('filter_category');
+		if($data['filter_category']==""){
+			$data['filter_category']="All";
+		}
+		
+		$data['subnavtitle'] ="Ticket List: Pickup, Category:".$data['filter_category']."";
 		$data['ticketlistclass'] = 'active';
 		$data['allclass'] ="";
 		$data['pickupclass'] ="active";
 		$data['openclass'] ="";
 		$data['rmaclass'] ="";
 		$data['closedclass'] ="";
-		$data['tickets'] = $this->ticket_model->getticketliststatus("Pickup");
+		$data['tickets'] = $this->ticket_model->getticketliststatus("Pickup",$data['filter_category']);
 				
 				
 		$data['totaltickets'] = $this->ticket_model->gettotaltickets();
@@ -151,7 +177,7 @@ class Ticket extends CI_Controller
 		$data['opentickets'] = $this->ticket_model->getopentickets();
 		$data['closedtickets'] = $this->ticket_model->getclosedtickets();
 		
-		
+		$data['category'] = $this->ticket_model->getcategory();
 		$data['categorytickets'] = $this->ticket_model->getcategorytickets();
 		$this->load->view('inc/header_view');
 		$this->load->view('ticket/ticket_view',$data);
@@ -163,14 +189,18 @@ class Ticket extends CI_Controller
 		$data = $this->data;
 		$js = $this->js;
 		
-		$data['subnavtitle'] ="Ticket List: RMA";
+		$data['filter_category'] = $this->input->post('filter_category');
+		if($data['filter_category']==""){
+			$data['filter_category']="All";
+		}
+		$data['subnavtitle'] ="Ticket List: RMA, Category:".$data['filter_category']."";
 		$data['ticketlistclass'] = 'active';
 		$data['allclass'] ="";
 		$data['pickupclass'] ="";
 		$data['openclass'] ="";
 		$data['rmaclass'] ="active";
 		$data['closedclass'] ="";
-		$data['tickets'] = $this->ticket_model->getticketliststatus("RMA");
+		$data['tickets'] = $this->ticket_model->getticketliststatus("RMA",$data['filter_category']);
 				
 				
 		$data['totaltickets'] = $this->ticket_model->gettotaltickets();
@@ -181,6 +211,8 @@ class Ticket extends CI_Controller
 		
 		
 		$data['categorytickets'] = $this->ticket_model->getcategorytickets();
+		
+		$data['category'] = $this->ticket_model->getcategory();
 		$this->load->view('inc/header_view');
 		$this->load->view('ticket/ticket_view',$data);
 		$this->load->view('inc/footer_view',$js);
@@ -200,6 +232,7 @@ class Ticket extends CI_Controller
 		$data['departments'] = $this->ticket_model->getdepartment();
 		$data['agentlist'] = $this->ticket_model->getagent();
 		$data['templatelist'] = $this->ticket_model->gettemplate();
+		
 
 		$this->load->view('inc/header_view');
 		$this->load->view('ticket/ticketadd_view',$data);
@@ -340,10 +373,14 @@ class Ticket extends CI_Controller
 		
 		$ticketid = $this->input->post('ticketid');
 		$formstatus = $this->input->post('status');
+		$priority = $this->input->post('priority');
+		$assignedto_uid = $this->input->post('assignedto_uid');
+		
+
 		$ticketdetails = $this->ticket_model->getticketdetails($ticketid);
 		//print_r($ticketdetails);
 		$uid = $this->session->userdata('uid');
-		
+		//update status 
 		if($ticketdetails['status']!=$formstatus){
 			//update with log
 			$remarks_log = "Changed Status from ".$ticketdetails['status']." to " .$formstatus;
@@ -353,7 +390,31 @@ class Ticket extends CI_Controller
 			//do nothing
 		}
 		
+		//update agent
+		if($ticketdetails['assignedto_uid']!=$assignedto_uid){
+			//update with log
+			$remarks_log = "Changed Agent from ".$ticketdetails['agentname']." to Agent ID: " .$assignedto_uid;
+			$this->ticket_model->updateticket_agent($ticketid,$assignedto_uid);
+			$this->ticket_model->logticket($ticketid,$formstatus,$remarks_log,$uid);
+		}else{
+			//do nothing
+		}
 		
+			//update priority
+		if($ticketdetails['priority']!=$priority){
+			//update with log
+			$remarks_log = "Changed Priority from ".$ticketdetails['priority']." to " .$priority;
+			$this->ticket_model->updateticket_priority($ticketid,$priority);
+			$this->ticket_model->logticket($ticketid,$formstatus,$remarks_log,$uid);
+		}else{
+			//do nothing
+		}
+		
+		//update due date by admin
+		if($this->session->userdata('usertype')=='21232f297a57a5a743894a0e4a801fc3'){
+			$duedate = $this->input->post('duedate');
+			$this->ticket_model->updateticket_due($ticketid,$duedate);
+		}
 		
 	}
 	

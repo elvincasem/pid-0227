@@ -33,7 +33,7 @@
                             </div> 
                             <div class="modal-body">
                                 <div class="form-group">
-						<label class="col-md-3 control-label text-right">Email Address*</label>
+						<label class="col-md-3 control-label text-right">Email Address</label>
                         <div class="col-md-7">
                             <input type="text" id="cemail" name="state-normal" class="form-control" tabindex="0" value="">
                         </div>	
@@ -50,6 +50,10 @@
                         <div class="col-md-7">
                             <input type="text" id="cmname" name="state-normal" class="form-control col-xs-1" tabindex="0" value="">
                         </div>	
+						<label class="col-md-3 control-label text-right">Company</label>
+                        <div class="col-md-7">
+                            <input type="text" id="ccompany" name="state-normal" class="form-control col-xs-1" tabindex="0" value="">
+                        </div>
 						<label class="col-md-3 control-label text-right">Address</label>
                         <div class="col-md-7">
                             <input type="text" id="caddress" name="state-normal" class="form-control col-xs-1" tabindex="0" value="">
@@ -95,6 +99,53 @@
                     </div>
                 </div>
 				
+				
+				<!-- tickets Modal -->
+                <div id="showticket" class="modal bg" role="dialog" aria-hidden="true">
+				<input type="hidden" id="customerid">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                           <div class="modal-header">
+								
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h3 class="modal-title"><strong>Ticket List</strong></h3>
+                                
+                            </div> 
+                            <div class="modal-body" id="modalbody">
+							
+		 <div class="table-responsive remove-margin-bottom">
+			<table  id="ticketbody" class="table table-striped table-bordered table-vcenter table-hover">
+               <tbody>
+                    
+				</tbody>
+			</table>
+	
+								
+						<div class="row"></div>
+							
+					</div>
+								
+								<!-- Input States Block -->
+            <div class="block">
+                
+
+                <!-- Input States Content -->
+
+                <!-- END Input States Content -->
+            </div>
+            <!-- END Input States Block -->
+								
+								
+								
+                            </div>
+                            <div class="modal-footer">
+							
+                                <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				
 		
             
 	<div class="block full">
@@ -111,11 +162,13 @@
                         <!-- <th style="width:100px;">Delivery ID</th>-->
                         
 						<th>Customer Name</th>
+						<th>Tickets</th>
 						<th>Address</th>
 						<th>Mobile No</th>
 						<th>Email</th>
 						<th>Other No</th>
 						<th>Device ID</th>
+						<th>Company</th>
                         
                         
 						<th></th>
@@ -130,11 +183,13 @@
 
 				
 				echo "<td><a href='#newcustomermodal' data-toggle='modal' onclick='editcustomer(".$cust_list['customerid'].");'>".$cust_list['cfname']." ".$cust_list['clname']."</a></td>";
+				echo "<td style='text-align:center;'><a href='#showticket' data-toggle='modal' onclick='showticket(".$cust_list['customerid'].");'>".$cust_list['ticketcount']."</a></td>";
 				echo "<td>".$cust_list['caddress']."</td>";
 				echo "<td>".$cust_list['cmobileno']."</td>";
 				echo "<td>".$cust_list['cemail']."</td>";
 				echo "<td>".$cust_list['cotherno']."</td>";
 				echo "<td>".$cust_list['deviceid']."</td>";
+				echo "<td>".$cust_list['ccompany']."</td>";
 				
 				
 				

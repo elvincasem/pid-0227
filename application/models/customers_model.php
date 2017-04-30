@@ -6,13 +6,13 @@ class Customers_model extends CI_Model
 	
 	public function getcustomers()
 	{
-		$sql = $this->db->query("SELECT * FROM customer");
+		$sql = $this->db->query("SELECT *,(SELECT COUNT(*) FROM tickets WHERE customer.customerid = tickets.customerid) AS ticketcount FROM customer ");
 		return $sql->result_array();
 		
 		
 	}
 	
-	public function saveemployee($empno,$lname,$fname,$mname,$extension,$designation)
+	public function saveemployee($empno,$lname,$fname,$mname,$extension,$designation,$ccompany)
 	{
 		
 		$sql = "INSERT INTO employee (empNo,lname,fname,mname,ename,designation) VALUES (".$this->db->escape($empno).",".$this->db->escape($lname).",".$this->db->escape($fname).",".$this->db->escape($mname).",".$this->db->escape($extension).",".$this->db->escape($designation).")";
@@ -30,10 +30,10 @@ class Customers_model extends CI_Model
 		
 	}
 	
-	public function savecustomer($cemail,$clname,$cfname,$cmname,$caddress,$cmobileno,$cotherno,$cpassword)
+	public function savecustomer($cemail,$clname,$cfname,$cmname,$caddress,$cmobileno,$cotherno,$cpassword,$ccompany)
 	{
 		
-		$sql = "INSERT INTO customer (cemail,clname,cfname,cmname,caddress,cmobileno,cotherno,cpassword) VALUES (".$this->db->escape($cemail).",".$this->db->escape($clname).",".$this->db->escape($cfname).",".$this->db->escape($cmname).",".$this->db->escape($caddress).",".$this->db->escape($cmobileno).",".$this->db->escape($cotherno).",".$this->db->escape($cpassword).")";
+		$sql = "INSERT INTO customer (cemail,clname,cfname,cmname,caddress,cmobileno,cotherno,cpassword,ccompany) VALUES (".$this->db->escape($cemail).",".$this->db->escape($clname).",".$this->db->escape($cfname).",".$this->db->escape($cmname).",".$this->db->escape($caddress).",".$this->db->escape($cmobileno).",".$this->db->escape($cotherno).",".$this->db->escape($cpassword).",".$this->db->escape($ccompany).")";
 		$this->db->query($sql);
 				
 		
@@ -48,11 +48,20 @@ class Customers_model extends CI_Model
 		
 		
 	}
+	public function getcustomertickets($customerid)
+	{
+		//echo $customerid;
+		$sql = $this->db->query("SELECT * FROM tickets where customerid=$customerid");
+		$result = $sql->result_array();
+		return $result;
+		
+		
+	}
 	
-	public function updatecustomer($customerid,$cemail,$clname,$cfname,$cmname,$caddress,$cmobileno,$cotherno,$cpassword)
+	public function updatecustomer($customerid,$cemail,$clname,$cfname,$cmname,$caddress,$cmobileno,$cotherno,$cpassword,$ccompany)
 	{
 		
-		$sql = "update customer set cemail=".$this->db->escape($cemail).",clname=".$this->db->escape($clname).",cfname=".$this->db->escape($cfname).",cmname=".$this->db->escape($cmname).",caddress=".$this->db->escape($caddress).",cmobileno=".$this->db->escape($cmobileno).",cotherno=".$this->db->escape($cotherno).",cpassword=".$this->db->escape($cpassword)." where customerid=".$this->db->escape($customerid)."";
+		$sql = "update customer set cemail=".$this->db->escape($cemail).",clname=".$this->db->escape($clname).",cfname=".$this->db->escape($cfname).",cmname=".$this->db->escape($cmname).",caddress=".$this->db->escape($caddress).",cmobileno=".$this->db->escape($cmobileno).",cotherno=".$this->db->escape($cotherno).",cpassword=".$this->db->escape($cpassword).",ccompany=".$this->db->escape($ccompany)." where customerid=".$this->db->escape($customerid)."";
 		$this->db->query($sql);
 				
 		

@@ -65,8 +65,8 @@ table { page-break-inside:auto;}
 <table border="0" style="width:800px;">
 
 	<tr style="text-align:left;">
-	<td colspan="6">Department: <u><strong><?php echo $ticketdetails['departmentvalue'];?></strong></u></td>
-	<td colspan="6">Category: <u><strong><?php echo $ticketdetails['categoryvalue'];?></strong></u></td>
+	<td colspan="6">Department: <u><strong><?php echo $ticketdetails['departmentid'];?></strong></u></td>
+	<td colspan="6">Category: <u><strong><?php echo $ticketdetails['categoryid'];?></strong></u></td>
 	
 	</tr>
 	<tr><td colspan="6">Status: <u><strong><?php echo $ticketdetails['status'];?></strong></u></td>
@@ -155,8 +155,8 @@ foreach ($ticketlog as $ticketlog_list):
 	</tbody>
 	<!-- ff -->
 	<tfoot>
-	
-	
+	<tr><td colspan="3">Terms and Conditions:</td></tr>
+	<tr><td colspan="3" style="text-align:center;"><br><br><u><?php echo $ticketdetails['cfname']." ".$ticketdetails['clname'];?></u><br>Customer Name and Signature</td></tr>
 	
 	
 	<tfoot>
@@ -202,7 +202,7 @@ foreach ($ticketlog as $ticketlog_list):
 		<!-- Menu Content -->
 		<input type="hidden" id="ticketid" value="<?php echo $ticketid;?>">
 		<input type="hidden" id="cemail" value="<?php echo $ticketdetails['cemail'];?>">
-		<input type="hidden" id="cmobileno" value="<?php echo $ticketdetails['cmobileno'];?>">
+		
 		<input type="hidden" id="deviceid" value="<?php echo $ticketdetails['deviceid'];?>">
 		<ul class="nav nav-pills nav-stacked">
 			<li class="active">
@@ -231,6 +231,17 @@ foreach ($ticketlog as $ticketlog_list):
                       
 			</li>
 			<li>
+				<label class="control-label" for="state-normal">Customer Mobile:</label>
+                       
+						
+					<input type="hidden" id="cmobileno" value="<?php echo $ticketdetails['cmobileno'];?>" disabled>
+					<label><?php echo $ticketdetails['cmobileno'];?></label>
+					<br>
+				<label class="control-label" for="state-normal">Customer Email:</label>
+					<label><?php echo $ticketdetails['cemail'];?></label>
+					<br><br>
+			</li>
+			<li>
 				<label class="control-label" for="state-normal">Department</label>
                        
 						
@@ -240,13 +251,13 @@ foreach ($ticketlog as $ticketlog_list):
 					
 					
 					foreach ($departments as $department_list):
-						if($department_list['departmentid']==$ticketdetails['departmentid']){
+						if($department_list['departmentvalue']==$ticketdetails['departmentid']){
 							$selected = "selected='selected'";
 						}else{
 							$selected="";
 						}	
 					
-					echo "<option value='".$department_list['departmentid']."' $selected>".$department_list['departmentvalue']."</option>";
+					echo "<option value='".$department_list['departmentvalue']."' $selected>".$department_list['departmentvalue']."</option>";
 					
 					endforeach;
 					?>
@@ -262,13 +273,13 @@ foreach ($ticketlog as $ticketlog_list):
 							
 							
 							foreach ($category as $category_list):
-								if($category_list['categoryid']==$ticketdetails['categoryid']){
+								if($category_list['categoryvalue']==$ticketdetails['categoryid']){
 									$selected = "selected='selected'";
 								}else{
 									$selected="";
 								}	
 							
-								echo "<option value='".$category_list['categoryid']."' $selected>".$category_list['categoryvalue']."</option>";
+								echo "<option value='".$category_list['categoryvalue']."' $selected>".$category_list['categoryvalue']."</option>";
 							
 							endforeach;
 							?>
@@ -610,4 +621,4 @@ foreach ($ticketlog as $ticketlog_list):
 </div>
 <!-- END Page Container -->
 
-
+<input type="hidden" id="utype" value="<?php echo $_SESSION['usertype'] ?>">
