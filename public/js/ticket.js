@@ -164,7 +164,7 @@ function editticket(){
 	
 	//admin control
 	if(document.getElementById("utype").value=="21232f297a57a5a743894a0e4a801fc3"){
-		alert(document.getElementById("utype").value);
+		
 		$('#duedate').prop("disabled", false); 
 	}
 	

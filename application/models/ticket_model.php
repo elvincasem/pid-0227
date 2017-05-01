@@ -319,6 +319,24 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 					
 		
 	}
+	public function getstartdate()
+	{
+		$sql = $this->db->query("SELECT DATE_FORMAT(time_stamp,'%Y-%m-%d') as startdate FROM tickets ORDER BY time_stamp ASC LIMIT 1");
+		$getcount = $sql->result_array();
+		return $getcount[0]['startdate'];
+		
+		
+	}
+	
+	public function getenddate()
+	{
+		$sql = $this->db->query("SELECT DATE_FORMAT(time_stamp,'%Y-%m-%d') as enddate FROM tickets ORDER BY time_stamp DESC LIMIT 1");
+		$getcount = $sql->result_array();
+		return $getcount[0]['enddate'];
+		
+		
+	}
+	
 	
 }
 

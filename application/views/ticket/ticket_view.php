@@ -197,9 +197,9 @@
                                             <tr>
 										<form method="post">
 												<td  style="width: 100%;"><div class="input-group input-daterange" data-date-format="yyyy-mm-dd">
-                                                    <input type="text" id="date1" name="example-daterange1" class="form-control" placeholder="From">
+                                                    <input type="text" id="startdate" name="startdate" class="form-control" placeholder="From" value="<?php echo $startdate;?>">
                                                     
-                                                    <input type="text" id="date2" name="example-daterange2" class="form-control" placeholder="To">
+                                                    <input type="text" id="enddate" name="enddate" class="form-control" placeholder="To" value="<?php echo $enddate;?>">
                                                 </div></td>
 											</tr>
 											<tr>
