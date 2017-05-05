@@ -59,12 +59,16 @@ class Ticket extends CI_Controller
 		$enddate = $this->input->post('enddate');
 		if($startdate=="" || $enddate==""){
 			$data['startdate'] = $this->ticket_model->getstartdate();
+			$startdate = $this->ticket_model->getstartdate();
 			$data['enddate'] = $this->ticket_model->getenddate();
+			$enddate = $this->ticket_model->getenddate();
 		}else{
 			$data['startdate'] = $startdate;
 			$data['enddate'] = $enddate;
 		}
 		
+		//get all tickets
+		$data['tickets'] = $this->ticket_model->getticketlist($data['filter_category'],$startdate,$enddate);
 		
 		
 		//echo $filter_category;
@@ -78,8 +82,7 @@ class Ticket extends CI_Controller
 		$data['closedclass'] ="";
 		
 		
-		//get all tickets
-		$data['tickets'] = $this->ticket_model->getticketlist($data['filter_category']);
+		
 		
 		//getcount
 		$data['category'] = $this->ticket_model->getcategory();
@@ -182,9 +185,23 @@ class Ticket extends CI_Controller
 		$js = $this->js;
 		
 		$data['filter_category'] = $this->input->post('filter_category');
+		
 		if($data['filter_category']==""){
 			$data['filter_category']="All";
 		}
+		
+		$startdate = $this->input->post('startdate');
+		$enddate = $this->input->post('enddate');
+		if($startdate=="" || $enddate==""){
+			$data['startdate'] = $this->ticket_model->getstartdate();
+			$startdate = $this->ticket_model->getstartdate();
+			$data['enddate'] = $this->ticket_model->getenddate();
+			$enddate = $this->ticket_model->getenddate();
+		}else{
+			$data['startdate'] = $startdate;
+			$data['enddate'] = $enddate;
+		}
+		$data['tickets'] = $this->ticket_model->getticketliststatus("Pickup",$data['filter_category'],$startdate,$enddate);
 		
 		$data['subnavtitle'] ="Ticket List: Pickup, Category:".$data['filter_category']."";
 		$data['ticketlistclass'] = 'active';
@@ -193,7 +210,7 @@ class Ticket extends CI_Controller
 		$data['openclass'] ="";
 		$data['rmaclass'] ="";
 		$data['closedclass'] ="";
-		$data['tickets'] = $this->ticket_model->getticketliststatus("Pickup",$data['filter_category']);
+		
 				
 				
 		$data['totaltickets'] = $this->ticket_model->gettotaltickets();
@@ -205,8 +222,7 @@ class Ticket extends CI_Controller
 		$data['category'] = $this->ticket_model->getcategory();
 		$data['categorytickets'] = $this->ticket_model->getcategorytickets();
 		
-		$data['startdate'] = $this->ticket_model->getstartdate();
-		$data['enddate'] = $this->ticket_model->getenddate();
+		
 		
 		$this->load->view('inc/header_view');
 		$this->load->view('ticket/ticket_view',$data);

@@ -68,12 +68,14 @@ class Ticket_model extends CI_Model
 		
 	}
 	
-	public function getticketlist($filtercategory)
+	public function getticketlist($filtercategory,$startdate,$enddate)
 	{
 		if($filtercategory=="All"){
-			$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid");
+			$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid where DATE_FORMAT(time_stamp,'%Y-%m-%d') between ".$this->db->escape($startdate)." AND ".$this->db->escape($enddate)."");
+			
+			
 		}else{
-			$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid WHERE categoryid=".$this->db->escape($filtercategory)."");
+			$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid WHERE categoryid=".$this->db->escape($filtercategory)." AND DATE_FORMAT(time_stamp,'%Y-%m-%d') between ".$this->db->escape($startdate)." AND ".$this->db->escape($enddate)."");
 		}
 		
 		return $sql->result_array();
@@ -81,12 +83,12 @@ class Ticket_model extends CI_Model
 		
 	}
 	
-	public function getticketliststatus($status,$filtercategory)
+	public function getticketliststatus($status,$filtercategory,$startdate,$enddate)
 	{
 		if($filtercategory=="All"){
-			$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid where status=".$this->db->escape($status)."");
+			$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid where status=".$this->db->escape($status)." and DATE_FORMAT(time_stamp,'%Y-%m-%d') between ".$this->db->escape($startdate)." AND ".$this->db->escape($enddate)."");
 		}else{
-			$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid where status=".$this->db->escape($status)." AND categoryid=".$this->db->escape($filtercategory)."");
+			$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid where status=".$this->db->escape($status)." AND categoryid=".$this->db->escape($filtercategory)." AND DATE_FORMAT(time_stamp,'%Y-%m-%d') between ".$this->db->escape($startdate)." AND ".$this->db->escape($enddate)."");
 		}
 		return $sql->result_array();
 		
