@@ -167,6 +167,13 @@
 		</a>
 	</li>
 	
+	<li class="<?php echo $overdueclass;?>">
+		<a href="<?=base_url();?>ticket/overdue">
+			<span class="badge pull-right"><?php echo $orverdueticketcount;?></span>
+			<i class="fa fa-fw fa-calendar-times-o icon-push"></i> <strong>Overdue</strong>
+		</a>
+	</li>
+	
 </ul>
                                     <!-- END Menu Content -->
                                 </div>

@@ -95,14 +95,25 @@ class Ticket_model extends CI_Model
 		
 	}
 	
-	public function getoverdueticketlist()
+	public function getoverdueticketlist($filtercategory)
 	{
 		$this->load->helper('date');
 		$now = new DateTime();
 		$now->setTimezone(new DateTimezone('Asia/Manila'));
 		$now_timestamp = $now->format('Y-m-d');
 		
-		$result = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid WHERE due_date < '$now_timestamp' AND STATUS ='Open'");
+		
+		if($filtercategory=="All"){
+			$result = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid WHERE due_date < '$now_timestamp' AND STATUS ='Open'");
+			
+			
+		}else{
+			$result = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid WHERE due_date < '$now_timestamp' AND STATUS ='Open' AND categoryid=".$this->db->escape($filtercategory)."");
+			
+			
+		}
+		
+		
 		
 			//$result = $this->db->query("SELECT COUNT(*) as totaloverdue FROM tickets WHERE due_date < '$now_timestamp' AND STATUS ='Open'");
 			$resultarray = $result->result_array();
@@ -355,6 +366,19 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 		
 	}
 	
+	public function getoverduecount()
+	{
+		$this->load->helper('date');
+		$now = new DateTime();
+		$now->setTimezone(new DateTimezone('Asia/Manila'));
+		$now_timestamp = $now->format('Y-m-d');
+		
+		
+			$result = $this->db->query("SELECT COUNT(*) as totaloverdue FROM tickets WHERE due_date < '$now_timestamp' AND STATUS ='Open'");
+			$resultarray = $result->result_array();
+			return $resultarray[0]['totaloverdue'];
+		
+	}
 	
 }
 

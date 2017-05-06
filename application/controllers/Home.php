@@ -62,7 +62,7 @@ class Home extends CI_Controller
 		$data['rmatickets'] = $this->ticket_model->getticketliststatus("RMA","All",$startdate,$enddate);
 		$data['pickuptickets'] = $this->ticket_model->getticketliststatus("Pickup","All",$startdate,$enddate);
 		
-		$data['overduetickets'] = $this->ticket_model->getoverdueticketlist();
+		$data['overduetickets'] = $this->ticket_model->getoverdueticketlist("All");
 		
 		
 		$this->load->view('inc/header_view');

@@ -429,7 +429,7 @@ foreach ($ticketlog as $ticketlog_list):
 				echo "<div class='alert alert-success animation-fadeInQuick'>Current Status: <strong>OPEN</strong></div>";
 			}
 			if($ticketdetails['status']=="Pickup"){
-				echo "<div class='alert alert-warning animation-fadeInQuick'>Current Status: <strong>Pickup</strong></div>";
+				echo "<div class='alert label-primary animation-fadeInQuick'>Current Status: <strong>Pickup</strong></div>";
 			}
 			if($ticketdetails['status']=="RMA"){
 				echo "<div class='alert alert-danger animation-fadeInQuick'>Current Status: <strong>RMA</strong></div>";
