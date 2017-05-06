@@ -302,7 +302,7 @@
 					if($ticketlist['status']=="Open"){
 						echo "<span class='label label-success'>OPEN</span>";
 					}if($ticketlist['status']=="Pickup"){
-						echo "<span class='label label-warning'>Pickup</span>";
+						echo "<span class='label label-primary'>Pickup</span>";
 					}if($ticketlist['status']=="RMA"){
 						echo "<span class='label label-danger'>RMA</span>";
 					}if($ticketlist['status']=="Closed"){

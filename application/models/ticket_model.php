@@ -95,6 +95,22 @@ class Ticket_model extends CI_Model
 		
 	}
 	
+	public function getoverdueticketlist()
+	{
+		$this->load->helper('date');
+		$now = new DateTime();
+		$now->setTimezone(new DateTimezone('Asia/Manila'));
+		$now_timestamp = $now->format('Y-m-d');
+		
+		$result = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid WHERE due_date < '$now_timestamp' AND STATUS ='Open'");
+		
+			//$result = $this->db->query("SELECT COUNT(*) as totaloverdue FROM tickets WHERE due_date < '$now_timestamp' AND STATUS ='Open'");
+			$resultarray = $result->result_array();
+			return $resultarray;
+		
+	}
+	
+	
 	public function getticketlog($id)
 	{
 		//$sql = $this->db->query("SELECT * FROM ((SELECT 'Customer' AS userreplied,CONCAT(customer.cfname,' ',customer.clname) AS user_name, cremarksid AS remarksid, cticketid AS ticketid,cremarks_info AS remarks_info, ctime_stamp AS time_stamp FROM remarks_customer LEFT JOIN customer ON remarks_customer.customerid = customer.customerid) UNION ALL (SELECT 'Agent' AS userreplied,users.name AS user_name, aremarksid AS remarksid, aticketid AS ticketid,aremarks_info AS remarks_info, atime_stamp AS time_stamp FROM remarks_agent LEFT JOIN users ON remarks_agent.uid= users.uid)) ticketlog WHERE ticketlog.ticketid = ".$this->db->escape($id)." ORDER BY time_stamp ASC ");

@@ -115,6 +115,20 @@ class Ticket extends CI_Controller
 			$data['filter_category']="All";
 		}
 		
+		//date filter
+		$startdate = $this->input->post('startdate');
+		$enddate = $this->input->post('enddate');
+		if($startdate=="" || $enddate==""){
+			$data['startdate'] = $this->ticket_model->getstartdate();
+			$startdate = $this->ticket_model->getstartdate();
+			$data['enddate'] = $this->ticket_model->getenddate();
+			$enddate = $this->ticket_model->getenddate();
+		}else{
+			$data['startdate'] = $startdate;
+			$data['enddate'] = $enddate;
+		}
+		
+		
 		$data['subnavtitle'] ="Ticket List: Closed, Category:".$data['filter_category']."";
 		$data['ticketlistclass'] = 'active';
 		$data['allclass'] ="";
@@ -122,7 +136,7 @@ class Ticket extends CI_Controller
 		$data['openclass'] ="";
 		$data['rmaclass'] ="";
 		$data['closedclass'] ="active";
-		$data['tickets'] = $this->ticket_model->getticketliststatus("Closed",$data['filter_category']);
+		$data['tickets'] = $this->ticket_model->getticketliststatus("Closed",$data['filter_category'],$startdate,$enddate);
 				
 				
 		$data['totaltickets'] = $this->ticket_model->gettotaltickets();
@@ -147,10 +161,25 @@ class Ticket extends CI_Controller
 		$data = $this->data;
 		$js = $this->js;
 		
+		//category filter
 		$data['filter_category'] = $this->input->post('filter_category');
 		if($data['filter_category']==""){
 			$data['filter_category']="All";
 		}
+		//date filter
+		$startdate = $this->input->post('startdate');
+		$enddate = $this->input->post('enddate');
+		if($startdate=="" || $enddate==""){
+			$data['startdate'] = $this->ticket_model->getstartdate();
+			$startdate = $this->ticket_model->getstartdate();
+			$data['enddate'] = $this->ticket_model->getenddate();
+			$enddate = $this->ticket_model->getenddate();
+		}else{
+			$data['startdate'] = $startdate;
+			$data['enddate'] = $enddate;
+		}
+		//query tickets
+		$data['tickets'] = $this->ticket_model->getticketliststatus("Open",$data['filter_category'],$startdate,$enddate);
 		
 		$data['subnavtitle'] ="Ticket List: Open, Category:".$data['filter_category']."";
 		$data['ticketlistclass'] = 'active';
@@ -159,7 +188,7 @@ class Ticket extends CI_Controller
 		$data['openclass'] ="active";
 		$data['rmaclass'] ="";
 		$data['closedclass'] ="";
-		$data['tickets'] = $this->ticket_model->getticketliststatus("Open",$data['filter_category']);
+		
 				
 				
 		$data['totaltickets'] = $this->ticket_model->gettotaltickets();
@@ -234,10 +263,29 @@ class Ticket extends CI_Controller
 		$data = $this->data;
 		$js = $this->js;
 		
+		//category filter
 		$data['filter_category'] = $this->input->post('filter_category');
 		if($data['filter_category']==""){
 			$data['filter_category']="All";
 		}
+		
+		//date filter
+		$startdate = $this->input->post('startdate');
+		$enddate = $this->input->post('enddate');
+		if($startdate=="" || $enddate==""){
+			$data['startdate'] = $this->ticket_model->getstartdate();
+			$startdate = $this->ticket_model->getstartdate();
+			$data['enddate'] = $this->ticket_model->getenddate();
+			$enddate = $this->ticket_model->getenddate();
+		}else{
+			$data['startdate'] = $startdate;
+			$data['enddate'] = $enddate;
+		}
+		
+		//query ticket
+		$data['tickets'] = $this->ticket_model->getticketliststatus("RMA",$data['filter_category'],$startdate,$enddate);
+		
+		
 		$data['subnavtitle'] ="Ticket List: RMA, Category:".$data['filter_category']."";
 		$data['ticketlistclass'] = 'active';
 		$data['allclass'] ="";
@@ -245,7 +293,7 @@ class Ticket extends CI_Controller
 		$data['openclass'] ="";
 		$data['rmaclass'] ="active";
 		$data['closedclass'] ="";
-		$data['tickets'] = $this->ticket_model->getticketliststatus("RMA",$data['filter_category']);
+		
 				
 				
 		$data['totaltickets'] = $this->ticket_model->gettotaltickets();

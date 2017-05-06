@@ -145,7 +145,7 @@
 							
 				<div class="col-sm-6">
 					<div class="widget" >
-						<div class="widget-content themed-background-danger text-light-op">
+						<div class="widget-content themed-background-warning text-light-op">
 							<i class="gi gi-file fa-chevron-right"></i> <strong> RMA Tickets</strong>
 						</div>
 									
@@ -176,9 +176,12 @@
 					</div>
 								</div>
 				</div>
+				<div class="row">
+							</div>
+				
 				<div class="col-sm-6">
 					<div class="widget" >
-						<div class="widget-content themed-background-warning text-light-op">
+						<div class="widget-content themed-background-default text-light-op">
 							<i class="gi gi-file fa-chevron-right"></i> <strong> Pickup Tickets</strong>
 						</div>
 									
@@ -210,8 +213,45 @@
 								</div>
 				</div>
 							
+							
+							<!-- overdue tickets -->
+							<div class="col-sm-6">
+					<div class="widget" >
+						<div class="widget-content themed-background-danger text-light-op">
+							<i class="gi gi-file fa-chevron-right"></i> <strong> Overdue</strong>
+						</div>
+									
+									
+					<div class="widget-content widget-content-full">
+						<table id="example-datatable6" class="table table-striped table-borderless remove-margin">
+						<thead>
+							<th>Customer</th>
+							<th class="text-center">Ticket</th>
+							
+						</thead>
+							<tbody>
+								<?php
+								foreach($overduetickets as $overdue_ticket):
+								
+								echo "<tr>";
+								echo "<td><a href='ticket/details/".$overdue_ticket['ticketid']."' class='text-black'>".$overdue_ticket['cfname']." ".$overdue_ticket['clname']."</a></td>";
+								echo "<td class='text-center' ><a href='ticket/details/".$overdue_ticket['ticketid']."' class='text-black'><span class='text-muted'>Ticket#:".$overdue_ticket['ticketid']."</span></td>";
+								echo "</a></tr>";
+								
+								endforeach;
+							
+							?>
+								
+								
+							</tbody>
+						</table>
+					</div>
+								</div>
+				</div>
 							<div class="row">
 							</div>
+							
+							
 							 
                         </div>
                         <!-- END First Row -->
