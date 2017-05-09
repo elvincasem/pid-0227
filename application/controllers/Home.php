@@ -54,9 +54,11 @@ class Home extends CI_Controller
 		$data['rmaticket'] = $this->dashboard_model->getrmaticket();
 		$data['orverdueticketcount'] = $this->dashboard_model->getoverduecount();
 		
-
+	
 		$startdate = $this->ticket_model->getstartdate();
+
 		$enddate = $this->ticket_model->getenddate();
+		
 		
 		$data['opentickets'] = $this->ticket_model->getticketliststatus("Open","All",$startdate,$enddate);
 		$data['rmatickets'] = $this->ticket_model->getticketliststatus("RMA","All",$startdate,$enddate);
