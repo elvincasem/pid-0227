@@ -24,7 +24,14 @@ class Reports_model extends CI_Model
 	{
 		$sql = $this->db->query("SELECT DATE_FORMAT(time_stamp,'%Y-%m-%d') as startdate FROM tickets ORDER BY time_stamp ASC LIMIT 1");
 		$getcount = $sql->result_array();
-		return $getcount[0]['startdate'];
+		
+		//print_r($getcount);
+		if($getcount==null){
+			return "0000-00-00";
+		}else{
+			return $getcount[0]['startdate'];
+		}
+		
 		
 		
 	}
@@ -33,10 +40,17 @@ class Reports_model extends CI_Model
 	{
 		$sql = $this->db->query("SELECT DATE_FORMAT(time_stamp,'%Y-%m-%d') as enddate FROM tickets ORDER BY time_stamp DESC LIMIT 1");
 		$getcount = $sql->result_array();
-		return $getcount[0]['enddate'];
+		if($getcount==null){
+			return "0000-00-00";
+		}else{
+			return $getcount[0]['enddate'];
+		}
+		
+		
 		
 		
 	}
+	
 	
 	
 	public function getticketlist($filtercategory,$startdate,$enddate)
