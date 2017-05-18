@@ -1,37 +1,55 @@
-/*
-SQLyog Ultimate - MySQL GUI v8.2 
-MySQL - 5.6.17 : Database - helpdesk
-*********************************************************************
-*/
+-- phpMyAdmin SQL Dump
+-- version 4.3.8
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: May 16, 2017 at 07:49 PM
+-- Server version: 5.5.51-38.2
+-- PHP Version: 5.6.20
 
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
-/*!40101 SET SQL_MODE=''*/;
+--
+-- Database: `twohelpd_twohelpdesk`
+--
 
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-/*Table structure for table `category` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `category`;
+--
+-- Table structure for table `category`
+--
 
-CREATE TABLE `category` (
-  `categoryid` bigint(20) NOT NULL AUTO_INCREMENT,
-  `categoryvalue` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`categoryid`)
+CREATE TABLE IF NOT EXISTS `category` (
+  `categoryid` bigint(20) NOT NULL,
+  `categoryvalue` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
-/*Data for the table `category` */
+--
+-- Dumping data for table `category`
+--
 
-insert  into `category`(`categoryid`,`categoryvalue`) values (1,'CCTV'),(2,'Desktop Computer'),(3,'Laptop'),(4,'Others'),(5,'Printer');
+INSERT INTO `category` (`categoryid`, `categoryvalue`) VALUES
+(1, 'CCTV'),
+(2, 'Desktop Computer'),
+(3, 'Laptop'),
+(4, 'Others'),
+(5, 'Printer');
 
-/*Table structure for table `customer` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `customer`;
+--
+-- Table structure for table `customer`
+--
 
-CREATE TABLE `customer` (
-  `customerid` bigint(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `customer` (
+  `customerid` bigint(20) NOT NULL,
   `cemail` varchar(300) NOT NULL DEFAULT 'NONE',
   `clname` varchar(300) DEFAULT NULL,
   `cfname` varchar(300) NOT NULL,
@@ -42,34 +60,44 @@ CREATE TABLE `customer` (
   `cpassword` varchar(300) DEFAULT NULL,
   `deviceid` varchar(500) DEFAULT NULL,
   `customer_time_stamp` varchar(500) DEFAULT NULL,
-  `ccompany` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`customerid`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8;
+  `ccompany` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
 
-/*Data for the table `customer` */
+--
+-- Dumping data for table `customer`
+--
 
-insert  into `customer`(`customerid`,`cemail`,`clname`,`cfname`,`cmname`,`caddress`,`cmobileno`,`cotherno`,`cpassword`,`deviceid`,`customer_time_stamp`,`ccompany`) values (1,'elvin.casem@gmail.com','Casem','Elvin','E','City of San Fernando, La Union','09468147457','8880336','1234','14c00b04-efa6-42d4-8e32-89d596dfd632','2017-03-05 22:34:08',NULL),(2,'lynnette.cabanban@gmail.com','Cabanban','Christianne Lynnette','G','Caba, La Union','09177770832','','password123','37825e4c-641c-48ad-a6d0-c1609dc88f63','2017-03-05 23:09:00',NULL),(10,'juan@gmail.com','Konek','Juan','','','','','',NULL,'2017-03-18 19:41:12',NULL),(11,'edgee@pc4me.com.ph','Zarsadias','Edgee','P. ','77 Ortega Street, SFCLU','09175641000','09205771000','edgee','1470d876-d77c-4f48-be52-b205898414ba','2017-04-12 01:15:35',NULL),(13,'habanbryan@gmail.com','Haban','Bryan','V','sfc','09260374786','','09260374786',NULL,'2017-04-19 03:59:11',NULL),(14,'*','Dangla','Elma','Nemfa','Santol, La Union','09277917487','','09277917487',NULL,'2017-04-19 05:01:52',NULL),(15,'lucia_saint@yahoo.com','Argel','Ma. Nila','O','Vigan, Ilocos Sur','09177112190','','09177112190',NULL,'2017-04-19 21:09:23',NULL),(16,'nicafe@yahoo.com','Manalang','Edwina','M.','Tanqui C.S.F','09182566115','','09182566115',NULL,'2017-04-19 21:35:44',NULL),(17,'none','Lopez','Nelson','','Santa Barbara L.U.','09178221094','','09178221094',NULL,'2017-04-19 22:13:37',NULL),(18,'mikepogi0226@gmail.com','Bernardo','Mike','B','Ilocos Sur','09460410754','','rushe27',NULL,'2017-04-19 22:43:46',NULL),(19,'gel.0616@yahoo.com','Adriano','Angelica','','Bangar La Union','09129414575','','09129414575',NULL,'2017-04-19 23:12:11',NULL),(20,'jv062494@gmail.com','Vera','Jerome','','San Vicente, San Fernando City, La Union','09070721302','','none',NULL,'2017-04-19 23:31:08',NULL),(21,'christinesiazon@yahoo.com','Siazon','Christine','','San Fernando La Union','09177731470','','09177731470',NULL,'2017-04-20 02:40:15',NULL),(22,'NONE1','PARLAN','JERRY','','MSFWD L.U','09175640301','','09175640301',NULL,'2017-04-20 03:43:07',NULL),(23,'mafepaz_082368@yahoo.com.ph','Paz','Ma.Fe ','Astom','San Fernando, La Union','09369387911','','09369387911',NULL,'2017-04-20 04:12:52',NULL),(24,'gem@pc4me.com.ph','Gacayan','Gem','','','09175005425','','09175005425',NULL,NULL,NULL),(25,'no1anthonyc@gmail.com','Carreon','Anthony','D','DMMSU-MLUC','09159394927','','',NULL,NULL,NULL),(26,'none10','boado','Carlos','','San Fernando City La Union','09778012304','','09778012304',NULL,NULL,NULL),(27,'none11','Galvez','Lester','','Santiago, City of San Fernando, La Union','09285072123','6075315','09285072123',NULL,NULL,NULL),(28,'anchetamads@gmail.com','Ancheta','Madelaine','','Legleg San Juan L.U','09274523449','','09274523449',NULL,NULL,NULL),(29,'none12','Milagnos','Maria','','San Fernando City, La Union','09162289292','None','09162289292',NULL,NULL,NULL),(30,'none2','Carbajaz','Susan','F','Sto Domingo Sur Luna LU','0908213890','','0908213890',NULL,NULL,NULL),(31,'janreinuesca@gmail.com','Nuesca','Janrei marcus','A','Cabaroan San Fernando City La Union','09773802310','','09773802310',NULL,NULL,NULL),(32,'none13','','Joviemel','','SAN JUAN, LA UNION','09465686225','','09465686225',NULL,NULL,NULL),(33,'isthanian01060317@yahoo.com','Aruejo','Jonaliza','O','Central east #2 bangar La Union','09468890416','','09468890416',NULL,NULL,NULL),(34,'None14','Milo','Resty','','CALUMBAYA BAUANG L.U','09499071108','','09499071108',NULL,NULL,NULL),(35,'none15','Gracias','Mary Joy','B','Pagdaraoan, City of San Fernando, La Union','09778026999','none','09778026999',NULL,NULL,NULL),(36,'none16','Rafanan','Maebelen','','POB. SAN GABRIEL L.U','09097938117','','09097938117',NULL,NULL,NULL),(37,'None17','Torres','Mera','','BRGY. PORO SFC, L.U','09489150683','','09489150683',NULL,NULL,NULL),(38,'none18','Peralta','Bessie','','San Juan, La Union','09091385971','','09091385971',NULL,NULL,NULL),(39,'None19','Laroya','Karl Adrian','','SAN FERNANDO CITY, LA UNION','09285017945','','09285017945',NULL,NULL,NULL),(40,'none20','Yu','Flora','','City of San Fernando, La Union','09491500347','','09491500347',NULL,NULL,NULL),(41,'yammatt@yahoo.com','Rante','Pia','','Naguilian, La Union','09266518924','','',NULL,NULL,NULL),(42,'none21','Salanga','Eloisa Diana','','Pagudpud La Union','09484124866','','09484124866',NULL,NULL,NULL),(43,'none22','Gagarin','Clarence ','M. ','Pagudpud, City of San Fernando, La Union','094842124866','','094842124866',NULL,NULL,NULL),(44,'jonel_ibay@yahoo.com','Ibay','Jomel','Gonzales','Purok 6 Sevilla L.U.','09228570149','','',NULL,NULL,NULL),(45,'none23','Gagarin','Clarence','M','Bumbuneg, City of San Fernando, La Union','09158337770','','09158337770',NULL,NULL,NULL),(46,'none23','Gagarin','Clarence','M','Bumbuneg, City of San Fernando, La Union','09158337770','','09158337770',NULL,NULL,NULL),(47,'none24','Martos','Kristine','','SAN FERNANDO CITY, LA UNION','242-5770','','242-5770',NULL,NULL,NULL),(48,'none25','Fortuna','Mary Ann','','Poblacion, Bacnotan La Union','09495983940','','09495983940',NULL,NULL,NULL),(49,'none26','Nisperas','Danishe Faye ','M.','PAGDALAGAN SUR, BAUANG L.U','09158960694','','09158960694',NULL,NULL,NULL),(50,'none27','Tejada','Judy Marie','','ANTONIO, BALAOAN, L.U.','09214443614','','09214443614',NULL,NULL,NULL),(51,'none29','Basa','Ernaldo','','Antonio, Balaoan La Union','09214443614','','09214443614',NULL,NULL,NULL),(52,'None30','Concubierta','Jeric','','Bauang, La Union','09568049632','','09568049632',NULL,NULL,NULL),(53,'none31','Nillo','Ruffa Mae','','San Juan, La Union','09484118385','','09484118385',NULL,NULL,NULL),(54,'none33','Balanon','Lorena','','San Fernando La Union','6078440','','6078440',NULL,NULL,NULL),(55,'tangalin_angelica@yahoo.com','Tangalin','Angelica','L.','Payocpoc, Bauang La Union','09102451056','','',NULL,NULL,NULL),(56,'none35','Potenciana','Perez','','Naguilian, La Union','09392841053','','09392841053',NULL,NULL,NULL),(57,'none36','Macato','Rosenia','G','Sto. Rosario L.U','09176756509','','09176756509',NULL,NULL,NULL),(58,'none37','Manuel','Venjovie','A.','SAN BENITO SUR, ARINGAY L.U','09076422887','','09076422887',NULL,NULL,NULL),(59,'none38','Racines','Geraldine','','NAGUILIAN, L.U.','09974767404','','09974767404',NULL,NULL,NULL),(60,'none38','Racines','Geraldine','','NAGUILIAN, L.U.','09974767404','','09974767404',NULL,NULL,NULL),(61,'none39','DyQuiangco','Roberto Jr.','','Tanqui SFC LU','09195080599','','09195080599',NULL,NULL,NULL),(62,'none41','Jacla','Carl Louie','','San Fernando La Union','09063498499','','09063498499',NULL,NULL,NULL),(63,'none42','Pacursa','Jingle','','San Fernando La Union ','09164148516','','09164148516',NULL,NULL,NULL),(64,'none43','Balinag','Josielyn','','Balaoan La Union','09185375076','','09185375076',NULL,NULL,NULL),(65,'none44','Juan','Fridda May','','SEVILLA, SFC, L.U.','09505512221','','09505512221',NULL,NULL,NULL),(66,'NONE3','Lacayanga','Rosita','A.','Bungno San Fernando L.U','09072447360','09393719752','',NULL,NULL,NULL),(67,'NONE4','Baybayan','Edwin','A.','66 Dalumpinas OESTE L.U','09298675989','','',NULL,NULL,NULL),(68,'reymartmendoza79@gmail.com','Mendoza','Reymart','M.','San Fernando City L.U','09212208647','','',NULL,NULL,NULL),(69,'jumar_esperanza_calip@yahoo.com','Calip','Jumar','','Lingsat S.FC L.U','09274305488','','',NULL,NULL,NULL),(70,'tadjiemarvie@yahoo.com','Tadije','Marvie','N','Paraoir, Balaoan La Unin','09289682421','','09289682421',NULL,NULL,NULL),(71,'balanciojunian@yahoo.com','Balancio','Jun Ian','','Pagdalagan City of San Fernando La Union','09153415287','','09153415287',NULL,NULL,NULL),(72,'lezlyconcepcion@yahoo.com','Concepcion','Lezly','O.','Balaoan La Union','09298655659','','',NULL,NULL,NULL),(73,'NONE5','Tubera','Shemaiah Emerly','C','Pilar, Ara','09158566075','','09158566075',NULL,NULL,NULL),(74,'cfc_launion@yahoo.com','Corona','Carmen ','F.','Poro, City of San Fernando LaUnion','09231905706','','09231905706',NULL,NULL,NULL),(75,'none7','Rebotoc','Anna-Lyn','B.','Paraoir Balaoan La Union','09219962947','','',NULL,NULL,NULL),(76,'heggie1825@gmail.com','Valdez','Heggie-Boy','','Lingsat La Union','091222398166','','',NULL,NULL,NULL),(77,'none8','c/o Joe','Awesome Hotel','','Ili Norte San Fernandez La Union','09256246835','','',NULL,NULL,NULL),(80,'','','john doe','','','','','',NULL,NULL,'company');
+INSERT INTO `customer` (`customerid`, `cemail`, `clname`, `cfname`, `cmname`, `caddress`, `cmobileno`, `cotherno`, `cpassword`, `deviceid`, `customer_time_stamp`, `ccompany`) VALUES
+(81, 'none1', 'Tuyay', 'Marinell', 'C', '', '09127447738', '09064025849', '09127447738', NULL, NULL, 'PC4Me'),
+(82, 'none1', 'Tuyay', 'Marinell', 'C', '', '09127447738', '09064025849', '09127447738', NULL, NULL, 'PC4Me');
 
-/*Table structure for table `department` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `department`;
+--
+-- Table structure for table `department`
+--
 
-CREATE TABLE `department` (
-  `departmentid` bigint(20) NOT NULL AUTO_INCREMENT,
-  `departmentvalue` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`departmentid`)
+CREATE TABLE IF NOT EXISTS `department` (
+  `departmentid` bigint(20) NOT NULL,
+  `departmentvalue` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
-/*Data for the table `department` */
+--
+-- Dumping data for table `department`
+--
 
-insert  into `department`(`departmentid`,`departmentvalue`) values (1,'Sales'),(2,'Technical');
+INSERT INTO `department` (`departmentid`, `departmentvalue`) VALUES
+(1, 'Sales'),
+(2, 'Technical');
 
-/*Table structure for table `remarks_agent` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `remarks_agent`;
+--
+-- Table structure for table `remarks_agent`
+--
 
-CREATE TABLE `remarks_agent` (
-  `aremarksid` bigint(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `remarks_agent` (
+  `aremarksid` bigint(20) NOT NULL,
   `aticketid` bigint(20) DEFAULT NULL,
   `aremarks_info` text,
   `atime_stamp` varchar(500) NOT NULL,
@@ -77,65 +105,57 @@ CREATE TABLE `remarks_agent` (
   `replytype` varchar(500) DEFAULT 'TEXT',
   `n_email` int(11) NOT NULL DEFAULT '0',
   `n_sms` int(11) NOT NULL DEFAULT '0',
-  `n_mobile` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`aremarksid`)
-) ENGINE=InnoDB AUTO_INCREMENT=276 DEFAULT CHARSET=latin1;
+  `n_mobile` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `remarks_agent` */
+-- --------------------------------------------------------
 
-insert  into `remarks_agent`(`aremarksid`,`aticketid`,`aremarks_info`,`atime_stamp`,`uid`,`replytype`,`n_email`,`n_sms`,`n_mobile`) values (50,15,'15_1491960868.jpg','2017-04-11 20:34:29',1,'image/jpeg',0,0,0),(51,15,'Started working on the laptop','2017-04-11 20:35:36',1,'TEXT',0,0,0),(52,15,'15_1491961221.mp4','2017-04-11 20:40:21',1,'video/mp4',0,0,0),(53,16,'16_1492302405.jpg','2017-04-15 19:26:45',8,'image/jpeg',0,0,0),(54,16,'virus detected and removed, installed anti-virus 2017 and under burn testing\n','2017-04-15 19:29:20',8,'TEXT',0,0,0),(55,16,'Unit is ready for pick up. Burn test passed.','2017-04-16 18:05:14',8,'TEXT',0,0,0),(56,16,'Gentle reminder the unit is ready for pick up. \nWe are open from 9am to 6pm Mondays thru Saturdays.\nThank you.','2017-04-17 00:48:39',8,'TEXT',0,0,0),(57,17,'Welcome to PC4Me Helpdesk\nPlease save this ticket ID Number','2017-04-19 04:01:20',9,'TEXT',0,0,0),(58,17,'17_1492592690.jpg','2017-04-19 04:04:50',9,'image/jpeg',0,0,0),(59,17,'Virus Detected, now recovering lost windows files','2017-04-19 04:04:58',8,'TEXT',0,0,0),(60,17,'Virus Detected, now recovering lost windows files','2017-04-19 04:05:29',8,'TEXT',0,0,0),(61,17,'Unit now is ok, burn test on-going.','2017-04-19 04:06:48',8,'TEXT',0,0,0),(62,17,'Unit now is ok, burn test on-going.','2017-04-19 04:08:04',8,'TEXT',0,0,0),(63,17,'Testing','2017-04-19 04:10:16',9,'TEXT',0,0,0),(64,17,'Email Test','2017-04-19 04:12:18',9,'TEXT',0,0,0),(65,18,'Welcome to PC4Me Helpdesk\nPlease take note of your Ticket Number and SO Number: 3210\n','2017-04-19 04:49:45',9,'TEXT',0,0,0),(66,16,'Welcome to PC4Me Helpdesk Please save this ticket ID Number','2017-04-19 05:19:35',9,'TEXT',0,0,0),(67,15,'Unit for pickup now.','2017-04-19 10:48:06',1,'TEXT',0,0,0),(68,17,'Hi Sir, Your unit is now for pickup.\nThank You','2017-04-19 20:42:06',9,'TEXT',0,0,0),(69,16,'Hi Sir, just a friendly reminder your unit is now for pickup Thank You','2017-04-19 20:43:34',9,'TEXT',0,0,0),(70,19,'welcome to pc4me your one stop shop please don\'t forget your ticket#19','2017-04-19 21:18:56',10,'TEXT',0,0,0),(71,15,'test push app','2017-04-19 21:53:18',1,'TEXT',0,0,0),(72,15,'push','2017-04-19 21:54:05',1,'TEXT',0,0,0),(73,20,'welcome to pc4me your one stop shop don\'t forget your ticket#20. thank you!','2017-04-19 22:09:59',10,'TEXT',0,0,0),(74,21,'welcome to pc4me your one stop shop don\'t forget your ticket#21. thank you!','2017-04-19 22:15:47',10,'TEXT',0,0,0),(75,22,'welcome to pc4me your one stop shop don\'t forget your ticket#22. thank you!','2017-04-19 22:47:10',10,'TEXT',0,0,0),(76,22,'rushe27','2017-04-19 22:49:41',10,'TEXT',0,0,0),(77,22,'Power Adapter: with\nAccessory(if there\'s any): with box','2017-04-19 22:50:46',10,'TEXT',0,0,0),(78,15,'Sender ID testing','2017-04-19 23:04:16',1,'TEXT',0,0,0),(79,23,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#23 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-19 23:15:52',10,'TEXT',0,0,0),(80,24,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#24 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-19 23:35:05',9,'TEXT',0,0,0),(81,16,'Hi Sir, just a friendly reminder your unit is now for pickup Thank You','2017-04-19 23:35:52',1,'TEXT',0,0,0),(82,24,'with box (union fan)','2017-04-19 23:36:16',9,'TEXT',0,0,0),(83,24,'with usb cable','2017-04-19 23:37:58',9,'TEXT',0,0,0),(84,20,'DIAGNOSIS FEE\nAMT:250\nOR:36163\n','2017-04-19 23:51:14',10,'TEXT',0,0,0),(85,20,'RELEASED:anthony\nRECEIVED: edwina manalang\nDATE:4/20/17\n','2017-04-19 23:52:26',10,'TEXT',0,0,0),(86,25,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket# and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-20 02:43:46',10,'TEXT',0,0,0),(87,25,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#25 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-20 02:44:00',10,'TEXT',0,0,0),(88,26,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#26 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-20 03:52:56',10,'TEXT',0,0,0),(89,26,'Good afternoon Mr. Jerry Parlan, your Epson Printer is now ready for Pick up. we are open Mondays to Saturdays from 9am to 6pm. Thank you for choosing PC4Me as your service provider. ','2017-04-20 04:00:23',8,'TEXT',0,0,0),(90,26,'No charge courtesy of EPZ','2017-04-20 04:03:31',8,'TEXT',0,0,0),(91,16,'Hi Sir, just a friendly reminder your unit is now for pickup Thank You. Our Office is opne from Monday to Saturday 9am to 6pm. Thank you','2017-04-20 04:05:02',8,'TEXT',0,0,0),(92,28,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#28 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-20 04:16:56',10,'TEXT',0,0,0),(93,28,'password: potpot ','2017-04-20 04:17:13',10,'TEXT',0,0,0),(94,27,'Duplicate Ticket \ncheck ticket 26','2017-04-20 04:20:55',10,'TEXT',0,0,0),(95,15,'test sms','2017-04-20 05:01:06',1,'TEXT',0,0,0),(96,19,'DIAGNOSIS FEE\nAMT:350\nOR:36158\n4/20/2017','2017-04-20 05:06:18',10,'TEXT',0,0,0),(97,21,'DIAGNOSIS FEE\nAMT:350\nOR:36161\n4/20/2017','2017-04-20 05:09:19',10,'TEXT',0,0,0),(98,22,'DIAGNOSIS FEE\nAMT:250\nOR:36165\n4/20/17','2017-04-20 05:09:59',10,'TEXT',0,0,0),(99,23,'DIAGNOSIS FEE\nAMT:250\nOR:36174\n4/20/17','2017-04-20 05:16:39',10,'TEXT',0,0,0),(100,24,'DIAGNOSIS FEE\nAMT:350\nOR:4/20/17\n','2017-04-20 05:17:42',10,'TEXT',0,0,0),(101,25,'payment to follow','2017-04-20 05:18:12',10,'TEXT',0,0,0),(102,26,'duplicate ticket#27','2017-04-20 05:19:28',10,'TEXT',0,0,0),(103,20,'RELEASED:Anthony\nRECEIVED:Edwina Manalang\nDATE:4/20/17','2017-04-20 05:22:43',10,'TEXT',0,0,0),(104,22,'RELEASED:Anthony\nRECEIVED:Mike Bernardo\nDATE:4/20/17','2017-04-20 05:24:11',10,'TEXT',0,0,0),(105,23,'RELEASED:Anthony\nRECEIVED:Angelica Adriano\nDATE:4/20/17','2017-04-20 05:25:20',10,'TEXT',0,0,0),(106,26,'waived','2017-04-20 05:26:11',10,'TEXT',0,0,0),(107,26,'RELEASED:Anthony\nRECEIVED:Jerry Parlan\nDATE:4/20/17','2017-04-20 05:26:38',10,'TEXT',0,0,0),(108,15,'email','2017-04-20 19:26:06',1,'TEXT',1,0,0),(109,15,'sms','2017-04-20 19:26:16',1,'TEXT',0,1,0),(110,15,'mobile app','2017-04-20 19:26:28',1,'TEXT',0,0,1),(111,15,'all notification','2017-04-20 19:26:54',1,'TEXT',1,1,1),(112,15,'test','2017-04-20 19:34:24',1,'TEXT',0,0,0),(113,15,'again','2017-04-21 08:35:29',1,'TEXT',0,0,0),(114,15,'awesome!','2017-04-21 08:41:08',1,'TEXT',0,0,0),(115,29,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing PC4Me as your service provider. We are looking forward to serving you again. God bless.','2017-04-21 09:19:11',8,'TEXT',0,1,0),(116,30,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#30 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-21 09:32:47',10,'TEXT',0,1,0),(117,31,'Duplicate Ticket \nPlease check Ticket 32','2017-04-21 10:53:29',9,'TEXT',0,0,0),(118,34,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#34 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-21 11:35:15',10,'TEXT',0,0,0),(119,35,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless','2017-04-21 11:48:42',13,'TEXT',0,1,0),(120,32,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-21 11:51:02',13,'TEXT',0,1,0),(121,33,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-21 11:53:24',13,'TEXT',0,1,0),(122,36,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket# and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-21 12:11:58',10,'TEXT',0,1,0),(123,37,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket# and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-21 12:40:34',10,'TEXT',0,1,0),(124,38,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless.','2017-04-21 12:52:10',13,'TEXT',0,1,0),(125,39,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket# and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-21 12:56:57',10,'TEXT',0,1,0),(126,40,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless.','2017-04-21 12:58:51',13,'TEXT',0,1,0),(127,41,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-21 13:10:22',13,'TEXT',0,1,0),(128,42,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-21 13:20:57',13,'TEXT',0,1,0),(129,34,'OUT OF WARRANTY','2017-04-21 13:20:58',10,'TEXT',0,0,0),(130,43,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-21 13:32:49',13,'TEXT',0,1,0),(131,44,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless.','2017-04-21 13:37:33',13,'TEXT',0,1,0),(132,45,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-21 13:45:47',13,'TEXT',0,1,0),(133,46,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless.','2017-04-21 13:50:20',13,'TEXT',0,1,0),(134,47,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless.','2017-04-21 14:00:10',13,'TEXT',0,1,0),(135,48,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket# and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-21 14:06:25',10,'TEXT',0,1,0),(136,49,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-21 14:06:31',13,'TEXT',0,1,0),(137,50,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#50 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-21 14:18:52',10,'TEXT',0,1,0),(138,51,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-21 14:22:31',13,'TEXT',0,1,0),(139,52,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-21 14:26:41',13,'TEXT',0,1,0),(140,53,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless.','2017-04-21 14:36:23',13,'TEXT',0,1,0),(141,54,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-21 14:43:57',13,'TEXT',0,1,0),(142,55,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless.','2017-04-21 14:48:45',13,'TEXT',0,1,0),(143,56,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You','2017-04-21 14:58:49',13,'TEXT',0,1,0),(144,57,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You','2017-04-21 15:03:52',13,'TEXT',0,1,0),(145,58,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You','2017-04-21 15:06:57',13,'TEXT',0,1,0),(146,59,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless.','2017-04-21 15:16:39',13,'TEXT',0,1,0),(147,60,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-21 15:23:32',13,'TEXT',0,1,0),(148,60,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-21 15:29:19',13,'TEXT',0,1,0),(149,37,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless.\nReady for pick up Saturday: 9 am to 6 pm','2017-04-21 16:13:51',11,'TEXT',0,1,0),(150,61,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#61 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-21 16:20:07',10,'TEXT',0,1,0),(151,37,'Done Format Windows 10 and basic Application','2017-04-21 16:33:33',11,'TEXT',0,0,0),(152,62,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-21 17:13:05',13,'TEXT',0,1,0),(153,21,'Done Remove Small Item. \nTest print is ok.','2017-04-21 17:15:22',11,'TEXT',0,0,0),(154,21,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless.','2017-04-21 17:15:48',11,'TEXT',0,1,0),(155,44,'from SO#3972','2017-04-21 17:18:06',10,'TEXT',0,0,0),(156,45,'from SO#3969','2017-04-21 17:19:51',10,'TEXT',0,0,0),(157,45,'from SO#3969','2017-04-21 17:20:08',10,'TEXT',0,0,0),(158,63,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless.','2017-04-21 17:20:23',13,'TEXT',0,1,0),(159,64,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-21 17:36:37',13,'TEXT',0,1,0),(160,39,'Done Format With Back up Windows 10 With app','2017-04-21 17:36:45',11,'TEXT',0,0,0),(161,39,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless.','2017-04-21 17:37:02',11,'TEXT',0,1,0),(162,65,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-21 17:43:07',13,'TEXT',0,1,0),(163,66,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-21 17:49:09',13,'TEXT',0,1,0),(164,48,'ticket#48','2017-04-21 17:49:12',10,'TEXT',0,0,0),(165,34,'DIAGNOSIS FEE\nAMT:450\nOR:36218\n4/21/17','2017-04-21 17:50:35',10,'TEXT',0,0,0),(166,36,'DIAGNOSIS FEE\nAMT:350\nOR:36221\n4/21/17','2017-04-21 17:51:25',10,'TEXT',0,0,0),(167,37,'DIAGNOSIS FEE\nAMT:450\nOR:36223\n4/21/17','2017-04-21 17:54:09',10,'TEXT',0,0,0),(168,67,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You.','2017-04-21 17:54:38',13,'TEXT',0,1,0),(169,39,'DIAGNOSIS FEE\nAMT:750\nOR:36225\n4/21/17','2017-04-21 17:56:15',10,'TEXT',0,0,0),(170,48,'DIAGNOSIS FEE\nAMT:250\nOR:36233\n4/21/17','2017-04-21 17:56:48',10,'TEXT',0,0,0),(171,30,'For Diagnosis \nLooking HDD pero Wla nmn pong HDD Sa Loob ng DVR \n','2017-04-21 17:57:10',11,'TEXT',0,0,0),(172,50,'payment to follow','2017-04-21 17:57:16',10,'TEXT',0,0,0),(173,68,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-21 18:01:33',13,'TEXT',0,1,0),(174,39,'OUT OF WARRANTY','2017-04-21 18:29:52',10,'TEXT',0,0,0),(175,65,'FROM SO#3653','2017-04-22 09:15:33',10,'TEXT',0,0,0),(176,61,'Dead LCD White line \nFinal Diagnosis: Defective LCD Need Replace.','2017-04-22 09:17:15',11,'TEXT',0,0,0),(177,70,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#70 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-22 09:45:47',10,'TEXT',0,1,0),(178,70,'CONTACT#: 09393719752','2017-04-22 09:51:55',10,'TEXT',0,0,0),(179,28,'Done Power Setting Default .','2017-04-22 09:58:05',11,'TEXT',0,0,0),(180,28,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless.','2017-04-22 09:58:24',11,'TEXT',0,1,0),(181,64,'FROM SO#3977','2017-04-22 10:00:46',10,'TEXT',0,0,0),(182,48,'Cleaning and repair Still no Work\nFinal Diagnosis: Defective Keyboard Need replace\nRecommending: Use External Keyboard.','2017-04-22 10:24:39',11,'TEXT',0,0,0),(183,48,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-22 10:25:50',11,'TEXT',0,1,0),(184,71,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#71 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-22 10:28:35',10,'TEXT',0,1,0),(185,73,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#73 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-22 10:53:31',10,'TEXT',0,1,0),(186,73,'BASIC FRAMES & PHOTOGRAPHY','2017-04-22 10:57:28',10,'TEXT',0,0,0),(187,73,'BASIC FRAMES & PHOTOGRAPHY','2017-04-22 10:57:29',10,'TEXT',0,0,0),(188,24,'Checking Power cord \nTry unmounted Mainboard \nCleaning and Static Charge Repair\nStill no good. Shorted Mainboard \nFinal Diagnosis Defective Mainboard Need replace. ','2017-04-22 11:25:24',11,'TEXT',0,0,0),(189,24,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-22 11:25:38',11,'TEXT',0,1,0),(190,19,'Before Format Partitioning HDD for Error .Good HDD\nDone Format windows 10 and install With app\nWith Canon MP145 Burn out Same Black and Colored \n','2017-04-22 11:41:22',11,'TEXT',0,0,0),(191,19,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless.','2017-04-22 11:41:47',11,'TEXT',0,1,0),(192,25,'Checking LAN Port Stand Light Green Only\ntry to Solution Still no good\nFormat the OS Same Problem.\nFinal Diagnosis Defective Back panel LAN port.\nRecommending: Use Wifi Adapter.\n','2017-04-22 12:07:11',11,'TEXT',0,0,0),(193,25,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-22 12:07:28',11,'TEXT',0,1,0),(194,72,'Duplicate ticket no. 71','2017-04-22 12:11:08',10,'TEXT',0,0,0),(195,75,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#75 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-22 12:12:32',10,'TEXT',0,1,0),(196,74,'DUPLICATE TICKET#73','2017-04-22 12:17:59',10,'TEXT',0,0,0),(197,36,'Reset Ram\nReset Video card \ntry another Ram Still no good \nTry another Video Card Good \nFinal Diagnosis Defective Video Card need Replace.','2017-04-22 12:23:05',11,'TEXT',0,0,0),(198,36,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-22 12:23:25',11,'TEXT',0,1,0),(199,32,'For Request HDD','2017-04-22 14:30:13',9,'TEXT',0,0,0),(200,32,'Requested to Acer PH, for verification','2017-04-22 15:27:44',9,'TEXT',0,0,0),(201,76,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless.','2017-04-22 15:57:35',13,'TEXT',0,1,0),(202,49,'Requested to Acer PH, Out of Stock','2017-04-22 16:04:18',10,'TEXT',0,0,0),(203,19,'RELEASED:Anthony\nRECEIVED:Ma. Mila Argel\nDATE:4/22/17','2017-04-22 16:07:49',10,'TEXT',0,0,0),(204,37,'RELEASED:Anthony\nRECEIVED:Janrei Marcus Nuesca\nDATE:4/22/17','2017-04-22 16:11:46',10,'TEXT',0,0,0),(205,39,'RELEASED:Anthony\nRECEIVED:Jonaliza Aruejo\nDATE:4/22/17','2017-04-22 16:14:13',10,'TEXT',0,0,0),(206,48,'RELEASED:Alex\nRECEIVED:Jumar Calip\nDATE:4/22/17','2017-04-22 16:19:11',10,'TEXT',0,0,0),(207,75,'DIAGNOSIS FEE\nAMT:250\nWF:36283\n4/22/17','2017-04-22 16:32:35',10,'TEXT',0,0,0),(208,75,'RELEASED:ALEX\nRECEIVED:Jumar Calip\nDATE:4/22/17','2017-04-22 16:33:39',10,'TEXT',0,0,0),(209,28,'RELEASED:Anthony\nRECEIVED:Angela Blanche Paz\nDATE:4/22/17','2017-04-22 16:55:04',10,'TEXT',0,0,0),(210,50,'Done Cleaning Fun and MOBO.\ntest burn 3 hours Good.','2017-04-22 16:56:42',11,'TEXT',0,0,0),(211,68,'Wrong Entry of Name this ticket account should be to Ma\'am Josielyn Badua','2017-04-22 16:56:58',13,'TEXT',0,0,0),(212,50,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless.','2017-04-22 16:57:20',11,'TEXT',0,1,0),(213,34,'Done Reset and with application','2017-04-22 17:57:25',11,'TEXT',0,0,0),(214,34,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless.','2017-04-22 17:57:37',11,'TEXT',0,1,0),(215,47,'RELEASED:Anthony\nRECEIVED:Floro Yu\nDATE:4/22/17','2017-04-22 18:29:10',10,'TEXT',0,0,0),(216,46,'RELEASED:Anthony\nRECEIVED:Karl Adrian Laroya\nDATE:04/22/17','2017-04-22 18:31:05',10,'TEXT',0,0,0),(217,64,'RELEASED:Anthony\nRECEIVED:Geraldine Racines\nDATE:04/22/17','2017-04-22 18:32:10',10,'TEXT',0,0,0),(218,40,'RELEASED:Anthony\nRECEIVED:Resty Milo\nDATE:04/22/17','2017-04-22 18:33:25',10,'TEXT',0,0,0),(219,38,'RELEASED:Anthony\nRECEIVED:Joviemel\nDATE:04/22/17','2017-04-22 18:37:13',10,'TEXT',0,0,0),(220,77,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket# 77 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-24 10:08:45',10,'TEXT',0,1,0),(221,78,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket# 78  and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-24 10:14:45',10,'TEXT',0,1,0),(222,79,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket# and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-24 10:43:58',10,'TEXT',0,1,0),(223,67,'FROM SO# 3723','2017-04-24 11:06:40',10,'TEXT',0,0,0),(224,80,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing PC4Me as your service provider. We are looking forward to serving you again. God Bless.\n','2017-04-24 11:29:50',13,'TEXT',0,1,0),(225,62,'SO# 2899','2017-04-24 11:39:49',13,'TEXT',0,0,0),(226,65,'SO#3653','2017-04-24 11:42:47',13,'TEXT',0,0,0),(227,58,'SO#3863','2017-04-24 11:45:39',13,'TEXT',0,0,0),(228,33,'SO#3983','2017-04-24 11:46:33',13,'TEXT',0,0,0),(229,80,'SO#3677','2017-04-24 11:50:24',13,'TEXT',0,0,0),(230,70,'Done Format Windows 10 64bit with backup.','2017-04-24 11:58:40',11,'TEXT',0,0,0),(231,70,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless.\n','2017-04-24 11:59:12',11,'TEXT',0,1,0),(232,81,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#81 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-24 12:07:14',13,'TEXT',0,1,0),(233,16,'pls see link for further details\nhttps://www.dropbox.com/s/gezde6bh6cg6twp/Screenshot%202017-04-24%2012.12.35.png?dl=0\n\nsample only','2017-04-24 12:42:28',8,'TEXT',0,1,0),(234,82,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#82 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-24 13:19:20',10,'TEXT',0,1,0),(235,82,'with paper bag mouse and adapter','2017-04-24 13:24:45',10,'TEXT',0,0,0),(236,83,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#83 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-24 13:49:40',10,'TEXT',0,1,0),(237,32,'Good Day from PC4Me, your unit has been requested to the vendor for warranty claim, turnaround time will be depending on the part availability. For more information you may call our contact numbers Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Bryan Haban. Thank You','2017-04-24 13:54:32',9,'TEXT',0,1,0),(238,49,'Good Day from PC4Me, your unit has been requested to the vendor for warranty claim, turnaround time will be depending on the part availability. For more information you may call our contact numbers Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Bryan Haban. Thank You','2017-04-24 13:55:12',9,'TEXT',0,1,0),(239,78,'Done Format.','2017-04-24 13:58:39',11,'TEXT',0,0,0),(240,78,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless.\n','2017-04-24 13:59:05',11,'TEXT',0,1,0),(241,84,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#24 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-24 14:17:49',10,'TEXT',0,0,0),(242,24,'24_1493015020.JPG','2017-04-24 14:23:40',11,'image/jpeg',0,0,0),(243,71,'71_1493015094.JPG','2017-04-24 14:24:54',11,'image/jpeg',0,0,0),(244,24,'disregard image above','2017-04-24 14:25:24',9,'TEXT',0,0,0),(245,85,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#85 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-24 14:29:00',10,'TEXT',0,1,0),(246,86,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#86 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-24 14:31:45',10,'TEXT',0,1,0),(247,17,'17_1493017340.JPG','2017-04-24 15:02:20',10,'image/jpeg',0,0,0),(248,71,'Unmounted Mobo\nCleaning and Static Charge \nGood na siya. More Diagnosis 2 USB port Disabled. \nRecommending using external USB port.','2017-04-24 15:03:09',11,'TEXT',0,0,0),(249,71,'Good day from PC4Me. Your unit is ready for pick up, we are open from 9am to 6pm Mondays to Saturdays, Thank you for choosing \nPC4Me as your service provider. We are looking forward to serving you again. God Bless.\n','2017-04-24 15:03:27',11,'TEXT',0,1,0),(250,84,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#24 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-24 15:03:44',10,'TEXT',0,1,0),(251,84,'Welcome to PC4Me Tech Support. We are pleased to serve you. This is your Ticket#84 and you will be receiving updates from now on. Thank you and Have a good day!','2017-04-24 15:03:57',10,'TEXT',0,1,0),(252,42,'From SO# 3975','2017-04-24 15:08:13',10,'TEXT',0,0,0),(253,41,'From SO# 3976','2017-04-24 15:12:16',10,'TEXT',0,0,0),(254,63,'From SO# 3982','2017-04-24 15:13:18',10,'TEXT',0,0,0),(255,66,'From SO# 3674','2017-04-24 15:17:47',10,'TEXT',0,0,0),(256,73,'soaking 3 hours Printer head.\n','2017-04-24 15:27:55',11,'TEXT',0,0,0),(257,57,'From SO# 57','2017-04-24 15:31:35',10,'TEXT',0,0,0),(258,57,'From SO# 3864.. please disregard the SO# 57','2017-04-24 15:32:12',10,'TEXT',0,0,0),(259,52,'From SO# 3947','2017-04-24 15:35:56',10,'TEXT',0,0,0),(260,17,'SMS TEST','2017-04-24 15:38:13',10,'TEXT',0,1,0),(261,73,'after Soaking 3 hours test print. same problem pump yellow barado tlga. \nTry another Solution. Still no good \ntry another printer head Good Sya.\nFinal Diagnosis Defective printer head Yellow. Need replace. ','2017-04-24 17:20:49',11,'TEXT',0,0,0),(262,73,'Good day from PC4Me. Your unit has been diagnosed, You may call our contact numbers: Smart: 09199912205, Globe: 09175005430, Tel: (072) 607-2249 and please look for Anthony Padua for more information. Thank You ','2017-04-24 17:21:30',11,'TEXT',0,1,0),(263,77,'DIAGNOSIS FEE\nAMT:450\nWF:36330\n4/24/17','2017-04-24 17:38:21',10,'TEXT',0,0,0),(264,78,'DIAGNOSIS FEE\nAMT:450\nWF:36331\n4/24/17','2017-04-24 17:39:13',10,'TEXT',0,0,0),(265,79,'DIAGNOSIS FEE\nAMT:250\nWF:36334\n4/24/17','2017-04-24 17:40:54',10,'TEXT',0,0,0),(266,81,'DIAGNOSIS FEE\nAMT:750\nWF:36341\n4/24/17\n','2017-04-24 17:42:20',10,'TEXT',0,0,0),(267,82,'DIAGNOSIS FEE\nAMT:450\nWF:36347\n4/24/17\n','2017-04-24 17:43:40',10,'TEXT',0,0,0),(268,83,'DIAGNOSIS FEE\nAMT:450\nWF:36351\n4/24/17','2017-04-24 17:44:22',10,'TEXT',0,0,0),(269,85,'Payment to Follow\n','2017-04-24 17:48:07',10,'TEXT',0,0,0),(270,86,'Payment to Follow','2017-04-24 17:48:35',10,'TEXT',0,0,0),(271,66,'RELEASED:Anthony\nRECEIVED:RUEL M. NAVOR\nDATE:4/24/17','2017-04-24 17:51:19',10,'TEXT',0,0,0),(272,24,'RELEASED:ANTHONY\nRECEIVED:VICTOR FRANCIS\nDATE:4/24/17','2017-04-24 17:54:29',10,'TEXT',0,0,0),(273,34,'RELEASED:ANTHONY\nRECEIVED:ANCHETA MADELAINE\nDATE:4/24/17','2017-04-24 17:56:38',10,'TEXT',0,0,0),(274,78,'RELEASED:ALEX MENOR\nRECEIVED:JUN IAN BALANCIO\nDATE:4/24/17','2017-04-24 17:57:44',10,'TEXT',0,0,0),(275,79,'RELEASED:ALEX B. MENOR\nRECEIVED:LEZLY CONCEPCION\nDATE:4/24/17','2017-04-24 17:59:38',10,'TEXT',0,0,0);
+--
+-- Table structure for table `remarks_customer`
+--
 
-/*Table structure for table `remarks_customer` */
-
-DROP TABLE IF EXISTS `remarks_customer`;
-
-CREATE TABLE `remarks_customer` (
-  `cremarksid` bigint(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `remarks_customer` (
+  `cremarksid` bigint(20) NOT NULL,
   `cticketid` bigint(20) DEFAULT NULL,
   `cremarks_info` text,
   `ctime_stamp` varchar(500) NOT NULL,
   `customerid` bigint(20) DEFAULT NULL,
-  `creplytype` varchar(500) DEFAULT 'TEXT',
-  PRIMARY KEY (`cremarksid`)
+  `creplytype` varchar(500) DEFAULT 'TEXT'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `remarks_customer` */
+-- --------------------------------------------------------
 
-/*Table structure for table `remarks_file` */
+--
+-- Table structure for table `remarks_file`
+--
 
-DROP TABLE IF EXISTS `remarks_file`;
-
-CREATE TABLE `remarks_file` (
-  `fremarksid` bigint(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `remarks_file` (
+  `fremarksid` bigint(20) NOT NULL,
   `fticketid` bigint(20) DEFAULT NULL,
   `fremarks_info` varchar(500) DEFAULT NULL,
   `ftime_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `fuid` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`fremarksid`)
+  `fuid` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `remarks_file` */
+-- --------------------------------------------------------
 
-/*Table structure for table `template` */
+--
+-- Table structure for table `template`
+--
 
-DROP TABLE IF EXISTS `template`;
-
-CREATE TABLE `template` (
-  `templateid` bigint(20) NOT NULL AUTO_INCREMENT,
-  `templatedescription` text,
-  PRIMARY KEY (`templateid`)
+CREATE TABLE IF NOT EXISTS `template` (
+  `templateid` bigint(20) NOT NULL,
+  `templatedescription` text
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
-/*Data for the table `template` */
+-- --------------------------------------------------------
 
-insert  into `template`(`templateid`,`templatedescription`) values (1,'No Power'),(2,'No Display'),(3,'Slow boot up'),(4,'Slow Internet'),(5,'Intermittent on/off'),(6,'Blue Screen'),(7,'Can\'t Log in'),(8,'Deleted files need to recover'),(9,'Printer does not work'),(10,'Unusual noise'),(11,'Wireless network keeps on disconnecting'),(12,'My ______ program is not working'),(13,'My Computer wont recognize my USB device');
+--
+-- Table structure for table `tickets`
+--
 
-/*Table structure for table `tickets` */
-
-DROP TABLE IF EXISTS `tickets`;
-
-CREATE TABLE `tickets` (
-  `ticketid` bigint(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `tickets` (
+  `ticketid` bigint(20) NOT NULL,
   `categoryid` varchar(300) DEFAULT NULL,
   `status` varchar(300) DEFAULT NULL,
   `priority` varchar(300) DEFAULT NULL,
@@ -149,52 +169,45 @@ CREATE TABLE `tickets` (
   `departmentid` varchar(500) DEFAULT NULL,
   `addedbyuid` bigint(20) DEFAULT NULL,
   `time_stamp` varchar(500) NOT NULL,
-  `due_date` date DEFAULT NULL,
-  PRIMARY KEY (`ticketid`)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=latin1;
+  `due_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `tickets` */
+-- --------------------------------------------------------
 
-insert  into `tickets`(`ticketid`,`categoryid`,`status`,`priority`,`customerid`,`assignedto_uid`,`problem`,`description`,`history`,`special_instruction`,`serialno`,`departmentid`,`addedbyuid`,`time_stamp`,`due_date`) values (15,'CCTV','Closed','Under Warranty - PC4ME',1,1,'Blue screen laptop','NEO Laptop','date purchased - December 2013','Backup files before formating','NNDKLEU948032','Sales',1,'2017-04-19 21:31:51','2017-04-11'),(16,'Laptop','Pickup','Under Warranty - PC4ME',11,7,'Hangs and very slow','Macbook pro 15\n8gb\n256ssd\nmid 2014 unit\nminor scratches pls see attach pictures','after a movie download from the internet','do not delete any files','Pdiwg128sm#1','Technical',8,'2017-04-16 18:05:52','2017-04-17'),(17,'Laptop','Pickup','Out of Warranty - PC4ME',13,7,'No Display','Acer one 14','After brownout','No delete any files','1234567890','Technical',9,'2017-04-19 20:42:20','2017-04-19'),(18,'Desktop Computer','Pickup','Under Warranty - PC4ME',13,7,'Keyboard problem - some keys not working','Acer One 14\nWith Charger and sleeve (blue)','napandagan','With backup in case','abc123','Technical',9,'2017-04-19 21:33:19','2017-04-20'),(19,'Desktop Computer','Closed','Out of Warranty - Walk-In',15,7,'slow continue on windows then restart again with bluescreen','Diagnose','','without backup','','Technical',10,'2017-04-19 21:14:37','2017-04-19'),(20,'Laptop','Closed','Out of Warranty - Walk-In',16,7,'Error on Microsoft Office','Toshiba C850-BC26','','Install Application','9C402250R','Technical',10,'2017-04-20 05:23:09','2017-04-19'),(21,'Printer','Pickup','Out of Warranty - Walk-In',17,7,'Paper Feed Jam','Epson L210','','Diagnose','TP3K290890','Technical',10,'2017-04-19 22:15:16','2017-04-22'),(22,'Laptop','Closed','Out of Warranty - Walk-In',18,7,'install application','acer es11','','install application','NXGG2SP0026520FA77600','Technical',10,'2017-04-20 05:24:22','2017-04-19'),(23,'Laptop','Closed','Out of Warranty - Walk-In',19,7,'install application','lenovo ideapad 100','','install application','MD07YRCB','Technical',10,'2017-04-19 23:15:33','2017-04-20'),(24,'Printer','Closed','Out of Warranty - Walk-In',20,11,'No Power','HP Deskjet D2660\nwith colored and black cart.\nwith power cable','pinacheck sa ibang shop','','CN99F3F66G','Technical',9,'2017-04-19 23:34:29','2017-04-22'),(25,'Desktop Computer','Pickup','Out of Warranty - Walk-In',21,7,'according sa client nginternet siya tapos pagbalik niya nawala na ung connection sa internet','acer desktop','','diagnose','PVSDV01002022042ED3000','Technical',10,'2017-04-20 02:43:20','2017-04-22'),(26,'Printer','Closed','Under Warranty - PC4ME',22,11,'PROBLEM IN PRINTING MAY LINE KAPAG NGPRINT','Model: EPSON L365\nPower Cord:*\nUSB Cord: *\nAccessory(if there\'s any):* ','CLIENT TRIED\nHEAD CLEANING AND INK FLUSH\nSTILL NO POWER','','VHCK006376','Technical',10,'2017-04-20 05:26:58','2017-04-21'),(27,'Printer','Closed','Under Warranty - PC4ME',22,11,'PROBLEM IN PRINTING MAY LINE KAPAG NGPRINT','Model: EPSON L365\nPower Cord:*\nUSB Cord: *\nAccessory(if there\'s any):* ','CLIENT TRIED\nHEAD CLEANING AND INK FLUSH\nSTILL NO POWER','','VHCK006376','Technical',10,'2017-04-20 04:21:09','2017-04-21'),(28,'Laptop','Closed','Under Warranty - c/o',23,11,'Charge only till 60%\nsometimes not charging','Model: Lenovo Ideapad 110\nCharger: With\nAccessories: * ','','Ok to format','PF0HB3KF','Technical',10,'2017-04-20 04:16:26','2017-04-25'),(29,'Others','Pickup','Under Warranty - PC4ME',24,1,'General Problem','Generic Unit','','','','Sales',8,'2017-04-21 09:15:39','2017-04-20'),(30,'CCTV','Pickup','Under Warranty - PC4ME',25,11,'CANNOT READ HDD- according sa client pagstart up ng DVR no disk na','iSECURE DVR\nC008HD(1080N)','','diagnose','N201606290118','Technical',10,'2017-04-21 09:32:05','2017-04-17'),(31,'Laptop','Closed','Under Warranty - c/o',26,13,'Windows Slow continue to open on windows','Model: Aspire r11\nPower Cord: without\nPower Adapter: with\nAccessories: none\n','','Incase to format with backup','NXGOYSP007618047C16600','Technical',13,'2017-04-21 10:48:17','2017-04-25'),(32,'Laptop','RMA','Under Warranty - c/o',26,13,'Windows Slow continue to open on windows','Model: Aspire r11\nPower Cord: without\nPower Adapter: with\nAccessories: none\n','','Incase to format with backup','NXGOYSP007618047C16600','Technical',13,'2017-04-21 10:48:18','2017-04-25'),(33,'Desktop Computer','Pickup','Under Warranty - c/o',27,13,'Initial Diagnosis: No Power\n','Motherboard:*\nProcessor: *\nMemory: *\nHdd: *\nVideo Card:\nOptical Drive:*\nPower Supply: *\nAccessory(if there\'s any): *','','Checking power Supply Good\nChecking MOBO Good \nPower Switch On is defective need Replace Casing parts of Switch','none','Technical',13,'2017-04-21 11:30:12','2017-04-24'),(34,'Laptop','Closed','Under Warranty - PC4ME',28,11,'cannot open password in windows','Blackout/No Power: WITH\nPassword: \nModel:  LENOVO TABLET PC\nPower Adapter:  WITH\nAccessory(if there\'s any): ','','for format without back-up','YE00G9Z8','Technical',10,'2017-04-21 11:34:47','2017-04-24'),(35,'Laptop','Closed','Under Warranty - c/o',29,13,'Initial Diagnosis: Install Application Canon Ip1200','Model: lenovo G41\nPower Cord: with\nPower Adapter: *\nAccessory(if there\'s any): Bag','Reset','with\n','None','Technical',13,'2017-04-21 11:43:39','2017-04-24'),(36,'Desktop Computer','Pickup','Out of Warranty - Walk-In',30,11,'No Display','Desktop \nwith Power','After Shout down','For Diagnose','*','Technical',10,'2017-04-21 12:11:36','2017-04-25'),(37,'Laptop','Closed','Out of Warranty - Walk-In',31,11,'BlueScreen','Acer- V5-473pg','Biglang nag hang.','Diagnose','NXMB9SG00641803F2D7600','Technical',10,'2017-04-21 12:40:21','2017-04-24'),(38,'Laptop','Closed','Under Warranty - c/o',32,13,'Initial Diagnosis:Wifi Problem minutes losing and Automatic off power','Model: Asus\nPower Cord:with \nPower Adapter: *\nAccessory(if there\'s any):* ','','With','GNOWUO3042036D','Technical',13,'2017-04-21 12:49:44','2017-04-24'),(39,'Laptop','Closed','Under Warranty - PC4ME',33,11,'White Screen ','Acer Es1 431 p7gc','yesterday Blackscreen','Diagnosis','NXMZCSP0036080A3407600','Technical',10,'2017-04-21 12:56:45','2017-04-25'),(40,'Laptop','Closed','Under Warranty - c/o',34,13,'Initial Diagnosis: BLUE SCREEN PROBLEM NOT CONTINUE ON WINDOWS','SANSAN MKTG c/o Resty Milo\nModel: LENOVO G405\nPower Cord:* \nPower Adapter:WITH \nAccessory(if there\'s any):* ','','with','CB30251994','Technical',13,'2017-04-21 12:58:17','2017-04-24'),(41,'Laptop','Pickup','Under Warranty - c/o',35,13,'Initial Diagnosis: No Display\n','Model: ASPIRE ONE14 E5-4736-51GY\nPower Cord:* \nPower Adapter:WITH \nBattery:*\nAccessory(if there\'s any): WITH BAG, MOUSE \n','','','NXG0HSP004550030373400','Technical',13,'2017-04-21 13:09:32','2017-04-24'),(42,'Laptop','Pickup','Under Warranty - c/o',36,13,'Initial Diagnosis: NO DISPLAY','Model: LENOVO G485\nPower Cord:* \nPower Adapter:WITH \nAccessory(if there\'s any):WITH BAG ','','','CB20303884','Technical',13,'2017-04-21 13:18:51','2017-04-24'),(43,'Laptop','Pickup','Under Warranty - c/o',14,13,'Initial Diagnosis: No Display\n','Model: ACER ONE14 Z1401-C95N\nPower Cord:* \nPower Adapter:WITH \nAccessory(if there\'s any):*','','','NXMT1SP004512032514P00','Technical',13,'2017-04-21 13:31:07','2017-04-24'),(44,'Printer','Closed','Under Warranty - c/o',37,13,'Initial Diagnosis: PAPER JAM','Model: EPSON L220\nPower Cord:*\nUSB Cord: *\nAccessory(if there\'s any):* ','','','VGWK037163','Technical',13,'2017-04-21 13:37:10','2017-04-24'),(45,'Desktop Computer','Closed','Under Warranty - c/o',38,13,'Initial Diagnosis: Desktop not opening in windows','Power Supply: *\nAccessory(if there\'s any):* ','','W/O','','Technical',13,'2017-04-21 13:44:50','2017-04-24'),(46,'Laptop','Closed','Under Warranty - PC4ME',39,13,'Initial Diagnosis: Bluescreen\n','Model: Acer V5\nPower Cord: With\nPower Adapter: *\nAccessory(if there\'s any): * ','','with','NXMKRSP00140602C3D6600','Technical',13,'2017-04-21 13:50:04','2017-04-24'),(47,'Laptop','Closed','Under Warranty - c/o',40,13,'Initial Diagnosis: Unit was infected by virus.','Model: Samsung \nPower Cord: With \nPower Adapter: *\nBattery: With\nAccessory(if there\'s any): Bag & mouse','The LCD was changed by the other company ','w/o','0J7S91CH100666P','Technical',13,'2017-04-21 13:59:27','2017-04-24'),(48,'Laptop','Closed','Out of Warranty - Walk-In',41,11,'sticky ung key sa keyboard ung ibang keys di mapindot','ASPIRE 5741-334G50Mn\n\nWITH CHARGER\nWITHOUT POWER CABLE','','clean or disable keyboard','LXPSV021470162F7111601','Technical',10,'2017-04-21 14:05:44','2017-04-21'),(49,'Laptop','RMA','Under Warranty - c/o',42,13,'Initial Diagnosis: KEYBOARD PROBLEM\n','Model: ACER ASPIRE ES14\nPower Cord:* \nPower Adapter:WITH \nAccessory(if there\'s any):WITH BAG ','','','NXMZCSP00461201AC07600','Technical',13,'2017-04-21 14:05:58','2017-04-24'),(50,'Laptop','Pickup','Out of Warranty - Walk-In',44,11,'according sa client biglang ngshutdown yong unit kapag matagal ng ginagamit','HP431\nWITH CHARGER AND ADAPTER\n\n\nPASSWORD: noviembre','','diagnose','4CZ1211WK','Technical',10,'2017-04-21 14:18:16','2017-04-25'),(51,'Others','Pickup','Under Warranty - c/o',43,13,'Initial Diagnosis: HDD can not detected','Model: SEAGATE 1TB HDD\nAccessory(if there\'s any): WITH BOX','\n','','none','Technical',13,'2017-04-21 14:21:58','2017-04-24'),(52,'Others','Pickup','Under Warranty - PC4ME',47,13,'Initial Diagnosis: NOT DETECTING HDD','Model: SEAGATE 1TB HDD\nPower Cord:\nUSB Cord: WITH\nAccessory(if there\'s any):WITH BOX ','','','NA988W6X','Technical',13,'2017-04-21 14:26:26','2017-04-24'),(53,'Laptop','Pickup','Under Warranty - c/o',48,13,'Initial Diagnosis: The computer has no power.\n','Model: LENOVO G50\nPower Cord:* \nPower Adapter:WITH \nAccessory(if there\'s any):* ','','','PF06Z4XK','Technical',13,'2017-04-21 14:35:29','2017-04-24'),(54,'Laptop','Pickup','Under Warranty - c/o',49,13,'Initial Diagnosis: The laptop has no power','Model:ASUS X552L\nPower Cord:* \nPower Adapter:WITH \nBattery:WITH\nAccessory(if there\'s any):BAG ','','','E9N0CV06779836B','Technical',13,'2017-04-21 14:43:39','2017-04-24'),(55,'Laptop','Pickup','Under Warranty - c/o',50,13,'Initial Diagnosis: FORMAT','Model: Gateway\nPower Cord: with\nPower Adapter: *\nBattery:with\nAccessory(if there\'s any): Bag','3810','with','LXWYP0C017150002712200 ','Technical',13,'2017-04-21 14:48:02','2017-04-24'),(56,'Laptop','Pickup','Under Warranty - c/o',51,13,'Initial Diagnosis: Format ','Power Cord: WITH\nPower Adapter: *\nBattery: WITH\nAccessory(if there\'s any): *\n','','','CNU0432NL6','Technical',13,'2017-04-21 14:57:46','2017-04-24'),(57,'Others','Pickup','Under Warranty - c/o',52,13,'Initial Diagnosis: Diagnosis (Video Card)','Video Card: Yes \nOptical Drive: *\nPower Supply: *\nAccessory(if there\'s any): *','','','None','Technical',13,'2017-04-21 15:02:28','2017-04-24'),(58,'Desktop Computer','Pickup','Under Warranty - c/o',52,13,'Initial Diagnosis: Diagnose ( MOBO)','Motherboard: MB-Asus P*H67\nVideo Card: \nOptical Drive:* \nPower Supply: *\nAccessory(if there\'s any):* ','','','','Technical',13,'2017-04-21 15:06:39','2017-04-24'),(59,'Laptop','Open','Under Warranty - c/o',53,13,'Initial Diagnosis: FORMAT TO 64BIT, INSTALLER ON AUTO CAD AT FLASHDRIVE','Model: LENOVO G580\nHard Disk: *\nPower Cord: WITH\nPower Adapter: *\nBattery: WITH\nAccessory(if there\'s any): BAG','','','CB21752687','Technical',13,'2017-04-21 15:15:59','2017-04-24'),(60,'Printer','Pickup','Under Warranty - c/o',54,13,'NO POWER (ACCDG. TO TECHNICIAN)','EPSON L210\nPower Cord: with\nUSB Cord: with\nAccessory(if there\'s any): *\n\nLorena Balanon c/o City Hall Market Office','','',' SMXK071227','Technical',13,'2017-04-21 15:23:04','2017-04-24'),(61,'Laptop','RMA','Under Warranty - PC4ME',55,9,'line on the LCD','Lenovo G41-35\nwith Charger and Bag\npassword: acyl.thea','','For Warranty','PF0FX5AJ','Technical',10,'2017-04-21 16:19:40','2017-04-26'),(62,'CCTV','Pickup','Under Warranty - c/o',56,13,'the hard drive can not detected ','Motherboard:Intel\nProcessor:Intel\nMemory:with (1pc.)\nHdd: with\nVideo Card: *\nOptical Drive: *\nPower Supply:with\nAccessory(if there\'s any): *','','','','Technical',13,'2017-04-21 17:12:04','2017-04-24'),(63,'Laptop','Pickup','Under Warranty - c/o',57,13,'Initial Diagnosis: ERROR AFTER OPENING AND ICON APPLICATION BLINGKING','Model: ASPIRE 4830GT\nProcessor: *\nMemory: *\nHard Disk:* \nPower Cord:* \nPower Adapter:WITH \nBattery:*','S0#3399 AND SO#3661','','LXRGM021362090B8C11601','Technical',13,'2017-04-21 17:19:36','2017-04-21'),(64,'Laptop','Closed','Under Warranty - c/o',59,13,'Initial Diagnosis: BLUE SCREEN AND SLOW\n','Model: ASPIRE V3-571\nPower Cord:* \nPower Adapter: WITH\nAccessory(if there\'s any):*','','with','NXRYFC00221500A301601','Technical',13,'2017-04-21 17:35:42','2017-04-24'),(65,'Desktop Computer','Pickup','Under Warranty - c/o',61,13,'Initial Diagnosis: No Display','Motherboard: with\nProcessor: AMD\nMemory: WITH\nHdd:WITH\nVideo Card: WTH\nOptical Drive: *\nPower Supply: WITH','','with','','Technical',13,'2017-04-21 17:42:35','2017-04-24'),(66,'Others','Closed','Under Warranty - c/o',62,13,'Initial Diagnosis: NO POWER','Model: GIGABYTE  GA-B150M-D3H\nPower Cord: *\nUSB Cord: *\nAccessory(if there\'s any): BOX','','','408D5C847E2','Technical',13,'2017-04-21 17:48:51','2017-04-24'),(67,'Printer','Pickup','Under Warranty - c/o',63,13,'Initial Diagnosis: Sensor Error\n','Model: HP Desktjet F2180\nPower Cord: with\nUSB Cord: *\nAccessory(if there\'s any): ','','','','Technical',13,'2017-04-21 17:54:24','2017-04-24'),(68,'Printer','Pickup','Under Warranty - c/o',1,13,'General Error','EPSON L210\nPower Cord: *\nUSB Cord: *\nAccessory(if there\'s any): *','','','SMXK205968','Sales',13,'2017-04-21 18:01:11','2017-04-24'),(69,'Printer','Pickup','Under Warranty - c/o',1,13,'Initial Diagnosis: all inks can\'t print','Model: EPSON L120\nPower Cord:with\nUSB Cord: with\nAccessory(if there\'s any): PLASTIC BAG','','','TP3K351912','Technical',13,'2017-04-21 18:04:45','2017-04-24'),(70,'Laptop','Pickup','Out of Warranty - Walk-In',66,11,'According sa client mabagal ung unit','Toshiba C40-B with Charger and Bag','','Format with Backup','5E041199S','Technical',10,'2017-04-22 09:45:08','2017-04-26'),(71,'Laptop','Pickup','Out of Warranty - Walk-In',67,11,'No Power','Aspire 4739 with charger','','Diagnose','NXRP0SP00221015D8C7600','Technical',10,'2017-04-22 10:27:57','2017-04-26'),(72,'Laptop','Closed','Out of Warranty - Walk-In',67,11,'No Power','Aspire 4739 with charger','','Diagnose','NXRP0SP00221015D8C7600','Technical',10,'2017-04-22 10:27:58','2017-04-26'),(73,'Printer','Pickup','Out of Warranty - Walk-In',68,11,'yellow ink missing in printing','Epson L110','','diagnose','SMQK057066','Technical',10,'2017-04-22 10:48:18','2017-04-26'),(74,'Printer','Closed','Out of Warranty - Walk-In',68,11,'yellow ink missing in printing','Epson L110','','diagnose','SMQK057066','Technical',10,'2017-04-22 10:48:18','2017-04-26'),(75,'Laptop','Closed','Out of Warranty - Walk-In',69,11,'Install Application','AcerAspire Happy2 -N57DQ','','Install Application','13503828476','Sales',10,'2017-04-22 12:12:06','2017-04-22'),(76,'Printer','Pickup','Under Warranty - c/o',65,13,'Initial Diagnosis: all inks can\'t print','EPSON L120\nPower Cord:with\nUSB Cord: with\nAccessory(if there\'s any): PLASTIC BAG','','','TP3K351912','Technical',13,'2017-04-22 15:55:15','2017-04-24'),(77,'Laptop','Open','Out of Warranty - Walk-In',70,11,'Format/ Without Backup\nand Check the Keyboard Problem','Samsung N150 Plus Netbook\nwith charger and bag ','','Format without Backup','ZZXB93HB10065H','Technical',10,'2017-04-24 10:07:54','2017-04-24'),(78,'Laptop','Closed','Out of Warranty - Walk-In',71,11,'Format w/o Backup ','Unit Type: HP Mini 110-3744c9\nwith Charger and Bag','','Format w/o Backup ','5CB1191Y45','Technical',10,'2017-04-24 10:13:59','2017-04-24'),(79,'Laptop','Closed','Out of Warranty - Walk-In',72,10,'Install Application','Model:  Hp 2000\nPower Adapter: WITH\nBattery: WITH\nAccessory(if there\'s any): BAG and IPAD(lowbat) and Charger','','Installation','5CG3360KSK','Technical',10,'2017-04-24 10:43:38','2017-04-24'),(80,'Laptop','Pickup','Under Warranty - PC4ME',73,9,'According to client the laptop will restart for 3 times','Unit Model: ASUS\n with Power Cord and Bag','','Diagnose','FBN0WU24032248A','Sales',13,'2017-04-24 11:27:29','2017-04-24'),(81,'Laptop','Open','Out of Warranty - Walk-In',74,11,'Format with Backup ','Unit Model: HP Pavillion DV5 \nwith Charger ','','Format with Backup ','CNF8302KWX','Technical',13,'2017-04-24 12:03:56','2017-04-23'),(82,'Laptop','Open','Out of Warranty - Walk-In',75,11,'Format without Backup','Neo Basic B3360 N\nwith Charger','','Format','NKM110QC000109196','Technical',10,'2017-04-24 13:18:57','2017-04-26'),(83,'Laptop','Open','Out of Warranty - Walk-In',76,11,'Format without Back-Up','Model:  Hp 15-b006ee\nPower Adapter: with','','Format','5CD2452WP6','Technical',10,'2017-04-24 13:49:28','2017-04-25'),(84,'Others','RMA','Under Warranty - PC4ME',11,9,'Flashing  Led Orange','TP-LINK EAP330 with charger\nFor shipping to supplier ','','Diagnose','2165774001095','Technical',10,'2017-04-24 14:16:47','2017-04-25'),(85,'Laptop','Open','Out of Warranty - Walk-In',77,11,'No Display tried VGA External still no display','Dell P51F\nwith Charger','','Diagnose','234LS32','Technical',10,'2017-04-24 14:28:49','2017-04-27'),(86,'Printer','RMA','Under Warranty - c/o',77,11,'No Power','Epson L210','','Diagnose1','RADK357442','Technical',10,'2017-04-24 14:31:32','2017-04-27'),(87,'Printer','Open','Under Warranty - PC4ME',1,1,'Slow boot up','test','','','','2',6,'2017-04-30 14:10:25','2017-04-30'),(88,'Others','Open','Under Warranty - PC4ME',1,1,'Intermittent on/off','test','','','','Technical',6,'2017-04-30 14:12:12','2017-04-30'),(89,'CCTV','Open','Under Warranty - PC4ME',1,1,'Slow boot up','test','','','','Sales',6,'2017-05-01 06:53:12','2017-05-01');
+--
+-- Table structure for table `tickets_log`
+--
 
-/*Table structure for table `tickets_log` */
-
-DROP TABLE IF EXISTS `tickets_log`;
-
-CREATE TABLE `tickets_log` (
-  `tlogid` bigint(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `tickets_log` (
+  `tlogid` bigint(20) NOT NULL,
   `ticketid` bigint(20) DEFAULT NULL,
   `status` varchar(300) DEFAULT NULL,
   `remarks` text,
   `updatedby` bigint(20) DEFAULT NULL,
-  `time_stamp` varchar(500) NOT NULL,
-  PRIMARY KEY (`tlogid`)
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=latin1;
-
-/*Data for the table `tickets_log` */
-
-insert  into `tickets_log`(`tlogid`,`ticketid`,`status`,`remarks`,`updatedby`,`time_stamp`) values (48,16,'Pickup','Changed Status from Open to Pickup',8,'2017-04-16 18:05:52'),(49,17,'Pickup','Changed Status from Open to Pickup',9,'2017-04-19 20:42:20'),(50,15,'Pickup','Changed Status from Open to Pickup',9,'2017-04-19 21:31:51'),(51,18,'Pickup','Changed Status from Open to Pickup',9,'2017-04-19 21:33:19'),(52,27,'Closed','Changed Status from Open to Closed',10,'2017-04-20 04:21:09'),(53,20,'Closed','Changed Status from Open to Closed',10,'2017-04-20 05:23:09'),(54,22,'Closed','Changed Status from Open to Closed',10,'2017-04-20 05:24:22'),(55,26,'Closed','Changed Status from Open to Closed',10,'2017-04-20 05:26:58'),(56,31,'Closed','Changed Status from Pickup to Closed',9,'2017-04-21 10:53:20'),(57,37,'Pickup','Changed Status from Open to Pickup',11,'2017-04-21 16:16:12'),(58,21,'Pickup','Changed Status from Open to Pickup',11,'2017-04-21 17:16:24'),(59,44,'Closed','Changed Status from Pickup to Closed',10,'2017-04-21 17:18:16'),(60,45,'Closed','Changed Status from Pickup to Closed',10,'2017-04-21 17:20:15'),(61,23,'Closed','Changed Status from Open to Closed',11,'2017-04-21 17:23:48'),(62,39,'Pickup','Changed Status from Open to Pickup',11,'2017-04-21 17:37:12'),(63,30,'Pickup','Changed Status from Open to Pickup',11,'2017-04-21 17:57:28'),(64,35,'Closed','Changed Status from Pickup to Closed',10,'2017-04-21 18:54:53'),(65,61,'RMA','Changed Status from Open to RMA',11,'2017-04-22 09:17:27'),(66,28,'Pickup','Changed Status from Open to Pickup',11,'2017-04-22 09:58:39'),(67,48,'Pickup','Changed Status from Open to Pickup',11,'2017-04-22 10:31:24'),(68,24,'Pickup','Changed Status from Open to Pickup',11,'2017-04-22 11:25:48'),(69,19,'Pickup','Changed Status from Open to Pickup',11,'2017-04-22 11:42:18'),(70,25,'Pickup','Changed Status from Open to Pickup',11,'2017-04-22 12:07:49'),(71,72,'Closed','Changed Status from Open to Closed',10,'2017-04-22 12:11:16'),(72,74,'Closed','Changed Status from Open to Closed',10,'2017-04-22 12:18:28'),(73,36,'Pickup','Changed Status from Open to Pickup',11,'2017-04-22 12:23:34'),(74,32,'RMA','Changed Status from Pickup to RMA',9,'2017-04-22 14:30:04'),(75,49,'RMA','Changed Status from Pickup to RMA',10,'2017-04-22 16:03:57'),(76,19,'Closed','Changed Status from Pickup to Closed',10,'2017-04-22 16:08:53'),(77,37,'Closed','Changed Status from Pickup to Closed',10,'2017-04-22 16:12:09'),(78,39,'Closed','Changed Status from Pickup to Closed',10,'2017-04-22 16:15:18'),(79,48,'Closed','Changed Status from Pickup to Closed',10,'2017-04-22 16:20:05'),(80,75,'Closed','Changed Status from Open to Closed',10,'2017-04-22 16:34:03'),(81,28,'Closed','Changed Status from Pickup to Closed',10,'2017-04-22 16:55:14'),(82,50,'Pickup','Changed Status from Open to Pickup',11,'2017-04-22 16:57:28'),(83,34,'Pickup','Changed Status from Open to Pickup',11,'2017-04-22 17:57:48'),(84,47,'Closed','Changed Status from Pickup to Closed',10,'2017-04-22 18:28:33'),(85,46,'Closed','Changed Status from Pickup to Closed',10,'2017-04-22 18:31:18'),(86,64,'Closed','Changed Status from Pickup to Closed',10,'2017-04-22 18:32:18'),(87,40,'Closed','Changed Status from Pickup to Closed',10,'2017-04-22 18:33:35'),(88,38,'Closed','Changed Status from Pickup to Closed',10,'2017-04-22 18:37:21'),(89,15,'Closed','Changed Status from Pickup to Closed',1,'2017-04-23 09:55:44'),(90,67,'Pickup','Changed Status from Open to Pickup',13,'2017-04-24 11:35:14'),(91,70,'Pickup','Changed Status from Open to Pickup',11,'2017-04-24 11:59:25'),(92,78,'Pickup','Changed Status from Open to Pickup',11,'2017-04-24 14:00:26'),(93,71,'Pickup','Changed Status from Open to Pickup',11,'2017-04-24 15:03:55'),(94,84,'RMA','Changed Status from Open to RMA',9,'2017-04-24 15:06:43'),(95,73,'Pickup','Changed Status from Open to Pickup',11,'2017-04-24 17:21:40'),(96,66,'Closed','Changed Status from Pickup to Closed',10,'2017-04-24 17:51:27'),(97,24,'Closed','Changed Status from Pickup to Closed',10,'2017-04-24 17:54:53'),(98,34,'Closed','Changed Status from Pickup to Closed',10,'2017-04-24 17:56:45'),(99,78,'Closed','Changed Status from Pickup to Closed',10,'2017-04-24 17:57:55'),(100,79,'Closed','Changed Status from Open to Closed',10,'2017-04-24 17:59:57'),(101,86,'Closed','Changed Status from Open to Closed',1,'2017-04-30 11:49:36'),(102,86,'Open','Changed Status from Closed to Open',6,'2017-04-30 13:33:33'),(103,86,'Open','Changed Agent from Anthony Padua to Agent ID: 12',6,'2017-04-30 13:33:33'),(104,86,'Open','Changed Priority from Out of Warranty - Walk-In to Under Warranty - PC4ME',6,'2017-04-30 13:33:33'),(105,86,'RMA','Changed Status from Open to RMA',6,'2017-04-30 13:34:14'),(106,86,'RMA','Changed Agent from Anthony Padua to Agent ID: 11',6,'2017-04-30 13:34:14'),(107,86,'RMA','Changed Priority from Under Warranty - PC4ME to Under Warranty - c/o',6,'2017-04-30 13:34:14'),(108,86,'RMA','Changed History from Diagnose to Diagnose1',6,'2017-04-30 13:39:53');
-
-/*Table structure for table `tickets_timeline` */
-
-DROP TABLE IF EXISTS `tickets_timeline`;
-
-CREATE TABLE `tickets_timeline` (
-  `ttimeid` bigint(20) NOT NULL AUTO_INCREMENT,
-  `ticketid` bigint(20) DEFAULT NULL,
-  `action` varchar(500) DEFAULT NULL,
-  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`ttimeid`)
+  `time_stamp` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `tickets_timeline` */
+-- --------------------------------------------------------
 
-/*Table structure for table `users` */
+--
+-- Table structure for table `tickets_timeline`
+--
 
-DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `tickets_timeline` (
+  `ttimeid` bigint(20) NOT NULL,
+  `ticketid` bigint(20) DEFAULT NULL,
+  `action` varchar(500) DEFAULT NULL,
+  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `users` (
-  `uid` bigint(20) NOT NULL AUTO_INCREMENT,
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `uid` bigint(20) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(150) NOT NULL,
   `name` varchar(500) DEFAULT NULL,
@@ -202,15 +215,147 @@ CREATE TABLE `users` (
   `ustatus` varchar(1) NOT NULL,
   `mobileno` varchar(300) DEFAULT NULL,
   `email` varchar(300) DEFAULT NULL,
-  `otherno` varchar(300) DEFAULT NULL,
-  PRIMARY KEY (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+  `otherno` varchar(300) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
-/*Data for the table `users` */
+--
+-- Dumping data for table `users`
+--
 
-insert  into `users`(`uid`,`username`,`password`,`name`,`usertype`,`ustatus`,`mobileno`,`email`,`otherno`) values (1,'admin','21232f297a57a5a743894a0e4a801fc3','Admin','admin','1',NULL,NULL,NULL),(5,'lynnette','5f4dcc3b5aa765d61d8327deb882cf99','Lynnette','admin','1',NULL,NULL,NULL),(6,'juan','1253208465b1efa876f982d8a9e73eef','Juan Doe','staff','',NULL,NULL,NULL),(7,'technician','eb919176ebac2099dd026ec41524b707','Technician One','staff','',NULL,NULL,NULL),(8,'edgee','482c811da5d5b4bc6d497ffa98491e38','Edgee','admin','',NULL,NULL,NULL),(9,'Bryan','7d4ef62de50874a4db33e6da3ff79f75','Bryan Haban','admin','',NULL,NULL,NULL),(10,'anthony','63d4399b76e9f9d8ee6cb3acb484dba6','Anthony Padua','staff','',NULL,NULL,NULL),(11,'leomar','59025dc54530f60163e21e5a3e411ea5','Leomar Patungan','staff','',NULL,NULL,NULL),(12,'gemo','97558594c7d508b14b8442eb856ae5db','Gemo Gacayan','admin','',NULL,NULL,NULL),(13,'alex','be484458f8f0553947356cdff72c2ef6','Alex B. Menor','staff','',NULL,NULL,NULL);
+INSERT INTO `users` (`uid`, `username`, `password`, `name`, `usertype`, `ustatus`, `mobileno`, `email`, `otherno`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Admin', 'admin', '1', NULL, NULL, NULL),
+(8, 'edgee', '482c811da5d5b4bc6d497ffa98491e38', 'Edgee', 'admin', '', NULL, NULL, NULL),
+(14, 'Bryan', 'e10adc3949ba59abbe56e057f20f883e', 'Bryan Haban', 'admin', '', NULL, NULL, NULL);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`categoryid`);
+
+--
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`customerid`);
+
+--
+-- Indexes for table `department`
+--
+ALTER TABLE `department`
+  ADD PRIMARY KEY (`departmentid`);
+
+--
+-- Indexes for table `remarks_agent`
+--
+ALTER TABLE `remarks_agent`
+  ADD PRIMARY KEY (`aremarksid`);
+
+--
+-- Indexes for table `remarks_customer`
+--
+ALTER TABLE `remarks_customer`
+  ADD PRIMARY KEY (`cremarksid`);
+
+--
+-- Indexes for table `remarks_file`
+--
+ALTER TABLE `remarks_file`
+  ADD PRIMARY KEY (`fremarksid`);
+
+--
+-- Indexes for table `template`
+--
+ALTER TABLE `template`
+  ADD PRIMARY KEY (`templateid`);
+
+--
+-- Indexes for table `tickets`
+--
+ALTER TABLE `tickets`
+  ADD PRIMARY KEY (`ticketid`);
+
+--
+-- Indexes for table `tickets_log`
+--
+ALTER TABLE `tickets_log`
+  ADD PRIMARY KEY (`tlogid`);
+
+--
+-- Indexes for table `tickets_timeline`
+--
+ALTER TABLE `tickets_timeline`
+  ADD PRIMARY KEY (`ttimeid`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`uid`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `categoryid` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `customerid` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=83;
+--
+-- AUTO_INCREMENT for table `department`
+--
+ALTER TABLE `department`
+  MODIFY `departmentid` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `remarks_agent`
+--
+ALTER TABLE `remarks_agent`
+  MODIFY `aremarksid` bigint(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `remarks_customer`
+--
+ALTER TABLE `remarks_customer`
+  MODIFY `cremarksid` bigint(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `remarks_file`
+--
+ALTER TABLE `remarks_file`
+  MODIFY `fremarksid` bigint(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `template`
+--
+ALTER TABLE `template`
+  MODIFY `templateid` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT for table `tickets`
+--
+ALTER TABLE `tickets`
+  MODIFY `ticketid` bigint(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tickets_log`
+--
+ALTER TABLE `tickets_log`
+  MODIFY `tlogid` bigint(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tickets_timeline`
+--
+ALTER TABLE `tickets_timeline`
+  MODIFY `ttimeid` bigint(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `uid` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
