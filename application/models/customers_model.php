@@ -90,6 +90,41 @@ class Customers_model extends CI_Model
 		
 	}
 	
+	public function getcustomerticket_mobile($useremail)
+	{
+		//echo $customerid;
+		$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid WHERE customer.cemail=".$this->db->escape($useremail)."");
+		$result = $sql->result_array();
+		return $result;
+		
+		
+	}
+	
+	public function getticketdetailssingle_mobile($current_ticket)
+	{
+		$sql = $this->db->query("SELECT * FROM tickets WHERE ticketid=".$this->db->escape($current_ticket)."");
+		$result = $sql->result_array();
+		return $result[0];
+		
+	}
+	
+	public function getticketlog_mobile($current_ticket)
+	{
+		//echo $customerid;
+		$sql = $this->db->query("SELECT * FROM 
+((SELECT 'Customer' AS userreplied,CONCAT(customer.cfname,' ',customer.clname) AS user_name, cremarksid AS remarksid, cticketid AS ticketid,cremarks_info AS remarks_info, ctime_stamp AS time_stamp, creplytype AS replytype, '0' AS n_email,'0' AS n_sms,'0' AS n_mobile  FROM remarks_customer 
+LEFT JOIN customer ON remarks_customer.customerid = customer.customerid) 
+UNION ALL 
+(SELECT 'Agent' AS userreplied,users.name AS user_name, aremarksid AS remarksid, aticketid AS ticketid,aremarks_info AS remarks_info, atime_stamp AS time_stamp, replytype AS replytype,n_email,n_sms,n_mobile FROM remarks_agent 
+LEFT JOIN users ON remarks_agent.uid= users.uid) 
+UNION ALL 
+(SELECT 'System' AS userreplied,users.name AS user_name, tlogid AS remarksid, ticketid AS ticketid,remarks AS remarks_info, time_stamp AS time_stamp,'TEXT' AS replytype, '0' AS n_email,'0' AS n_sms,'0' AS n_mobile FROM tickets_log LEFT JOIN users 
+ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$this->db->escape($current_ticket)." ORDER BY time_stamp ASC ");
+		$result = $sql->result_array();
+		return $result;
+		
+		
+	}
 	
 }
 

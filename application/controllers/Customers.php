@@ -127,21 +127,44 @@ class Customers extends CI_Controller
 		
 	}
 	
+	public function getcustomerticket(){
+		$useremail = $this->input->post('useremail');
+		
+		
+		header('Access-Control-Allow-Origin: *'); 
+		header('Content-Type: application/json');
+
+		echo json_encode($this->customers_model->getcustomerticket_mobile($useremail));
+		
+	}
+	public function getticketdetails(){
+		$current_ticket = $this->input->post('current_ticket');
+		
+		
+		header('Access-Control-Allow-Origin: *'); 
+		header('Content-Type: application/json');
+
+		echo json_encode($this->customers_model->getticketdetailssingle_mobile($current_ticket));
+		
+	}
+	
+	public function getticketlog(){
+		$current_ticket = $this->input->post('current_ticket');
+		
+		
+		header('Access-Control-Allow-Origin: *'); 
+		header('Content-Type: application/json');
+
+		echo json_encode($this->customers_model->getticketlog_mobile($current_ticket));
+		
+	}
+	
 	
 	
 	
 
 	
-	public function saveemployee(){
-		$empno = $this->input->post('empno');
-		$lname = $this->input->post('lname');
-		$fname = $this->input->post('fname');
-		$mname = $this->input->post('mname');
-		$extension = $this->input->post('extension');
-		$designation = $this->input->post('designation');
-		
-		$this->employees_model->saveemployee($empno,$lname,$fname,$mname,$extension,$designation);
-	}
+	
 	
 	
 	
