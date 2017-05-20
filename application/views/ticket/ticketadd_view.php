@@ -193,7 +193,7 @@
                         <div class="col-md-4">
 						
                             <select id="customerid" name="example-select2" class="select-select2" style="width: 73%;" data-placeholder="Choose one.." >
-							
+							<option value=""></option>
 							<?php
 							//echo "<option value='".$itemsdetails['category']."'>".$itemsdetails['category']."</option>";
 							
