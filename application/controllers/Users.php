@@ -19,6 +19,7 @@ class Users extends CI_Controller
 			'departmentsclass' => '',
 			'templateclass' => '',
 			'categoryclass' => '',
+			'priorityclass' => '',
 			'subnavtitle' => 'Users'
 			);
 			

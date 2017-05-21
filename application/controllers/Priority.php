@@ -1,12 +1,12 @@
 <?php
 
-class Departments extends CI_Controller
+class Priority extends CI_Controller
 {
 	public function __construct()
 	{
 		parent::__construct();
 		//model module
-		$this->load->model('departments_model');
+		$this->load->model('priority_model');
 		$this->load->helper('date');
 		//view module
 		 $this->data = array(
@@ -19,17 +19,17 @@ class Departments extends CI_Controller
 			'settingsclass' => 'active',
 			'usersclass' => '',
 			'userssubclass' => '',
-			'departmentsclass' => 'active',
+			'departmentsclass' => '',
 			'templateclass' => '',
 			'categoryclass' => '',
-			'priorityclass' => '',
-			'subnavtitle' => 'Departments',
+			'priorityclass' => 'active',
+			'subnavtitle' => 'Priority',
 			'typeahead' => '1',
 			
 			);
 		//javascript module
 		$this->js = array(
-            'jsfile' => 'settings_department.js',
+            'jsfile' => 'settings_priority.js',
 			'datatablescript' => null
 			);
 	}
@@ -40,29 +40,29 @@ class Departments extends CI_Controller
 		$js = $this->js;
 
 		
-		$data['departments'] = $this->departments_model->getdeptlist();
+		$data['prioritylist'] = $this->priority_model->getpriority();
 
 		$this->load->view('inc/header_view');
-		$this->load->view('settings/departments_view',$data);
+		$this->load->view('settings/priority_view',$data);
 		$this->load->view('inc/footer_view',$js);
 		
 	}
 	
 
 	
-	public function savedepartment(){
-		$departmentname = $this->input->post('departmentname');
-		if($departmentname!=null){
-			$this->departments_model->saveemployee($departmentname);
+	public function savepriority(){
+		$priorityname = $this->input->post('priorityname');
+		if($priorityname!=null){
+			$this->priority_model->savepriority($priorityname);
 		}
 		
 	}
 	
-	public function deletedepartment(){
+	public function deletepriority(){
 		
-		$departmentid = $this->input->post('did');
-		if($departmentid!=null){
-			$this->db->delete('department', array('departmentid' => $departmentid));
+		$priorityid = $this->input->post('priorityid');
+		if($priorityid!=null){
+			$this->db->delete('priority', array('priorityid' => $priorityid));
 		}
 		
 		

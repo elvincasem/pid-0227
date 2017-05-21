@@ -17,27 +17,11 @@
                         <!-- First Row -->
                         <div class="row">
                             <!-- Simple Stats Widgets -->
-                            <div class="col-sm-6 col-lg-3">
-                                <a href="#" class="widget">
-                                    <div class="widget-content widget-content-mini text-right clearfix">
-                                        <div class="widget-icon pull-left themed-background">
-                                            <i class="gi gi-group text-light-op"></i>
-                                        </div>
-                                        <h2 class="widget-heading h3">
-                                            <strong><span data-toggle="counter" data-to=""><?php 
-										echo $customerscount['totalcustomers'];
-										?></span></strong>
-                                        </h2>
-                                        <span class="text-muted">Customers </span>
-                                    </div>
-                                </a>
-								
-								
-                            </div>
+                           
 							
 							
                             <div class="col-sm-6 col-lg-3">
-                                <a href="javascript:void(0)" class="widget">
+                                <a href="ticket/open" class="widget">
                                     <div class="widget-content widget-content-mini text-right clearfix">
                                         <div class="widget-icon pull-left themed-background-success">
                                             <i class="gi gi-folder_open text-light-op"></i>
@@ -52,8 +36,28 @@
                                 </a>
                             </div>
 							
+							
+							 <div class="col-sm-6 col-lg-3">
+                                <a href="ticket/pickup" class="widget">
+                                    <div class="widget-content widget-content-mini text-right clearfix">
+                                        <div class="widget-icon pull-left themed-background">
+                                            <i class="gi gi-thumbs_up text-light-op"></i>
+                                        </div>
+                                        <h2 class="widget-heading h3">
+                                            <strong><span data-toggle="counter" data-to=""><?php 
+										echo $pickupcount['totalpickup'];
+										?></span></strong>
+                                        </h2>
+                                        <span class="text-muted">Pickup </span>
+                                    </div>
+                                </a>
+								
+								
+                            </div>
+							
+							
                             <div class="col-sm-6 col-lg-3">
-                                <a href="javascript:void(0)" class="widget">
+                                <a href="ticket/overdue" class="widget">
                                     <div class="widget-content widget-content-mini text-right clearfix">
                                         <div class="widget-icon pull-left themed-background-danger">
                                             <i class="gi gi-warning_sign text-light-op"></i>
@@ -69,10 +73,10 @@
                             </div>
 							
                             <div class="col-sm-6 col-lg-3">
-                                <a href="javascript:void(0)" class="widget">
+                                <a href="ticket/rma" class="widget">
                                     <div class="widget-content widget-content-mini text-right clearfix">
                                         <div class="widget-icon pull-left themed-background-danger">
-                                            <i class="gi gi-file text-light-op"></i>
+                                            <i class="gi gi-retweet text-light-op"></i>
                                         </div>
                                         <h2 class="widget-heading h3 text-danger">
                                             <strong><span data-toggle="counter" data-to=""><?php 

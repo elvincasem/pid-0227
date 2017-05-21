@@ -42,7 +42,9 @@
 							
 							
                             <!-- END Alternative Sidebar Toggle Button -->
-
+							<li style="padding:15px;">
+							<small class="navbar-form-custom" style="color:white;font-weight:bold;font-size:16px;">You are logged in as: <?php echo $this->session->userdata('name');?></small>
+							</li>
                             <!-- User Dropdown -->
                             <li class="dropdown">
                                 <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">

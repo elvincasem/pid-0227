@@ -31,6 +31,7 @@ class Ticket extends CI_Controller
 			'departmentsclass' => '',
 			'templateclass' => '',
 			'categoryclass' => '',
+			'priorityclass' => '',
 			'subnavtitle' => 'Ticket #:'
 			
 			);
@@ -87,6 +88,7 @@ class Ticket extends CI_Controller
 		
 		//getcount
 		$data['category'] = $this->ticket_model->getcategory();
+		
 		$data['totaltickets'] = $this->ticket_model->gettotaltickets();
 		$data['pickuptickets'] = $this->ticket_model->getpickuptickets();
 		$data['rmatickets'] = $this->ticket_model->getrmatickets();
@@ -384,7 +386,7 @@ class Ticket extends CI_Controller
 		$data['departments'] = $this->ticket_model->getdepartment();
 		$data['agentlist'] = $this->ticket_model->getagent();
 		$data['templatelist'] = $this->ticket_model->gettemplate();
-		
+		$data['priority'] = $this->ticket_model->getpriority();
 
 		$this->load->view('inc/header_view');
 		$this->load->view('ticket/ticketadd_view',$data);
@@ -409,6 +411,7 @@ class Ticket extends CI_Controller
 		}
 		
 		$data['customers'] = $this->ticket_model->getcustomer();
+		$data['priority'] = $this->ticket_model->getpriority();
 		$data['category'] = $this->ticket_model->getcategory();
 		$data['departments'] = $this->ticket_model->getdepartment();
 		$data['agentlist'] = $this->ticket_model->getagent();
@@ -614,6 +617,14 @@ class Ticket extends CI_Controller
 		
 		
 	}
+	
+	
+	public function archiveticket()
+	{
+		$ticketid = $this->input->post('ticketid');
+		$this->ticket_model->archiveticket($ticketid);
+	}
+	
 	
 	public function send_sms($sms_to,$ticketid,$ticket_reply){
 		

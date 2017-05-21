@@ -22,6 +22,7 @@ class Category extends CI_Controller
 			'departmentsclass' => '',
 			'templateclass' => '',
 			'categoryclass' => 'active',
+			'priorityclass' => '',
 			'subnavtitle' => 'Category',
 			'typeahead' => '1',
 			

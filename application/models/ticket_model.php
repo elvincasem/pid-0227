@@ -71,11 +71,11 @@ class Ticket_model extends CI_Model
 	public function getticketlist($filtercategory,$startdate,$enddate)
 	{
 		if($filtercategory=="All"){
-			$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid where DATE_FORMAT(time_stamp,'%Y-%m-%d') between ".$this->db->escape($startdate)." AND ".$this->db->escape($enddate)."");
+			$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid where DATE_FORMAT(time_stamp,'%Y-%m-%d') between ".$this->db->escape($startdate)." AND ".$this->db->escape($enddate)." AND ticket_status ='ACTIVE'");
 			
 			
 		}else{
-			$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid WHERE categoryid=".$this->db->escape($filtercategory)." AND DATE_FORMAT(time_stamp,'%Y-%m-%d') between ".$this->db->escape($startdate)." AND ".$this->db->escape($enddate)."");
+			$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid WHERE categoryid=".$this->db->escape($filtercategory)." AND DATE_FORMAT(time_stamp,'%Y-%m-%d') between ".$this->db->escape($startdate)." AND ".$this->db->escape($enddate)." AND ticket_status ='ACTIVE'");
 		}
 		
 		return $sql->result_array();
@@ -86,9 +86,9 @@ class Ticket_model extends CI_Model
 	public function getticketliststatus($status,$filtercategory,$startdate,$enddate)
 	{
 		if($filtercategory=="All"){
-			$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid where status=".$this->db->escape($status)." and DATE_FORMAT(time_stamp,'%Y-%m-%d') between ".$this->db->escape($startdate)." AND ".$this->db->escape($enddate)."");
+			$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid where status=".$this->db->escape($status)." and DATE_FORMAT(time_stamp,'%Y-%m-%d') between ".$this->db->escape($startdate)." AND ".$this->db->escape($enddate)."  AND ticket_status ='ACTIVE'");
 		}else{
-			$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid where status=".$this->db->escape($status)." AND categoryid=".$this->db->escape($filtercategory)." AND DATE_FORMAT(time_stamp,'%Y-%m-%d') between ".$this->db->escape($startdate)." AND ".$this->db->escape($enddate)."");
+			$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid where status=".$this->db->escape($status)." AND categoryid=".$this->db->escape($filtercategory)." AND DATE_FORMAT(time_stamp,'%Y-%m-%d') between ".$this->db->escape($startdate)." AND ".$this->db->escape($enddate)."  AND ticket_status ='ACTIVE'");
 		}
 		return $sql->result_array();
 		
@@ -104,11 +104,11 @@ class Ticket_model extends CI_Model
 		
 		
 		if($filtercategory=="All"){
-			$result = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid WHERE due_date < '$now_timestamp' AND STATUS ='Open'");
+			$result = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid WHERE due_date < '$now_timestamp' AND STATUS ='Open'  AND ticket_status ='ACTIVE'");
 			
 			
 		}else{
-			$result = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid WHERE due_date < '$now_timestamp' AND STATUS ='Open' AND categoryid=".$this->db->escape($filtercategory)."");
+			$result = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid WHERE due_date < '$now_timestamp' AND STATUS ='Open' AND categoryid=".$this->db->escape($filtercategory)."  AND ticket_status ='ACTIVE'");
 			
 			
 		}
@@ -170,6 +170,13 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 	public function getcategory()
 	{
 		$sql = $this->db->query("SELECT * FROM category");
+		return $sql->result_array();
+		
+		
+	}
+	public function getpriority()
+	{
+		$sql = $this->db->query("SELECT * FROM priority");
 		return $sql->result_array();
 		
 		
@@ -243,7 +250,7 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 	
 	public function gettotaltickets()
 	{
-		$sql = $this->db->query("SELECT count(*) as totalticket FROM tickets");
+		$sql = $this->db->query("SELECT count(*) as totalticket FROM tickets where ticket_status ='ACTIVE'");
 		$getcount = $sql->result_array();
 		return $getcount[0]['totalticket'];
 		
@@ -251,7 +258,7 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 	}
 	public function getpickuptickets()
 	{
-		$sql = $this->db->query("SELECT count(*) as totalticket FROM tickets where status='Pickup'");
+		$sql = $this->db->query("SELECT count(*) as totalticket FROM tickets where status='Pickup' AND ticket_status ='ACTIVE'");
 		$getcount = $sql->result_array();
 		return $getcount[0]['totalticket'];
 		
@@ -259,7 +266,7 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 	}
 	public function getrmatickets()
 	{
-		$sql = $this->db->query("SELECT count(*) as totalticket FROM tickets where status='RMA'");
+		$sql = $this->db->query("SELECT count(*) as totalticket FROM tickets where status='RMA' AND ticket_status ='ACTIVE'");
 		$getcount = $sql->result_array();
 		return $getcount[0]['totalticket'];
 		
@@ -267,7 +274,7 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 	}
 	public function getopentickets()
 	{
-		$sql = $this->db->query("SELECT count(*) as totalticket FROM tickets where status='Open'");
+		$sql = $this->db->query("SELECT count(*) as totalticket FROM tickets where status='Open' AND ticket_status ='ACTIVE'");
 		$getcount = $sql->result_array();
 		return $getcount[0]['totalticket'];
 		
@@ -275,7 +282,7 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 	}
 	public function getclosedtickets()
 	{
-		$sql = $this->db->query("SELECT count(*) as totalticket FROM tickets where status='Closed'");
+		$sql = $this->db->query("SELECT count(*) as totalticket FROM tickets where status='Closed' AND ticket_status ='ACTIVE'");
 		$getcount = $sql->result_array();
 		return $getcount[0]['totalticket'];
 		
@@ -284,7 +291,7 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 	
 	public function getcategorytickets()
 	{
-		$sql = $this->db->query("SELECT COUNT(*) as totalnum,categoryvalue FROM tickets LEFT JOIN category ON tickets.categoryid = category.categoryid GROUP BY category.categoryid");
+		$sql = $this->db->query("SELECT COUNT(*) as totalnum,categoryvalue FROM tickets LEFT JOIN category ON tickets.categoryid = category.categoryid GROUP BY category.categoryid AND ticket_status ='ACTIVE'");
 		return $sql->result_array();
 		
 		
@@ -350,7 +357,7 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 	}
 	public function getstartdate()
 	{
-		$sql = $this->db->query("SELECT DATE_FORMAT(time_stamp,'%Y-%m-%d') as startdate FROM tickets ORDER BY time_stamp ASC LIMIT 1");
+		$sql = $this->db->query("SELECT DATE_FORMAT(time_stamp,'%Y-%m-%d') as startdate FROM tickets where ticket_status ='ACTIVE' ORDER BY time_stamp ASC LIMIT 1");
 		$getcount = $sql->result_array();
 		
 		//print_r($getcount);
@@ -366,7 +373,7 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 	
 	public function getenddate()
 	{
-		$sql = $this->db->query("SELECT DATE_FORMAT(time_stamp,'%Y-%m-%d') as enddate FROM tickets ORDER BY time_stamp DESC LIMIT 1");
+		$sql = $this->db->query("SELECT DATE_FORMAT(time_stamp,'%Y-%m-%d') as enddate FROM tickets where ticket_status ='ACTIVE' ORDER BY time_stamp DESC LIMIT 1");
 		$getcount = $sql->result_array();
 		if($getcount==null){
 			return "0000-00-00";
@@ -387,10 +394,19 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 		$now_timestamp = $now->format('Y-m-d');
 		
 		
-			$result = $this->db->query("SELECT COUNT(*) as totaloverdue FROM tickets WHERE due_date < '$now_timestamp' AND STATUS ='Open'");
+			$result = $this->db->query("SELECT COUNT(*) as totaloverdue FROM tickets WHERE due_date < '$now_timestamp' AND STATUS ='Open'  AND ticket_status ='ACTIVE'");
 			$resultarray = $result->result_array();
 			return $resultarray[0]['totaloverdue'];
 		
+	}
+	
+	public function archiveticket($ticketid)
+	{
+				
+		$sql = "update tickets set ticket_status='ARCHIVE' where ticketid=".$this->db->escape($ticketid)."";
+
+		$this->db->query($sql);
+
 	}
 	
 }

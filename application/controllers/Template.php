@@ -22,6 +22,7 @@ class Template extends CI_Controller
 			'departmentsclass' => '',
 			'templateclass' => 'active',
 			'categoryclass' => '',
+			'priorityclass' => '',
 			'subnavtitle' => 'Template',
 			'typeahead' => '1',
 			

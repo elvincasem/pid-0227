@@ -25,6 +25,7 @@ class Reports extends CI_Controller
 			'departmentsclass' => '',
 			'templateclass' => '',
 			'categoryclass' => '',
+			'priorityclass' => '',
 			'subnavtitle' => ''
 			
 			);

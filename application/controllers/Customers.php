@@ -23,6 +23,7 @@ class Customers extends CI_Controller
 			'departmentsclass' => '',
 			'templateclass' => '',
 			'categoryclass' => '',
+			'priorityclass' => '',
 			'subnavtitle' => 'Customer List',
 			'typeahead' => '1',
 			

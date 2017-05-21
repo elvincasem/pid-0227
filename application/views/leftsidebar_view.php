@@ -77,8 +77,12 @@
                                             <a  class="<?php echo $categoryclass;?>" href="<?=base_url()?>category" ><i class="gi gi-group sidebar-nav-icon"></i>Category</a>
                                         </li>
 										<li>
+                                            <a  class="<?php echo $priorityclass;?>" href="<?=base_url()?>priority" ><i class="hi hi-sort-by-attributes sidebar-nav-icon"></i>Priority</a>
+                                        </li>
+										<li>
                                             <a  class="<?php echo $templateclass;?>" href="<?=base_url()?>template" ><i class="fa fa-files-o sidebar-nav-icon"></i>Template</a>
                                         </li>
+										
 										
 										
 									</ul>

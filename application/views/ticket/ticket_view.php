@@ -323,8 +323,9 @@
 			
 				echo "<td class='center'> 
 					
-										
-					<button class='btn btn-danger notification' title='Delete Item' id='notification' onClick='deleteitem(".$ticketlist['ticketid'].")'><i class='fa fa-times'></i></button>
+					<button class='btn btn-warning notification' title='Archive Ticket' id='notification' onClick='archiveticket(".$ticketlist['ticketid'].")'><i class='fa fa-suitcase'></i></button>	
+					
+					<button class='hidden btn btn-danger notification' title='Delete Item' id='notification' onClick='deleteitem(".$ticketlist['ticketid'].")'><i class='fa fa-times'></i></button>
 				</td>";
 				echo "</tr>";
 				
@@ -415,8 +416,9 @@
 			
 				echo "<td class='center'> 
 					
-										
-					<button class='btn btn-danger notification' title='Delete Item' id='notification' onClick='deleteitem(".$ticketlist['ticketid'].")'><i class='fa fa-times'></i></button>
+						
+					
+					<button class='hidden btn btn-danger notification' title='Delete Item' id='notification' onClick='deleteitem(".$ticketlist['ticketid'].")'><i class='fa fa-times'></i></button>
 				</td>";
 				echo "</tr>";
 				

@@ -24,6 +24,7 @@ class Home extends CI_Controller
 			'departmentsclass' => '',
 			'templateclass' => '',
 			'categoryclass' => '',
+			'priorityclass' => '',
 			'subnavtitle' => 'Dashboard'
 			);
 			
@@ -50,6 +51,7 @@ class Home extends CI_Controller
 		$js = $this->js;
 		$data = $this->data;
 		$data['customerscount'] = $this->dashboard_model->gettotalcustomers();
+		$data['pickupcount'] = $this->dashboard_model->gettotalpickup();
 		$data['openticket'] = $this->dashboard_model->getopenticket();
 		$data['rmaticket'] = $this->dashboard_model->getrmaticket();
 		$data['orverdueticketcount'] = $this->dashboard_model->getoverduecount();

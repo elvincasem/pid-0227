@@ -377,3 +377,31 @@ function insertproblem(){
 	problem_box.innerHTML = problem_desc;
 	closebutton.click();
 }
+
+function archiveticket(id){
+	
+	var r = confirm("Are your sure you want to archive this Ticket?");
+    if (r == true) {
+        //alert ("You pressed OK!");
+		//var person = prompt("Please enter Administrator Password");
+		//if (person =='superadmin') {
+		$.ajax({
+                    url: 'ticket/archiveticket',
+                    type: 'post',
+                    data: {ticketid: id},
+                    success: function(response) {
+						console.log(response);
+						location.reload();
+						//$('#general-table').load(document.URL +  ' #general-table');
+                    }
+                });
+		//}else{
+			//alert("Invalid Password");
+		//}
+		
+    } if(r == false) {
+        //txt = "You pressed Cancel!";
+		
+    }
+	
+}

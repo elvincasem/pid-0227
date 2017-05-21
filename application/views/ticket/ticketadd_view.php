@@ -269,10 +269,18 @@
 						
                             <select id="priority" name="example-select2" class="select-select2" style="width: 100%;" data-placeholder="Choose one.." >
 							
-							<option value="Under Warranty - PC4ME">Under Warranty - PC4ME</option>
-							<option value="Under Warranty - c/o">Under Warranty - c/o</option>
-							<option value="Out of Warranty - PC4ME">Out of Warranty - PC4ME</option>
-							<option value="Out of Warranty - Walk-In">Out of Warranty - Walk-In</option>
+							<?php
+							
+							
+							foreach ($priority as $priority_list):
+								
+							
+							echo "<option value='".$priority_list['priorityvalue']."'>".$priority_list['priorityvalue']."</option>";
+							
+							endforeach;
+							?>
+							
+							
 							</select>
                         </div>
 						
