@@ -96,6 +96,27 @@ class Customers extends CI_Controller
 		$this->customers_model->updatecustomer($customerid,$cemail,$clname,$cfname,$cmname,$caddress,$cmobileno,$cotherno,$cpassword,$ccompany);
 	}
 	
+	public function updatecustomermobile(){
+		$customerid = $this->input->post('customerid');
+		$cemail = $this->input->post('cemail');
+		$clname = $this->input->post('clname');
+		$cfname = $this->input->post('cfname');
+		$cmname = $this->input->post('cmname');
+		$caddress = $this->input->post('caddress');
+		$cmobileno = $this->input->post('cmobileno');
+		$cotherno = $this->input->post('cotherno');
+		$cpassword = $this->input->post('cpassword');
+		$ccompany = $this->input->post('ccompany');
+		
+		header('Access-Control-Allow-Origin: *'); 
+		header('Content-Type: application/json');
+		
+		$this->customers_model->updatecustomer($customerid,$cemail,$clname,$cfname,$cmname,$caddress,$cmobileno,$cotherno,$cpassword,$ccompany);
+		
+		echo "1";
+	}
+	
+	
 	public function updatecustomerdeviceid(){
 		$deviceid = $this->input->post('deviceid');
 		$login_email = $this->input->post('login_email');
