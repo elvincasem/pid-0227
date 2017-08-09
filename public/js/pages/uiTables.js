@@ -14,18 +14,20 @@ var UiTables = function() {
             /* Initialize Datatables */
             $('#example-datatable').dataTable({
                 //columnDefs: [ { orderable: false, targets: [ 4 ] } ],
-                pageLength: 10,
-                lengthMenu: [[5, 10, 20, 50], [5, 10, 20, 50]]
+                //pageLength: 5,
+                lengthMenu: [[25, 50, 100], [25, 50, 100]]
             });
-			/*$('#datatable-ticket').dataTable({
-				columnDefs: [ { orderable: false, targets: [ 0 ] } ],
-                pageLength: 10,
-                lengthMenu: [[5, 10, 20, 50], [5, 10, 20, 50]]
-            });*/
+			$('#datatable-ticket').dataTable({
+				columnDefs: [ { orderable: true, targets: [ 0 ] } ],
+				order:[[0,"desc"]],
+                pageLength: 25,
+                lengthMenu: [[25, 50, 100], [25, 50, 100]]
+				
+            });
 			$('#example-datatable1').dataTable({
                 //columnDefs: [ { orderable: false, targets: [ 4 ] } ],
-                pageLength: 10,
-                lengthMenu: [[5, 10, 20, 50], [5, 10, 20, 50]]
+                pageLength: 25,
+                lengthMenu: [[25, 50, 100], [25, 50, 100]]
             });
 			
 			/* Initialize Datatables */
@@ -38,38 +40,38 @@ var UiTables = function() {
 			
 			$('#example-datatable2').dataTable({
                 //columnDefs: [ { orderable: false, targets: [ 4 ] } ],
-                pageLength: 10,
+                pageLength: 25,
                 lengthMenu: [[5, 10, 20, 50], [5, 10, 20, 50]]
             });
 			
 			$('#example-datatable3').dataTable({
                 //columnDefs: [ { orderable: false, targets: [ 4 ] } ],
-                pageLength: 10,
+                pageLength: 25,
                 lengthMenu: [[5, 10, 20, 50], [5, 10, 20, 50]]
             });
 			$('#example-datatable4').dataTable({
                 //columnDefs: [ { orderable: false, targets: [ 4 ] } ],
-                pageLength: 10,
+                pageLength: 25,
                 lengthMenu: [[5, 10, 20, 50], [5, 10, 20, 50]]
             });
 			$('#example-datatable5').dataTable({
                 //columnDefs: [ { orderable: false, targets: [ 4 ] } ],
-                pageLength: 10,
+                pageLength: 25,
                 lengthMenu: [[5, 10, 20, 50], [5, 10, 20, 50]]
             });
 			$('#example-datatable6').dataTable({
                 //columnDefs: [ { orderable: false, targets: [ 4 ] } ],
-                pageLength: 10,
+                pageLength: 25,
                 lengthMenu: [[5, 10, 20, 50], [5, 10, 20, 50]]
             });
 			$('#example-datatable7').dataTable({
                 //columnDefs: [ { orderable: false, targets: [ 4 ] } ],
-                pageLength: 10,
+                pageLength: 25,
                 lengthMenu: [[5, 10, 20, 50], [5, 10, 20, 50]]
             });
 			$('#example-datatable8').dataTable({
                 //columnDefs: [ { orderable: false, targets: [ 4 ] } ],
-                pageLength: 10,
+                pageLength: 25,
                 lengthMenu: [[5, 10, 20, 50], [5, 10, 20, 50]]
             });
 

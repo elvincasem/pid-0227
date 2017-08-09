@@ -280,6 +280,7 @@
                         
                         <!-- <th style="width:100px;">Delivery ID</th>-->
                         <th>Ticket No.</th>
+                        <th style="width:200px;">Date</th>
 						<th>Problem</th>
                         <th>Customer</th>
                         <th>Agent</th>
@@ -299,8 +300,9 @@
 				echo "<tr class='odd gradeX' >";
 				
 				//echo "<td><a href='receiving/details/".$rrlist['deliveryid']."'>".$rrlist['deliveryid']."</a></td>";
-				echo "<td><a href='".$base."ticket/details/".$ticketlist['ticketid']."'>Ticket #".$ticketlist['ticketid']."</a></td>";
+				echo "<td><a href='".$base."ticket/details/".$ticketlist['ticketid']."'>".$ticketlist['ticketid']."</a></td>";
 				
+				echo "<td>".mdate('%F %d, %Y',strtotime($ticketlist['time_stamp']))."</a></td>";
 				echo "<td>".$ticketlist['problem']."</a></td>";
 				echo "<td>".$ticketlist['cfname']." ".$ticketlist['clname']."</td>";
 				echo "<td>".$ticketlist['name']."</td>";

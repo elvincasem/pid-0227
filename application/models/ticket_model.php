@@ -409,6 +409,24 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 
 	}
 	
+	public function updateticket_department($ticketid,$departmentid)
+	{
+				
+		$sql = "update tickets set departmentid=".$this->db->escape($departmentid)." where ticketid=".$this->db->escape($ticketid)."";
+
+		$this->db->query($sql);
+
+	}
+	
+	public function updateticket_category($ticketid,$categoryid)
+	{
+				
+		$sql = "update tickets set categoryid=".$this->db->escape($categoryid)." where ticketid=".$this->db->escape($ticketid)."";
+
+		$this->db->query($sql);
+
+	}
+	
 }
 
 ?>

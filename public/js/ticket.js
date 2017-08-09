@@ -161,6 +161,8 @@ function editticket(){
 	$('#status').prop("disabled", false); 
 	$('#priority').prop("disabled", false); 
 	$('#assignedto_uid').prop("disabled", false); 
+	$('#categoryid').prop("disabled", false); 
+	$('#departmentid').prop("disabled", false); 
 	
 	//admin control
 	if(document.getElementById("utype").value=="21232f297a57a5a743894a0e4a801fc3"){
@@ -210,6 +212,8 @@ function updatedetails(){
 	var duedate = document.getElementById("duedate").value;
 	var priority = document.getElementById("priority").value;
 	var assignedto_uid = document.getElementById("assignedto_uid").value;
+	var departmentid = document.getElementById("departmentid").value;
+	var categoryid = document.getElementById("categoryid").value;
 	
 	
 		//update ticket details
@@ -218,7 +222,7 @@ function updatedetails(){
 			$.ajax({
 			url: '../updateticket',
 			type: 'post',
-			data: {ticketid: ticketid,status:status,duedate:duedate,priority:priority,assignedto_uid:assignedto_uid},
+			data: {ticketid: ticketid,status:status,duedate:duedate,priority:priority,assignedto_uid:assignedto_uid,departmentid:departmentid,categoryid:categoryid},
 			success: function(response) {
 				console.log(response);
 				$('#ticket_timeline').load(document.URL +  ' #ticket_timeline');
@@ -234,6 +238,8 @@ function updatedetails(){
 			$('#status').prop("disabled", true); 
 			$('#assignedto_uid').prop("disabled", true); 
 			$('#priority').prop("disabled", true); 
+			$('#departmentid').prop("disabled", true); 
+			$('#categoryid').prop("disabled", true); 
 				
 			}
 		});

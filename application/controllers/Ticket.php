@@ -36,10 +36,13 @@ class Ticket extends CI_Controller
 			
 			);
 		//javascript module
-		$this->js = array(
+		/*$this->js = array(
             'jsfile' => 'ticket.js',
             'datatablescript' => '<script>$(document).ready(function() {$("#datatable-ticket").DataTable({"order":[[0,"desc"]]} );} );</script>'
 			);
+			*/
+			
+		$this->js = null;
 			
 			
 		$this->session;
@@ -530,6 +533,8 @@ class Ticket extends CI_Controller
 		$formstatus = $this->input->post('status');
 		$priority = $this->input->post('priority');
 		$assignedto_uid = $this->input->post('assignedto_uid');
+		$departmentid = $this->input->post('departmentid');
+		$categoryid = $this->input->post('categoryid');
 		
 
 		$ticketdetails = $this->ticket_model->getticketdetails($ticketid);
@@ -560,6 +565,26 @@ class Ticket extends CI_Controller
 			//update with log
 			$remarks_log = "Changed Priority from ".$ticketdetails['priority']." to " .$priority;
 			$this->ticket_model->updateticket_priority($ticketid,$priority);
+			$this->ticket_model->logticket($ticketid,$formstatus,$remarks_log,$uid);
+		}else{
+			//do nothing
+		}
+		
+			//update department
+		if($ticketdetails['departmentid']!=$departmentid){
+			//update with log
+			$remarks_log = "Changed Department from ".$ticketdetails['departmentid']." to " .$departmentid;
+			$this->ticket_model->updateticket_department($ticketid,$departmentid);
+			$this->ticket_model->logticket($ticketid,$formstatus,$remarks_log,$uid);
+		}else{
+			//do nothing
+		}
+		
+			//update department
+		if($ticketdetails['categoryid']!=$categoryid){
+			//update with log
+			$remarks_log = "Changed Department from ".$ticketdetails['categoryid']." to " .$categoryid;
+			$this->ticket_model->updateticket_category($ticketid,$categoryid);
 			$this->ticket_model->logticket($ticketid,$formstatus,$remarks_log,$uid);
 		}else{
 			//do nothing
