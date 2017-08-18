@@ -83,18 +83,18 @@ table { page-break-inside:auto;}
 	</tr>
 
 	<tr style="text-align:left;">
-	<td colspan="6">Problem: <u><strong><?php echo $ticketdetails['problem'];?></strong></u></td>
-	<td colspan="6">Description:<u><strong><?php echo $ticketdetails['description'];?></strong></u></td>
+	<td colspan="6">Problem:<br> <u><strong><?php echo nl2br($ticketdetails['problem']);?></strong></u></td>
+	<td colspan="6">Description:<br><u><strong><?php echo nl2br($ticketdetails['description']);?></strong></u></td>
 	</tr>
 	<tr style="text-align:left;">
 	<td colspan="6">Serial No: <u><strong><?php echo $ticketdetails['serialno'];?></strong></u></td>
-	<td colspan="6">History: <u><strong><?php echo $ticketdetails['history'];?></strong></u></td>
+	<td colspan="6">History:<br> <u><strong><?php echo nl2br($ticketdetails['history']);?></strong></u></td>
 	
 	
 	</tr>
 
 	<tr style="text-align:left;">
-	<td colspan="8">Special Instruction: <strong><u><?php echo $ticketdetails['special_instruction'];?></strong></u></td>
+	<td colspan="8">Special Instruction:<br> <strong><u><?php echo nl2br($ticketdetails['special_instruction']);?></strong></u></td>
 	</tr>
 	
 

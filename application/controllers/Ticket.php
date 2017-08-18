@@ -36,13 +36,13 @@ class Ticket extends CI_Controller
 			
 			);
 		//javascript module
-		/*$this->js = array(
+		$this->js = array(
             'jsfile' => 'ticket.js',
-            'datatablescript' => '<script>$(document).ready(function() {$("#datatable-ticket").DataTable({"order":[[0,"desc"]]} );} );</script>'
+            'datatablescript' => null
 			);
-			*/
+			/*'datatablescript' => '<script>$(document).ready(function() {$("#datatable-ticket").DataTable({"order":[[0,"desc"]]} );} );</script>'*/
 			
-		$this->js = null;
+		//$this->js = null;
 			
 			
 		$this->session;
