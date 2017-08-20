@@ -388,7 +388,10 @@ class Ticket extends CI_Controller
 		$data['category'] = $this->ticket_model->getcategory();
 		$data['departments'] = $this->ticket_model->getdepartment();
 		$data['agentlist'] = $this->ticket_model->getagent();
-		$data['templatelist'] = $this->ticket_model->gettemplate();
+		$data['template_problem'] = $this->ticket_model->gettemplatelist_specific("Problem");
+		$data['template_history'] = $this->ticket_model->gettemplatelist_specific("History");
+		$data['template_unitdescription'] = $this->ticket_model->gettemplatelist_specific("Unit Description");
+		
 		$data['priority'] = $this->ticket_model->getpriority();
 
 		$this->load->view('inc/header_view');

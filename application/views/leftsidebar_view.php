@@ -4,7 +4,7 @@
                     <div id="sidebar-brand" class="themed-background">
                         <a href="<?=base_url()?>home" class="sidebar-title sidebar-nav-mini-hide">
 						<i class="gi gi-group"></i>
-						<strong>Helpdesk System</strong>
+						<strong>PC4Me Helpdesk</strong>
                             
                         </a>
                     </div>
@@ -77,7 +77,7 @@
                                             <a  class="<?php echo $categoryclass;?>" href="<?=base_url()?>category" ><i class="gi gi-group sidebar-nav-icon"></i>Category</a>
                                         </li>
 										<li>
-                                            <a  class="<?php echo $priorityclass;?>" href="<?=base_url()?>priority" ><i class="hi hi-sort-by-attributes sidebar-nav-icon"></i>Priority</a>
+                                            <a  class="<?php echo $priorityclass;?>" href="<?=base_url()?>priority" ><i class="gi gi-sort-by-attributes"></i> Priority</a>
                                         </li>
 										<li>
                                             <a  class="<?php echo $templateclass;?>" href="<?=base_url()?>template" ><i class="fa fa-files-o sidebar-nav-icon"></i>Template</a>

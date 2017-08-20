@@ -19,7 +19,7 @@
     <head>
         <meta charset="utf-8">
 
-        <title>Helpdesk System v1</title>
+        <title>PC4Me Helpdesk</title>
 
         <meta name="description" content="eSource">
         <meta name="author" content="Elvin Casem">

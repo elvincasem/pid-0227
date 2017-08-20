@@ -111,7 +111,7 @@
                         <div class="col-md-12">
                              <select id="templatedescription" name="example-select2" class="select-select2" style="width: 100%;" data-placeholder="Choose one.." >
 							 <?php
-							 foreach ($templatelist as $temp_list):
+							 foreach ($template_problem as $temp_list):
 								
 							
 								echo "<option value='".$temp_list['templatedescription']."'>".$temp_list['templatedescription']."</option>";
@@ -146,7 +146,115 @@
                             </div>
                         </div>
                     </div>
-                </div>			
+                </div>		
+
+
+<!-- Regular Modal -->
+                <div id="templatedescriptionfield" class="modal bg" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                           <div class="modal-header">
+								
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h3 class="modal-title"><strong>Template Unit Description</strong></h3>
+                                
+                            </div> 
+                            <div class="modal-body">
+                                <div class="form-group">
+						
+                        <div class="col-md-12">
+                             <select id="templateunitdescription" name="example-select2" class="select-select2" style="width: 100%;" data-placeholder="Choose one.." >
+							 <?php
+							 foreach ($template_unitdescription as $temp_list):
+								
+							
+								echo "<option value='".$temp_list['templatedescription']."'>".$temp_list['templatedescription']."</option>";
+							
+							endforeach;
+							?>
+							 </select>
+                        </div>	
+						
+						<div class="row"></div>
+						
+							
+					</div>
+								
+								<!-- Input States Block -->
+            <div class="block">
+                
+
+                <!-- Input States Content -->
+
+                <!-- END Input States Content -->
+            </div>
+            <!-- END Input States Block -->
+								
+								
+								
+                            </div>
+                            <div class="modal-footer">
+							<button type="button" id="savebutton" class="btn btn-effect-ripple btn-primary" onclick="insertdescription();">Insert</button>
+							
+                                <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="closebuttonunit">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>		
+<!-- Regular Modal -->
+                <div id="templatehistory" class="modal bg" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                           <div class="modal-header">
+								
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h3 class="modal-title"><strong>Template History</strong></h3>
+                                
+                            </div> 
+                            <div class="modal-body">
+                                <div class="form-group">
+						
+                        <div class="col-md-12">
+                             <select id="templatehistoryfield" name="example-select2" class="select-select2" style="width: 100%;" data-placeholder="Choose one.." >
+							 <?php
+							 foreach ($template_history as $temp_list):
+								
+							
+								echo "<option value='".$temp_list['templatedescription']."'>".$temp_list['templatedescription']."</option>";
+							
+							endforeach;
+							?>
+							 </select>
+                        </div>	
+						
+						<div class="row"></div>
+						
+							
+					</div>
+								
+								<!-- Input States Block -->
+            <div class="block">
+                
+
+                <!-- Input States Content -->
+
+                <!-- END Input States Content -->
+            </div>
+            <!-- END Input States Block -->
+								
+								
+								
+                            </div>
+                            <div class="modal-footer">
+							<button type="button" id="savebutton" class="btn btn-effect-ripple btn-primary" onclick="inserthistory();">Insert</button>
+							
+                                <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="closebuttonhistory">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>		
+
+<!-- end modal -->				
 			
 				
 				
@@ -347,14 +455,14 @@
                             
 							
                         </div>
-						<label class="col-md-2 control-label" for="state-normal">Unit Description*</label>
+						<label class="col-md-2 control-label" for="state-normal">Unit Description*<br><a href="#templatedescriptionfield"  data-toggle="modal" ><i class="fa fa-files-o"></i> Template</a></label>
                         <div class="col-md-3">
                              
 							 <textarea class="form-control" id="description" style="height:150px;"></textarea>
 							
                         </div>
 						<div class="row"></div>
-						<label class="col-md-2 control-label" for="state-normal">History</label>
+						<label class="col-md-2 control-label" for="state-normal">History<br><a href="#templatehistory"  data-toggle="modal" ><i class="fa fa-files-o"></i> Template</a></label>
                         <div class="col-md-3">
 							<textarea class="form-control" id="history"></textarea>
                             

@@ -38,7 +38,8 @@ function saveticket(){
 				delay: 3000,
 				allow_dismiss: true,
 				offset: {from: 'top', amount: 20}});
-		}else{
+		}
+		if(customerid!="" && problem!="" && description!=""){
 			
 			$.ajax({
 			url: 'saveticket',
@@ -383,6 +384,25 @@ function insertproblem(){
 	problem_box.innerHTML = problem_desc;
 	closebutton.click();
 }
+
+function insertdescription(){
+	var closebutton = document.getElementById("closebuttonunit");
+	var problem_desc = document.getElementById("templateunitdescription").value;
+	var problem_box = document.getElementById("description");
+	
+	problem_box.innerHTML = problem_desc;
+	closebutton.click();
+}
+
+function inserthistory(){
+	var closebutton = document.getElementById("closebuttonhistory");
+	var problem_desc = document.getElementById("templatehistoryfield").value;
+	var problem_box = document.getElementById("history");
+	
+	problem_box.innerHTML = problem_desc;
+	closebutton.click();
+}
+
 
 function archiveticket(id){
 	

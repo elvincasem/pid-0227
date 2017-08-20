@@ -55,46 +55,46 @@ table { page-break-inside:auto;}
 }
 </style>
 
-<div style="text-align:center;font-weight:bold;">Helpdesk System</div>
+<div style="text-align:center;font-weight:bold;"><img style="width:100%;" src="<?php echo base_url();?>uploads/print_header.jpg"></div>
 <br>
-<div>Customer Name: <strong><?php echo $ticketdetails['cfname']." ".$ticketdetails['clname'];?></strong><span style="margin-left:50px;"></span><span>Contact #:  <strong><?php echo $ticketdetails['cmobileno'];?></strong></span> <span style="margin-left:50px;"></span><span>Email:  <strong><?php echo $ticketdetails['cemail'];?></strong></span> </div><br>
+<div><strong>Customer Name: </strong><?php echo $ticketdetails['cfname']." ".$ticketdetails['clname'];?><span style="margin-left:50px;"></span><span><strong>Contact #:  </strong><?php echo $ticketdetails['cmobileno'];?></span> <span style="margin-left:50px;"></span><span><strong>Email:  </strong><?php echo $ticketdetails['cemail'];?></span> </div><br>
 
-<h4>TICKET #: <strong><?php echo $ticketdetails['ticketid'];?></strong></h4>
+<h4><strong>TICKET #: </strong><?php echo $ticketdetails['ticketid'];?></h4>
 
 
 <table border="0" style="width:800px;">
 
 	<tr style="text-align:left;">
-	<td colspan="6">Department: <u><strong><?php echo $ticketdetails['departmentid'];?></strong></u></td>
-	<td colspan="6">Category: <u><strong><?php echo $ticketdetails['categoryid'];?></strong></u></td>
+	<td colspan="6"><strong>Department: </strong> <?php echo $ticketdetails['departmentid'];?></td>
+	<td colspan="6"><strong>Category: </strong><?php echo $ticketdetails['categoryid'];?></td>
 	
 	</tr>
-	<tr><td colspan="6">Status: <u><strong><?php echo $ticketdetails['status'];?></strong></u></td>
-	<td colspan="6">Priority: <u><strong><?php echo $ticketdetails['priority'];?></strong></u></td></tr>
+	<tr><td colspan="6"><strong>Status: </strong><?php echo $ticketdetails['status'];?></td>
+	<td colspan="6"><strong>Priority: </strong><?php echo $ticketdetails['priority'];?></td></tr>
 	
 	<tr style="text-align:left;">
-	<td colspan="6">Due Date: <u><strong><?php echo mdate('%F %d, %Y',strtotime($ticketdetails['due_date']));?></strong></u></td>
-	<td colspan="6">Assigned To: <u><strong><?php echo $ticketdetails['name'];?></strong></u></td>
+	<td colspan="6"><strong>Due Date: </strong><?php echo mdate('%F %d, %Y',strtotime($ticketdetails['due_date']));?></td>
+	<td colspan="6"><strong>Assigned To: </strong><?php echo $ticketdetails['name'];?></td>
 	</tr>
 	
 	<tr>
-	<td colspan="6">Created by: <u><strong><?php echo $ticketdetails['agentname'];?></strong></u></td>
-	<td colspan="6">Date Created: <u><strong><?php echo  mdate('%F %d, %Y at %h:%i %a',strtotime($ticketdetails['time_stamp']));?></strong></u></td>
+	<td colspan="6"><strong>Created by: </strong><?php echo $ticketdetails['agentname'];?></td>
+	<td colspan="6"><strong>Date Created: </strong><?php echo  mdate('%F %d, %Y at %h:%i %a',strtotime($ticketdetails['time_stamp']));?></td>
 	</tr>
 
 	<tr style="text-align:left;">
-	<td colspan="6">Problem:<br> <u><strong><?php echo nl2br($ticketdetails['problem']);?></strong></u></td>
-	<td colspan="6">Description:<br><u><strong><?php echo nl2br($ticketdetails['description']);?></strong></u></td>
+	<td colspan="6"><strong>Problem:<br> </strong><?php echo nl2br($ticketdetails['problem']);?></td>
+	<td colspan="6"><strong>Description:<br></strong><?php echo nl2br($ticketdetails['description']);?></td>
 	</tr>
 	<tr style="text-align:left;">
-	<td colspan="6">Serial No: <u><strong><?php echo $ticketdetails['serialno'];?></strong></u></td>
-	<td colspan="6">History:<br> <u><strong><?php echo nl2br($ticketdetails['history']);?></strong></u></td>
+	<td colspan="6"><strong>Serial No: </strong><?php echo $ticketdetails['serialno'];?></td>
+	<td colspan="6"><strong>History:<br> </strong><?php echo nl2br($ticketdetails['history']);?></td>
 	
 	
 	</tr>
 
 	<tr style="text-align:left;">
-	<td colspan="8">Special Instruction:<br> <strong><u><?php echo nl2br($ticketdetails['special_instruction']);?></strong></u></td>
+	<td colspan="8"><strong>Special Instruction:<br> </strong><u><?php echo nl2br($ticketdetails['special_instruction']);?></td>
 	</tr>
 	
 
@@ -164,7 +164,7 @@ foreach ($ticketlog as $ticketlog_list):
 	
 	
 </table>
-
+<div style="text-align:center;font-weight:bold;"><img style="width:100%;" src="<?php echo base_url();?>uploads/print_footer.jpg"></div>
 
 
 

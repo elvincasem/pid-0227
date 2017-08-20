@@ -2,11 +2,12 @@ function savetemplate(){
 	
 	$('#savebutton').prop("disabled", true);    
 	var templatedescription = document.getElementById("templatedescription").value;
+	var templatefield = document.getElementById("templatefield").value;
 	
 	$.ajax({
 		url: 'template/savetemplate',
 		type: 'post',
-		data: {templatedescription: templatedescription},
+		data: {templatedescription: templatedescription,templatefield:templatefield},
 		success: function(response) {
 			//console.log(response);
 			location.reload();

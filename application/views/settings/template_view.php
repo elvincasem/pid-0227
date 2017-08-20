@@ -36,6 +36,15 @@
                         <div class="col-md-7">
                             <input type="text" id="templatedescription" name="state-normal" class="form-control" tabindex="0" value="">
                         </div>	
+						<div class="row"></div>
+						<label class="col-md-3 control-label text-right">Field:</label>
+                        <div class="col-md-7">
+                            <select class="form-control" id="templatefield">
+								<option value="Problem">Problem</option>
+								<option value="History">History</option>
+								<option value="Unit Description">Unit Description</option>
+							</select>
+                        </div>	
 						
 						
 	
@@ -81,6 +90,7 @@
                         <!-- <th style="width:100px;">Delivery ID</th>-->
                         
 						<th>Template Description</th>
+						<th>Ticket Field</th>
                         
                         
 						<th></th>
@@ -95,6 +105,7 @@
 
 				
 				echo "<td><h style='font-weight:bold;'>".$temp_list['templatedescription']."</h4></td>";
+				echo "<td><h style='font-weight:bold;'>".$temp_list['templatefield']."</h4></td>";
 			
 				
 				

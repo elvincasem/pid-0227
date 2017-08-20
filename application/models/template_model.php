@@ -12,14 +12,16 @@ class Template_model extends CI_Model
 		
 	}
 	
-	public function savetemplate($templatedescription)
+	public function savetemplate($templatedescription,$templatefield)
 	{
 		
-		$sql = "INSERT INTO template (templatedescription) VALUES (".$this->db->escape($templatedescription).")";
+		$sql = "INSERT INTO template (templatedescription,templatefield) VALUES (".$this->db->escape($templatedescription).",".$this->db->escape($templatefield).")";
 		$this->db->query($sql);
 				
 		
 	}
+	
+
 	
 	
 }

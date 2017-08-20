@@ -196,6 +196,14 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 		
 	}
 	
+	public function gettemplatelist_specific($templatefield)
+	{
+		$sql = $this->db->query("SELECT * FROM template where templatefield=".$this->db->escape($templatefield)."");
+		return $sql->result_array();
+		
+		
+	}
+	
 	
 	
 	public function savereply($ticketid,$ticket_reply,$uid,$sms,$emailclient,$mobileapp)

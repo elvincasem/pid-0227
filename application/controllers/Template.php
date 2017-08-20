@@ -52,8 +52,9 @@ class Template extends CI_Controller
 	
 	public function savetemplate(){
 		$templatedescription = $this->input->post('templatedescription');
+		$templatefield = $this->input->post('templatefield');
 		if($templatedescription!=null){
-			$this->template_model->savetemplate($templatedescription);
+			$this->template_model->savetemplate($templatedescription,$templatefield);
 		}
 		
 	}
