@@ -60,7 +60,17 @@
 									</ul>
 								</li>
 								<!-- Settings-->
-								<li class="<?php echo $settingsclass;?>">
+								<?php
+									$this->load->library('session');
+									$this->session;
+									$usertype= $this->session->userdata('usertype');
+									//echo md5('staff');
+									//echo $usertype;
+									if ($usertype==md5('staff')){
+										//$hidesettings = "hidden";
+									}else{
+										?>
+										<li class="<?php echo $settingsclass;?>">
                                     <a href="#" class="sidebar-nav-menu"><i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-gear sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Settings</span></a>
                                     <ul>
 										
@@ -87,6 +97,14 @@
 										
 									</ul>
 								</li>
+										
+										
+										<?php
+									}
+								
+								?>
+								
+								
 								
 															
 										
