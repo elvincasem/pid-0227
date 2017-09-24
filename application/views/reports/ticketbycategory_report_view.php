@@ -78,7 +78,7 @@
 		<div class="block full">
         <div class="block-title">
 			
-			<h5>Purchase Requests</h5>
+			<h5>Ticket by Category</h5>
 			<a type="button" class="pull-right btn btn-md btn-primary" href="<?=base_url()?>reports/ticketbycategorydownload/<?php echo $startdate;?>/<?php echo $enddate;?>/<?php echo $categoryvalue;?>">Export Result XLS</a>
 			
 			<?php //print_r($heidirectory);?>

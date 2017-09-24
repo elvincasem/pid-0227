@@ -178,6 +178,85 @@ class Reports extends CI_Controller
 	}
 	
 	
+	public function smsbymonth(){
+		
+		$data = $this->data;
+		$js = $this->js;
+
+		
+		$data['year_list'] = $this->reports_model->yearlist();
+		$data['month_list'] = $this->reports_model->monthlist();
+		//$data['monthlysms'] = $this->reports_model->monthlysms();
+		$this->load->view('inc/header_view');
+		$this->load->view('reports/smsbymonth_view',$data);
+		$this->load->view('inc/footer_view',$js);
+		
+	}
+	public function smsbymonth_view(){
+		
+		$smsyear=$this->input->post('yearlist');
+		
+		$smsmonth=$this->input->post('monthvalue');
+		
+		
+		$data = $this->data;
+		$js = $this->js;
+
+		$data['year_list'] = $this->reports_model->yearlist();
+		$data['month_list'] = $this->reports_model->monthlist();
+		//$data['startdate'] = $from;
+		//$data['enddate'] = $to;
+		//$data['agent'] = $agent;
+		//$data['agentlist'] = $this->reports_model->getagentlist();
+		
+		//get all tickets
+		if($smsmonth=='All'){
+			$data['tickets'] = $this->reports_model->smscount_yearly($smsyear);
+		}else{
+			$data['tickets'] = $this->reports_model->smscount_month($smsyear,$smsmonth);
+		}
+		
+		
+		//print_r($data['tickets']);
+		$data['smsyear_selected']=$smsyear;
+		$data['smsmonth_selected']=$smsmonth;
+		$this->load->view('inc/header_view');
+		$this->load->view('reports/smsbymonth_report_view',$data);
+		$this->load->view('inc/footer_view',$js);
+		
+	}
 	
+	public function smsbymonthdownload($smsyear,$smsmonth)
+	{
+		
+		$this->load->library('excel');
+		$this->excel->setActiveSheetIndex(0);
+		$this->excel->getActiveSheet()->setTitle('SMS by Month');
+		$this->load->database();
+		//$users = $this->userModel->get_users();
+		
+		if($smsmonth=="All"){
+			$sql = $this->db->query("SELECT MONTH(atime_stamp) AS monthly,YEAR(atime_stamp) AS yearly, COUNT(n_sms) AS smssent FROM remarks_agent WHERE n_sms=1 AND YEAR(atime_stamp)=".$this->db->escape($smsyear)." GROUP BY monthly");
+			
+			
+		}else{
+			$sql = $this->db->query("SELECT MONTH(atime_stamp) AS monthly,YEAR(atime_stamp) AS yearly, COUNT(n_sms) AS smssent FROM remarks_agent WHERE n_sms=1 AND YEAR(atime_stamp)=".$this->db->escape($smsyear)." AND MONTH(atime_stamp)=".$this->db->escape($smsmonth)."");
+		}
+		
+		
+		$feedbacks = $sql->result_array();
+		//$feedbacks = $this->db->query($sql);
+		$arrHeader = array('Month', 'Year','No. of SMS Sent');
+		$this->excel->getActiveSheet()->fromArray($arrHeader,'2','A1');
+		//$this->excel->getActiveSheet()->setCellValueByColumnAndRow(A);
+		$this->excel->getActiveSheet()->fromArray($feedbacks,'','A2');
+		$filename='SMS_by_month.xls';
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="'.$filename.'"');
+		header('Cache-Control: max-age=0');
+		$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+		$objWriter->save('php://output');
+		
+	}
 	
 }

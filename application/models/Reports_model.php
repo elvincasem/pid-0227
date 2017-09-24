@@ -93,6 +93,35 @@ class Reports_model extends CI_Model
 	}
 	*/
 	
+	public function yearlist()
+	{
+		$sql = $this->db->query("SELECT DISTINCT(YEAR(time_stamp)) as ticket_year FROM tickets");
+		return $sql->result_array();
+		
+		
+	}
+	public function monthlist()
+	{
+		$sql = $this->db->query("SELECT  MONTH(atime_stamp) AS ticket_month, atime_stamp FROM remarks_agent GROUP BY ticket_month");
+		return $sql->result_array();
+		
+		
+	}
+	
+	public function smscount_month($smsyear,$smsmonth)
+	{
+		$sql = $this->db->query("SELECT MONTH(atime_stamp) AS monthly,YEAR(atime_stamp) AS yearly, COUNT(n_sms) AS smssent, atime_stamp FROM remarks_agent WHERE n_sms=1 AND YEAR(atime_stamp)=".$this->db->escape($smsyear)." AND MONTH(atime_stamp)=".$this->db->escape($smsmonth)."");
+		return $sql->result_array();
+		
+		
+	}
+	public function smscount_yearly($smsyear)
+	{
+		$sql = $this->db->query("SELECT MONTH(atime_stamp) AS monthly,YEAR(atime_stamp) AS yearly, COUNT(n_sms) AS smssent, atime_stamp FROM remarks_agent WHERE n_sms=1 AND YEAR(atime_stamp)=".$this->db->escape($smsyear)." GROUP BY monthly");
+		return $sql->result_array();
+		
+		
+	}
 	
 	
 }

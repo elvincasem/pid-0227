@@ -54,7 +54,9 @@
 										<li class="<?php //echo $userssubclass;?>">
                                             <a href="<?=base_url()?>reports/ticketbyagent" ><i class="gi gi-user sidebar-nav-icon"></i>Ticket by Agent</a>
                                         </li>
-										
+										<li class="<?php //echo $userssubclass;?>">
+                                            <a href="<?=base_url()?>reports/smsbymonth" ><i class="gi gi-user sidebar-nav-icon"></i>SMS by Month</a>
+                                        </li>
 										
 										
 									</ul>

@@ -29,31 +29,36 @@
                                     <!-- END Datepicker Title -->
 
                                     <!-- Datepicker Content -->
-                                    <form action="ticketbyagent_view" method="post" class="form-horizontal form-bordered" onsubmit="return true;">
+                                    <form action="smsbymonth_view" method="post" class="form-horizontal form-bordered" onsubmit="return true;">
                                         <!-- Datepicker for Bootstrap (classes are initialized in js/app.js -> uiInit()), for extra usage examples you can check out http://eternicode.github.io/bootstrap-datepicker -->
                                         <div class="form-group">
-										<label class="col-md-3 control-label" for="example-daterange1">Date Range</label>
+										<label class="col-md-3 control-label" for="example-daterange1">Year</label>
                                             <div class="col-md-7">
-                                                <div class="input-group input-daterange" data-date-format="yyyy-mm-dd">
-                                                    <input type="text" id="date1" name="date1" class="form-control" placeholder="From" value="<?php echo $startdate;?>">
-                                                    <span class="input-group-addon"><i class="fa fa-chevron-right"></i></span>
-                                                    <input type="text" id="date2" name="date2" class="form-control" placeholder="To" value="<?php echo $enddate;?>">
-                                                </div>
-                                            </div>
-											<div class="row">&nbsp;</div>
-											<label class="col-md-3 control-label" for="example-daterange1">Category</label>
-											<div class="col-md-7">
-										<select id="agent" name="agent" class="select-select2" style="width: 100%;" data-placeholder="Choose one..">
-										<?php //echo "<option value='$agent'>$agent</option>";?>
-										<option value="All">All</option>
+                                               <select id="yearlist" name="yearlist" class="select-select2" style="width: 100%;" data-placeholder="Choose one..">
+										
 										
 										<?php
-											foreach($agentlist as $agent_list):
-												echo "<option value='".$agent_list['uid']."'>".$agent_list['name']."</option>";
+											foreach($year_list as $years):
+												echo "<option value='".$years['ticket_year']."'>".$years['ticket_year']."</option>";
 											endforeach;
 										
 										?>
 										
+										
+										</select>
+                                            </div>
+											<div class="row">&nbsp;</div>
+											<label class="col-md-3 control-label" for="example-daterange1">Month</label>
+											<div class="col-md-7">
+										<select id="monthvalue" name="monthvalue" class="select-select2" style="width: 100%;" data-placeholder="Choose one..">
+										<option value="All">All</option>
+										
+										<?php
+											foreach($month_list as $months):
+												echo "<option value='".$months['ticket_month']."'>".mdate('%F',strtotime($months['atime_stamp']))."</option>";
+											endforeach;
+										
+										?>
 										
 										
 										</select>
@@ -79,8 +84,8 @@
 		<div class="block full">
         <div class="block-title">
 			
-			<h5>Ticket by Agent</h5>
-			<a type="button" class="pull-right btn btn-md btn-primary" href="<?=base_url()?>reports/ticketbyagentdownload/<?php echo $startdate;?>/<?php echo $enddate;?>/<?php echo $agent;?>">Export Result XLS</a>
+			<h5>SMS by Month</h5>
+			<a type="button" class="pull-right btn btn-md btn-primary" href="<?=base_url()?>reports/smsbymonthdownload/<?php echo $smsyear_selected;?>/<?php echo $smsmonth_selected;?>">Export Result XLS</a>
 			
 			<?php //print_r($heidirectory);?>
         </div>
@@ -89,37 +94,23 @@
                 <thead>
                     <tr>
 						
-                        <th>Date Added</th>
-						<th>Ticket #</th>
-                        <th>Problem</th>
-                        <th>Customer</th>
-                        <th>Agent</th>
-                        <th>Status</th>
-						<th>Category</th>
-						<th>Priority</th>
+                        <th>Year</th>
+						<th>Month</th>
+                        <th>SMS Count</th>
+                       
                     </tr>
                 </thead>
                 <tbody>
 				<?php
-				
+				$total_sms =0;
 				foreach ($tickets as $tickets_list):
 				//$heiname = strtoupper($hei['instname']);
 				echo "<tr class='odd gradeX'>";
-				
-				
-				echo "<td>".mdate('%F %d, %Y',strtotime($tickets_list['time_stamp']))."</td>";
-				echo "<td> Ticket #: ".$tickets_list['ticketid']."</td>";
-				echo "<td>".$tickets_list['problem']."</td>";
-				echo "<td>".$tickets_list['cfname']." ".$tickets_list['clname']."</td>";
-				echo "<td>".$tickets_list['name']."</td>";
-				echo "<td>".$tickets_list['status']."</td>";
-				echo "<td>".$tickets_list['categoryid']."</td>";
-				echo "<td>".$tickets_list['priority']."</td>";
-				
-			
-				
+				echo "<td>".$tickets_list['yearly']."</td>";
+				echo "<td>".mdate('%F',strtotime($tickets_list['atime_stamp']))."</td>";
+				echo "<td>".$tickets_list['smssent']."</td>";
 				echo "</tr>";
-				
+				$total_sms+=$tickets_list['smssent'];
 				endforeach;
 				
 				?>
@@ -132,7 +123,24 @@
             </table>
         </div>
     </div>
-						
+				 <div class="row">
+                            <!-- Simple Stats Widgets -->
+                            <div class="col-sm-6 col-lg-3">
+                                <a href="javascript:void(0)" class="widget">
+                                    <div class="widget-content widget-content-mini themed-background-dark-social">
+                                       
+                                        <strong class="text-light-op">Total</strong>
+                                    </div>
+                                    <div class="widget-content themed-background-social clearfix">
+                                        <div class="widget-icon pull-right">
+                                            <i class="gi gi-envelope text-light-op"></i>
+                                        </div>
+                                        <h2 class="widget-heading h3 text-light"><strong><?php echo number_format($total_sms,0);?></strong></h2>
+                                        <span class="text-light-op">SMS Sent</span>
+                                    </div>
+                                </a>
+                            </div>
+				</div><!-- end row -->
 
 
                         

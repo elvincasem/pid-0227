@@ -201,12 +201,12 @@ foreach ($ticketlog as $ticketlog_list):
 									$usertype= $this->session->userdata('usertype');
 									//echo md5('staff');
 									//echo $usertype;
-									if ($usertype==md5('staff')){
+									//if ($usertype==md5('staff')){
 										//$hidesettings = "hidden";
-									}else{?>
+									//}else{?>
 										
 		<div class="pull-right"><button id="editbutton" type="submit" class="btn btn-sm btn-primary" onclick="editticket();"><i class="fa fa-edit"></i> Edit</button>&nbsp;&nbsp;<button type="submit" class="btn btn-sm btn-primary" onclick="updatedetails();" id="savebutton" disabled><i class="fa fa-save"></i> Save</button></div>
-									<?php } ?>
+									<?php //} ?>
 		
 	</div>
 	<!-- END Menu Title -->
