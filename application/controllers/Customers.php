@@ -151,12 +151,13 @@ class Customers extends CI_Controller
 	
 	public function getcustomerticket(){
 		$useremail = $this->input->post('useremail');
+		$status = $this->input->post('status');
 		
 		
 		header('Access-Control-Allow-Origin: *'); 
 		header('Content-Type: application/json');
 
-		echo json_encode($this->customers_model->getcustomerticket_mobile($useremail));
+		echo json_encode($this->customers_model->getcustomerticket_mobile($useremail,$status));
 		
 	}
 	public function getticketdetails(){
@@ -181,7 +182,15 @@ class Customers extends CI_Controller
 		
 	}
 	
-	
+	public function getcustomerticket_count(){
+		$useremail = $this->input->post('useremail');
+		
+		header('Access-Control-Allow-Origin: *'); 
+		header('Content-Type: application/json');
+
+		echo json_encode($this->customers_model->getcustomerticket_count_mobile($useremail));
+		
+	}
 	
 	
 

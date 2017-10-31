@@ -90,10 +90,10 @@ class Customers_model extends CI_Model
 		
 	}
 	
-	public function getcustomerticket_mobile($useremail)
+	public function getcustomerticket_mobile($useremail,$status)
 	{
 		//echo $customerid;
-		$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid WHERE customer.cemail=".$this->db->escape($useremail)."");
+		$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid WHERE customer.cemail=".$this->db->escape($useremail)." AND tickets.status=".$this->db->escape($status)."");
 		$result = $sql->result_array();
 		return $result;
 		
@@ -125,6 +125,32 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 		
 		
 	}
+	
+	public function getcustomerticket_count_mobile($useremail)
+	{
+		$ticket_count = array();
+		
+		$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid WHERE customer.cemail=".$this->db->escape($useremail)." AND tickets.status='Open'");
+		$result = $sql->result_array();
+		array_push($ticket_count,$result);
+		
+		$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid WHERE customer.cemail=".$this->db->escape($useremail)." AND tickets.status='Closed'");
+		$result2 = $sql->result_array();
+		array_push($ticket_count,$result2);
+		
+		$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid WHERE customer.cemail=".$this->db->escape($useremail)." AND tickets.status='RMA'");
+		$result3 = $sql->result_array();
+		array_push($ticket_count,$result3);
+		
+		$sql = $this->db->query("SELECT * FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid WHERE customer.cemail=".$this->db->escape($useremail)." AND tickets.status='Pickup'");
+		$result4 = $sql->result_array();
+		array_push($ticket_count,$result4);
+		
+		return $ticket_count;
+		
+		
+	}
+	
 	
 }
 
