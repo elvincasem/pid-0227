@@ -349,6 +349,7 @@
 							<option value="Pickup">Pickup</option>
 							<option value="RMA">RMA</option>
 							<option value="Closed">Closed</option>
+							<option value="Ordered Parts">Ordered Parts</option>
 							</select>
                         </div>
 						

@@ -98,12 +98,27 @@
 										
 										
 									</ul>
+									
+									
 								</li>
 										
 										
 										<?php
 									}
 								
+								?>
+								
+								<?php
+								if($title =="Dashboard"){
+									$total_ticket = $openticket['totalopen']+$rmaticket['totalrma']+$pickupcount['totalpickup']+$orderedpartsticketcount;
+									
+									echo "<li>
+                                   <h4> <a href='#'><i class='fa fa-thumbs-up sidebar-nav-icon'></i><span class='sidebar-nav-mini-hide'>Total Units: ". $total_ticket."</span></a></h4>
+                                </li>";
+								}
+								
+								
+															
 								?>
 								
 								
@@ -117,10 +132,11 @@
                             <!-- END Sidebar Navigation -->
 
                         </div>
+						
                         <!-- END Sidebar Content -->
                     </div>
                     <!-- END Wrapper for scrolling functionality -->
-
+			
                     <!-- Sidebar Extra Info -->
                     <div id="sidebar-extra-info" class="sidebar-content sidebar-nav-mini-hide">
                         

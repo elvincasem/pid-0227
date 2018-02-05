@@ -304,6 +304,15 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 		
 		
 	}
+	public function getorderedcount()
+	{
+		$sql = $this->db->query("SELECT count(*) as totalticket FROM tickets where status='Ordered Parts' AND ticket_status ='ACTIVE'");
+		$getcount = $sql->result_array();
+		return $getcount[0]['totalticket'];
+		
+		
+	}
+	
 	
 	public function updateticket($ticketid,$status)
 	{
@@ -339,10 +348,10 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 
 	}
 	
-	public function updatedescription($ticketid,$problem,$ticketdescription,$serialno,$history,$special_instruction)
+	public function updatedescription($ticketid,$problem,$ticketdescription,$serialno,$history,$special_instruction,$internal_notes)
 	{
 				
-		$sql = "update tickets set problem=".$this->db->escape($problem).",description=".$this->db->escape($ticketdescription).",serialno=".$this->db->escape($serialno).",history=".$this->db->escape($history).",special_instruction=".$this->db->escape($special_instruction)." where ticketid=".$this->db->escape($ticketid)."";
+		$sql = "update tickets set problem=".$this->db->escape($problem).",description=".$this->db->escape($ticketdescription).",serialno=".$this->db->escape($serialno).",history=".$this->db->escape($history).",special_instruction=".$this->db->escape($special_instruction).",internal_notes=".$this->db->escape($internal_notes)." where ticketid=".$this->db->escape($ticketid)."";
 		//echo $sql;
 		$this->db->query($sql);
 
@@ -432,6 +441,18 @@ ON tickets_log.updatedby = users.uid)) ticketlog WHERE ticketlog.ticketid = ".$t
 		$sql = "update tickets set categoryid=".$this->db->escape($categoryid)." where ticketid=".$this->db->escape($ticketid)."";
 
 		$this->db->query($sql);
+
+	}
+	public function deleteagentreply($tlogid)
+	{
+				
+		$this->db->delete('remarks_agent', array('aremarksid' => $tlogid)); 
+
+	}
+	public function deletesystemreply($tlogid)
+	{
+				
+		$this->db->delete('tickets_log', array('tlogid' => $tlogid)); 
 
 	}
 	

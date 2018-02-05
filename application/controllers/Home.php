@@ -55,6 +55,7 @@ class Home extends CI_Controller
 		$data['openticket'] = $this->dashboard_model->getopenticket();
 		$data['rmaticket'] = $this->dashboard_model->getrmaticket();
 		$data['orverdueticketcount'] = $this->dashboard_model->getoverduecount();
+		$data['orderedpartsticketcount'] = $this->dashboard_model->getorderedcount();
 		
 	
 		$startdate = $this->ticket_model->getstartdate();
@@ -65,6 +66,8 @@ class Home extends CI_Controller
 		$data['opentickets'] = $this->ticket_model->getticketliststatus("Open","All",$startdate,$enddate);
 		$data['rmatickets'] = $this->ticket_model->getticketliststatus("RMA","All",$startdate,$enddate);
 		$data['pickuptickets'] = $this->ticket_model->getticketliststatus("Pickup","All",$startdate,$enddate);
+		$data['ordered_parts'] = $this->ticket_model->getticketliststatus("Ordered Parts","All",$startdate,$enddate);
+		
 		
 		$data['overduetickets'] = $this->ticket_model->getoverdueticketlist("All");
 		

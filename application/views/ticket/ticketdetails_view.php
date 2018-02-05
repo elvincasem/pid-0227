@@ -57,8 +57,8 @@ table { page-break-inside:auto;}
 
 <div style="text-align:center;font-weight:bold;"><img style="width:100%;" src="<?php echo base_url();?>uploads/print_header.jpg"></div>
 <br>
-<div><strong>Customer Name: </strong><?php echo $ticketdetails['cfname']." ".$ticketdetails['clname'];?><span style="margin-left:50px;"></span><span><strong>Contact #:  </strong><?php echo $ticketdetails['cmobileno'];?></span> <span style="margin-left:50px;"></span><span><strong>Email:  </strong><?php echo $ticketdetails['cemail'];?></span> </div><br>
-
+<div><strong>Customer Name: </strong><?php echo $ticketdetails['cfname']." ".$ticketdetails['clname'];?><span style="margin-left:50px;"></span><span><strong>Contact #:  </strong><?php echo $ticketdetails['cmobileno'];?></span> <span style="margin-left:50px;"></span><span><strong>Email:  </strong><?php echo $ticketdetails['cemail'];?></span> </div>
+<div><strong>Company: </strong><?php echo $ticketdetails['ccompany'];?><span style="margin-left:50px;"></span><span><strong>Address:  </strong><?php echo $ticketdetails['caddress'];?></span> </div><br>
 <h4><strong>TICKET #: </strong><?php echo $ticketdetails['ticketid'];?></h4>
 
 
@@ -309,6 +309,7 @@ foreach ($ticketlog as $ticketlog_list):
 							<option value="Pickup">Pickup</option>
 							<option value="RMA">RMA</option>
 							<option value="Closed">Closed</option>
+							<option value="Ordered Parts">Ordered Parts</option>
 							</select>
 			</li>
 			
@@ -441,6 +442,8 @@ foreach ($ticketlog as $ticketlog_list):
 				<textarea class="form-control"   disabled id="history"><?php echo $ticketdetails['history'];?></textarea>
 				<label>Special Instruction</label>
 				<textarea class="form-control" disabled id="special_instruction"><?php echo $ticketdetails['special_instruction'];?></textarea>
+				<label>Internal Notes</label>
+				<textarea class="form-control" disabled id="internal_notes"><?php echo $ticketdetails['internal_notes'];?></textarea>
 			</p>
 		   <?php
 			if($ticketdetails['status']=="Open"){
@@ -454,6 +457,9 @@ foreach ($ticketlog as $ticketlog_list):
 			}
 			if($ticketdetails['status']=="Closed"){
 				echo "<div class='alert label-default animation-fadeInQuick'>Current Status: <strong>Closed</strong></div>";
+			}
+			if($ticketdetails['status']=="Ordered Parts"){
+				echo "<div class='alert alert-danger animation-fadeInQuick'>Current Status: <strong>Ordered Parts</strong></div>";
 			}
 		   
 		   ?>
@@ -482,8 +488,18 @@ foreach ($ticketlog as $ticketlog_list):
 		echo "<div class='media-body'>";
 		echo "<p class=''>
 				<span class='text-muted pull-right'>
-					<small>".$ticket_log['time_stamp']."</small>
-				</span>
+				
+					<small>".$ticket_log['time_stamp']."</small> ";
+		if($usertype=="21232f297a57a5a743894a0e4a801fc3"){
+			if($ticket_log['userreplied']=="Agent"){
+				echo "<button class='btn btn-danger notification' title='Delete Item' id='notification' onClick='deleteagentreply(".$ticket_log['remarksid'].")'><i class='fa fa-times'></i></button>";
+			}if($ticket_log['userreplied']=="System"){
+				echo "<button class='btn btn-danger notification' title='Delete Item' id='notification' onClick='deletesystemreply(".$ticket_log['remarksid'].")'><i class='fa fa-times'></i></button>";
+			}
+		}
+				
+					
+			echo	"</span>
 				<small><a href='#'>".$ticket_log['user_name']."</a></small>
 			</p>";
 		

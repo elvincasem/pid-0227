@@ -160,6 +160,12 @@
 			<i class="fa fa-fw fa-gear icon-push"></i> <strong>RMA</strong>
 		</a>
 	</li>
+	<li class="<?php echo $orderedclass;?>">
+		<a href="<?=base_url();?>ticket/orderedparts">
+			<span class="badge pull-right"><?php echo $orderedpartsticketcount;?></span>
+			<i class="fa fa-truck icon-push"></i> <strong>Ordered Parts</strong>
+		</a>
+	</li>
 	<li class="<?php echo $closedclass;?>">
 		<a href="<?=base_url();?>ticket/closed">
 			<span class="badge pull-right"><?php echo $closedtickets;?></span>
@@ -316,6 +322,8 @@
 						echo "<span class='label label-danger'>RMA</span>";
 					}if($ticketlist['status']=="Closed"){
 						echo "<span class='label label-default'>Closed</span>";
+					}if($ticketlist['status']=="Ordered Parts"){
+						echo "<span class='label label-danger'>Ordered Parts</span>";
 					}
 
 				echo "</td>";

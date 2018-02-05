@@ -20,13 +20,13 @@
                            
 							
 							
-                            <div class="col-sm-6 col-lg-3">
+                            <div class="col-sm-6 col-lg-4">
                                 <a href="ticket/open" class="widget">
                                     <div class="widget-content widget-content-mini text-right clearfix">
-                                        <div class="widget-icon pull-left themed-background-success">
+                                        <div class="widget-icon pull-left themed-background-open">
                                             <i class="gi gi-folder_open text-light-op"></i>
                                         </div>
-                                        <h2 class="widget-heading h3 text-success">
+                                        <h2 class="widget-heading h3 text-open">
                                             <strong><span data-toggle="counter" data-to=""><?php 
 										echo $openticket['totalopen'];
 										?></span></strong>
@@ -37,7 +37,7 @@
                             </div>
 							
 							
-							 <div class="col-sm-6 col-lg-3">
+							 <div class="col-sm-6 col-lg-2">
                                 <a href="ticket/pickup" class="widget">
                                     <div class="widget-content widget-content-mini text-right clearfix">
                                         <div class="widget-icon pull-left themed-background">
@@ -56,7 +56,7 @@
                             </div>
 							
 							
-                            <div class="col-sm-6 col-lg-3">
+                            <div class="col-sm-6 col-lg-2">
                                 <a href="ticket/overdue" class="widget">
                                     <div class="widget-content widget-content-mini text-right clearfix">
                                         <div class="widget-icon pull-left themed-background-danger">
@@ -72,7 +72,7 @@
                                 </a>
                             </div>
 							
-                            <div class="col-sm-6 col-lg-3">
+                            <div class="col-sm-6 col-lg-2">
                                 <a href="ticket/rma" class="widget">
                                     <div class="widget-content widget-content-mini text-right clearfix">
                                         <div class="widget-icon pull-left themed-background-danger">
@@ -87,11 +87,26 @@
                                     </div>
                                 </a>
                             </div>
+							<div class="col-sm-6 col-lg-2">
+                                <a href="ticket/orderedparts" class="widget">
+                                    <div class="widget-content widget-content-mini text-right clearfix">
+                                        <div class="widget-icon pull-left themed-background-warning">
+                                            <i class="fa fa-truck text-light-op"></i>
+                                        </div>
+                                        <h2 class="widget-heading h3 text-danger">
+                                            <strong><span data-toggle="counter" data-to=""><?php 
+										echo $orderedpartsticketcount;
+										?></span></strong>
+                                        </h2>
+                                        <span class="text-muted">Ordered Parts</span>
+                                    </div>
+                                </a>
+                            </div>
 							
 							<div class="row"></div>
 							<div class="col-sm-6">
 								<div class="widget" >
-									<div class="widget-content themed-background-success text-light-op">
+									<div class="widget-content themed-background-open text-light-op">
 										<i class="gi gi-folder_open fa-chevron-right"></i> <strong> Open Tickets</strong>
 									</div>
 									
@@ -254,7 +269,41 @@
 				</div>
 							<div class="row">
 							</div>
+										
+				<div class="col-sm-6">
+					<div class="widget" >
+						<div class="widget-content themed-background-warning text-light-op">
+							<i class="gi gi-file fa-chevron-right"></i> <strong> Ordered Parts</strong>
+						</div>
+									
+									
+					<div class="widget-content widget-content-full">
+						<table id="example-datatable4" class="table table-striped table-borderless remove-margin">
+						<thead>
+							<th>Customer</th>
+							<th class="text-center">Ticket</th>
 							
+						</thead>
+							<tbody>
+								<?php
+								foreach($ordered_parts as $oparts):
+								
+								echo "<tr>";
+								echo "<td><a href='ticket/details/".$oparts['ticketid']."' class='text-black'>".$oparts['cfname']." ".$oparts['clname']."</a></td>";
+								echo "<td class='text-center' ><a href='ticket/details/".$oparts['ticketid']."' class='text-black'><span class='text-muted'>Ticket#:".$oparts['ticketid']."</span></td>";
+								echo "</a></tr>";
+								
+								endforeach;
+							
+							?>
+								
+								
+							</tbody>
+						</table>
+					</div>
+								</div>
+				</div>
+				
 							
 							 
                         </div>

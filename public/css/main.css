@@ -1684,6 +1684,14 @@ a.text-success:focus {
     color: #afde5c;
 }
 
+.text-open,
+.text-open:hover,
+a.text-open,
+a.text-open:hover,
+a.text-open:focus {
+    color: #69a105;
+}
+
 .text-info,
 .text-info:hover,
 a.text-info,
@@ -3506,6 +3514,9 @@ p, .table, .alert, .carousel {
     background-color: #f9f9f9 !important;
 }
 
+.themed-background-open {
+    background-color: #69a105 !important;
+}
 /*
 =================================================================
 (#m09res) RESPONSIVE

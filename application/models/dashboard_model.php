@@ -53,6 +53,14 @@ class Dashboard_model extends CI_Model
 		
 	}
 	
+	public function getorderedcount()
+	{
+		$sql = $this->db->query("SELECT count(*) as totalticket FROM tickets where status='Ordered Parts' AND ticket_status ='ACTIVE'");
+		$getcount = $sql->result_array();
+		return $getcount[0]['totalticket'];
+		
+		
+	}
 	
 	
 	

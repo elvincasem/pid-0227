@@ -201,6 +201,7 @@ function editdescription(){
 	$('#serialno').prop("disabled", false); 
 	$('#history').prop("disabled", false); 
 	$('#special_instruction').prop("disabled", false); 
+	$('#internal_notes').prop("disabled", false); 
 	
 }
 
@@ -264,13 +265,14 @@ function updatedescription(){
 	var serialno = document.getElementById("serialno").value;
 	var history = document.getElementById("history").value;
 	var special_instruction = document.getElementById("special_instruction").value;
+	var internal_notes = document.getElementById("internal_notes").value;
 	
 	
 		
 			$.ajax({
 			url: '../updatedescription',
 			type: 'post',
-			data: {ticketid: ticketid,problem:problem,ticketdescription:ticketdescription,serialno:serialno,history:history,special_instruction:special_instruction},
+			data: {ticketid: ticketid,problem:problem,ticketdescription:ticketdescription,serialno:serialno,history:history,special_instruction:special_instruction,internal_notes:internal_notes},
 			success: function(response) {
 				console.log(response);
 				$('#ticket_timeline').load(document.URL +  ' #ticket_timeline');
@@ -423,6 +425,60 @@ function archiveticket(id){
                 });
 		//}else{
 			//alert("Invalid Password");
+		//}
+		
+    } if(r == false) {
+        //txt = "You pressed Cancel!";
+		
+    }
+	
+}
+
+
+function deleteagentreply(id){
+	
+	var r = confirm("Are your sure you want to delete this Reply?");
+    if (r == true) {
+        //alert ("You pressed OK!");
+		//var person = prompt("Please enter Administrator Password");
+		//if (person =='superadmin') {
+		$.ajax({
+                    url: '../deleteagentreply',
+                    type: 'post',
+                    data: {tlogid: id},
+                    success: function(response) {
+						console.log(response);
+						location.reload();
+                    }
+                });
+		//}else{
+		//	alert("Invalid Password");
+		//}
+		
+    } if(r == false) {
+        //txt = "You pressed Cancel!";
+		
+    }
+	
+}
+function deletesystemreply(id){
+	
+	var r = confirm("Are your sure you want to delete this Reply?");
+    if (r == true) {
+        //alert ("You pressed OK!");
+		//var person = prompt("Please enter Administrator Password");
+		//if (person =='superadmin') {
+		$.ajax({
+                    url: '../deletesystemreply',
+                    type: 'post',
+                    data: {tlogid: id},
+                    success: function(response) {
+						console.log(response);
+						location.reload();
+                    }
+                });
+		//}else{
+		//	alert("Invalid Password");
 		//}
 		
     } if(r == false) {

@@ -46,6 +46,7 @@ class Ticket extends CI_Controller
 			
 			
 		$this->session;
+		
 	}
 	
 	public function index()
@@ -85,6 +86,7 @@ class Ticket extends CI_Controller
 		$data['rmaclass'] ="";
 		$data['closedclass'] ="";
 		$data['overdueclass'] ="";
+		$data['orderedclass'] ="";
 		
 		
 		
@@ -98,6 +100,7 @@ class Ticket extends CI_Controller
 		$data['opentickets'] = $this->ticket_model->getopentickets();
 		$data['closedtickets'] = $this->ticket_model->getclosedtickets();
 		$data['orverdueticketcount'] = $this->ticket_model->getoverduecount();
+		$data['orderedpartsticketcount'] = $this->ticket_model->getorderedcount();
 		
 		$data['categorytickets'] = $this->ticket_model->getcategorytickets();
 		
@@ -132,6 +135,7 @@ class Ticket extends CI_Controller
 		$data['rmaclass'] ="";
 		$data['closedclass'] ="";
 		$data['overdueclass'] ="active";
+		$data['orderedclass'] ="";
 		
 		$data['tickets'] = $this->ticket_model->getoverdueticketlist($data['filter_category']);
 		
@@ -144,6 +148,7 @@ class Ticket extends CI_Controller
 		$data['opentickets'] = $this->ticket_model->getopentickets();
 		$data['closedtickets'] = $this->ticket_model->getclosedtickets();
 		$data['orverdueticketcount'] = $this->ticket_model->getoverduecount();
+		$data['orderedpartsticketcount'] = $this->ticket_model->getorderedcount();
 		
 		$data['category'] = $this->ticket_model->getcategory();
 		$data['categorytickets'] = $this->ticket_model->getcategorytickets();
@@ -189,6 +194,8 @@ class Ticket extends CI_Controller
 		$data['rmaclass'] ="";
 		$data['closedclass'] ="active";
 		$data['overdueclass'] ="";
+		$data['orderedclass'] ="";
+		
 		$data['tickets'] = $this->ticket_model->getticketliststatus("Closed",$data['filter_category'],$startdate,$enddate);
 				
 		//get count		
@@ -198,6 +205,7 @@ class Ticket extends CI_Controller
 		$data['opentickets'] = $this->ticket_model->getopentickets();
 		$data['closedtickets'] = $this->ticket_model->getclosedtickets();
 		$data['orverdueticketcount'] = $this->ticket_model->getoverduecount();
+		$data['orderedpartsticketcount'] = $this->ticket_model->getorderedcount();
 		
 		$data['category'] = $this->ticket_model->getcategory();
 		$data['categorytickets'] = $this->ticket_model->getcategorytickets();
@@ -243,6 +251,7 @@ class Ticket extends CI_Controller
 		$data['rmaclass'] ="";
 		$data['closedclass'] ="";
 		$data['overdueclass'] ="";
+		$data['orderedclass'] ="";
 		
 				
 		//get count		
@@ -252,6 +261,7 @@ class Ticket extends CI_Controller
 		$data['opentickets'] = $this->ticket_model->getopentickets();
 		$data['closedtickets'] = $this->ticket_model->getclosedtickets();
 		$data['orverdueticketcount'] = $this->ticket_model->getoverduecount();
+		$data['orderedpartsticketcount'] = $this->ticket_model->getorderedcount();
 		
 		$data['category'] = $this->ticket_model->getcategory();
 		$data['categorytickets'] = $this->ticket_model->getcategorytickets();
@@ -296,6 +306,7 @@ class Ticket extends CI_Controller
 		$data['rmaclass'] ="";
 		$data['closedclass'] ="";
 		$data['overdueclass'] ="";
+		$data['orderedclass'] ="";
 		
 				
 		//get count		
@@ -305,6 +316,7 @@ class Ticket extends CI_Controller
 		$data['opentickets'] = $this->ticket_model->getopentickets();
 		$data['closedtickets'] = $this->ticket_model->getclosedtickets();
 		$data['orverdueticketcount'] = $this->ticket_model->getoverduecount();
+		$data['orderedpartsticketcount'] = $this->ticket_model->getorderedcount();
 		
 		$data['category'] = $this->ticket_model->getcategory();
 		$data['categorytickets'] = $this->ticket_model->getcategorytickets();
@@ -352,6 +364,7 @@ class Ticket extends CI_Controller
 		$data['rmaclass'] ="active";
 		$data['closedclass'] ="";
 		$data['overdueclass'] ="";
+		$data['orderedclass'] ="";
 		
 				
 		//get count		
@@ -361,6 +374,7 @@ class Ticket extends CI_Controller
 		$data['opentickets'] = $this->ticket_model->getopentickets();
 		$data['closedtickets'] = $this->ticket_model->getclosedtickets();
 		$data['orverdueticketcount'] = $this->ticket_model->getoverduecount();
+		$data['orderedpartsticketcount'] = $this->ticket_model->getorderedcount();
 		
 		
 		$data['categorytickets'] = $this->ticket_model->getcategorytickets();
@@ -375,6 +389,68 @@ class Ticket extends CI_Controller
 		$this->load->view('inc/footer_view',$js);
 		
 	}
+	public function orderedparts()
+	{
+		$data = $this->data;
+		$js = $this->js;
+		
+		//category filter
+		$data['filter_category'] = $this->input->post('filter_category');
+		if($data['filter_category']==""){
+			$data['filter_category']="All";
+		}
+		
+		//date filter
+		$startdate = $this->input->post('startdate');
+		$enddate = $this->input->post('enddate');
+		if($startdate=="" || $enddate==""){
+			$data['startdate'] = $this->ticket_model->getstartdate();
+			$startdate = $this->ticket_model->getstartdate();
+			$data['enddate'] = $this->ticket_model->getenddate();
+			$enddate = $this->ticket_model->getenddate();
+		}else{
+			$data['startdate'] = $startdate;
+			$data['enddate'] = $enddate;
+		}
+		
+		//query ticket
+		$data['tickets'] = $this->ticket_model->getticketliststatus("Ordered Parts",$data['filter_category'],$startdate,$enddate);
+		
+		
+		$data['subnavtitle'] ="Ticket List: Ordered Parts, Category:".$data['filter_category']."";
+		$data['ticketlistclass'] = 'active';
+		$data['allclass'] ="";
+		$data['pickupclass'] ="";
+		$data['openclass'] ="";
+		$data['rmaclass'] ="";
+		$data['closedclass'] ="";
+		$data['overdueclass'] ="";
+		$data['orderedclass'] ="active";
+		
+				
+		//get count		
+		$data['totaltickets'] = $this->ticket_model->gettotaltickets();
+		$data['pickuptickets'] = $this->ticket_model->getpickuptickets();
+		$data['rmatickets'] = $this->ticket_model->getrmatickets();
+		$data['opentickets'] = $this->ticket_model->getopentickets();
+		$data['closedtickets'] = $this->ticket_model->getclosedtickets();
+		$data['orverdueticketcount'] = $this->ticket_model->getoverduecount();
+		$data['orderedpartsticketcount'] = $this->ticket_model->getorderedcount();
+		
+		
+		$data['categorytickets'] = $this->ticket_model->getcategorytickets();
+		
+		$data['category'] = $this->ticket_model->getcategory();
+		
+		$data['startdate'] = $this->ticket_model->getstartdate();
+		$data['enddate'] = $this->ticket_model->getenddate();
+		
+		$this->load->view('inc/header_view');
+		$this->load->view('ticket/ticket_view',$data);
+		$this->load->view('inc/footer_view',$js);
+		
+	}
+	
 	public function add()
 	{
 		$data = $this->data;
@@ -439,6 +515,9 @@ class Ticket extends CI_Controller
         }
         curl_close($ch);
 		
+		
+		$data['usertype'] = $this->session->userdata('usertype');
+			
 		$data['subnavtitle'] ="Ticket #: $id";
 		$this->load->view('inc/header_view');
 		$this->load->view('ticket/ticketdetails_view',$data);
@@ -609,13 +688,14 @@ class Ticket extends CI_Controller
 		$serialno = $this->input->post('serialno');
 		$history = $this->input->post('history');
 		$special_instruction = $this->input->post('special_instruction');
+		$internal_notes = $this->input->post('internal_notes');
 		
 		
 		$ticketdetails = $this->ticket_model->getticketdetails($ticketid);
 		//print_r($ticketdetails);
 		$uid = $this->session->userdata('uid');
 		
-		$this->ticket_model->updatedescription($ticketid,$problem,$ticketdescription,$serialno,$history,$special_instruction);
+		$this->ticket_model->updatedescription($ticketid,$problem,$ticketdescription,$serialno,$history,$special_instruction,$internal_notes);
 		
 		$formstatus = $ticketdetails['status'];
 		
@@ -784,6 +864,17 @@ class Ticket extends CI_Controller
          } 
       }  
 	
+	
+	public function deleteagentreply()
+	{
+		$tlogid = $this->input->post('tlogid');
+		$this->ticket_model->deleteagentreply($tlogid);
+	}
+	public function deletesystemreply()
+	{
+		$tlogid = $this->input->post('tlogid');
+		$this->ticket_model->deletesystemreply($tlogid);
+	}
 	
 	
 
