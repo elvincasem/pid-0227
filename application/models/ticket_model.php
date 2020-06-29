@@ -4,6 +4,15 @@
 class Ticket_model extends CI_Model
 {
 	
+	function __construct()
+	{
+		parent::__construct();
+		$this->db->query("SET SESSION time_zone = '+8:00';");
+		$this->load->helper('date');
+		$now = new DateTime();
+		$now->setTimezone(new DateTimezone('Asia/Manila'));
+		
+	}
 	
 	public function savecustomer($cemail,$clname,$cfname,$cmname,$caddress,$cmobileno,$cotherno,$cpassword)
 	{
@@ -44,6 +53,10 @@ class Ticket_model extends CI_Model
 	
 	public function getticketdetails($id)
 	{
+		$this->load->helper('date');
+		$now = new DateTime();
+		$now->setTimezone(new DateTimezone('Asia/Manila'));
+		$now_timestamp = $now->format('Y-m-d H:i:s');
 		$sql = $this->db->query("SELECT *,(SELECT NAME AS uname FROM tickets LEFT JOIN users ON tickets.addedbyuid = users.uid WHERE tickets.ticketid=".$this->db->escape($id).") AS agentname FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid WHERE ticketid=".$this->db->escape($id)."");
 		
 		//echo "SELECT *,(SELECT NAME AS uname FROM tickets LEFT JOIN users ON tickets.addedbyuid = users.uid WHERE tickets.ticketid=".$this->db->escape($id).") AS agentname FROM tickets LEFT JOIN customer ON tickets.customerid = customer.customerid LEFT JOIN users ON tickets.assignedto_uid = users.uid LEFT JOIN department ON tickets.departmentid = department.departmentid WHERE ticketid=".$this->db->escape($id)."";

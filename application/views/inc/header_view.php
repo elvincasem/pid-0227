@@ -60,6 +60,7 @@
 
         <!-- Modernizr (browser feature detection library) -->
         <script src="<?=base_url()?>public/js/vendor/modernizr-3.3.1.min.js"></script>
+		<link id="theme-link" rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     </head>
 
     <body>

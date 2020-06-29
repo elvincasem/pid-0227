@@ -9,7 +9,8 @@ class Ticket extends CI_Controller
 		//$this->load->model('ticket_model');
 		$this->load->model('ticket_model');
 		$this->load->library('phpmailer');
-		$timezonedb = "SET time_zone = 'Asia/Manila'";
+		//$timezonedb = "SET time_zone = 'Asia/Manila'";
+		$timezonedb = "SET time_zone = '+08:00'";
 		$this->db->query($timezonedb);
 		
 		$this->load->helper('date');
@@ -111,6 +112,38 @@ class Ticket extends CI_Controller
 		$this->load->view('inc/header_view');
 		$this->load->view('ticket/ticket_view',$data);
 		$this->load->view('inc/footer_view',$js);
+		
+	}
+	
+	public function indexjson()
+	{
+		
+
+		
+		$data['filter_category'] = "";
+		if($data['filter_category']==""){
+			$data['filter_category']="All";
+		}
+		
+		$startdate = $this->input->post('startdate');
+		$enddate = $this->input->post('enddate');
+		if($startdate=="" || $enddate==""){
+			$data['startdate'] = $this->ticket_model->getstartdate();
+			$startdate = $this->ticket_model->getstartdate();
+			$data['enddate'] = $this->ticket_model->getenddate();
+			$enddate = $this->ticket_model->getenddate();
+		}else{
+			$data['startdate'] = $startdate;
+			$data['enddate'] = $enddate;
+		}
+		
+		
+		$csparray = $this->ticket_model->getticketlist($data['filter_category'],$startdate,$enddate);
+
+		echo json_encode($csparray);
+		
+		
+		
 		
 	}
 	
@@ -587,7 +620,7 @@ class Ticket extends CI_Controller
 		
 		//notify via sms
 		if($sms == "yes"){
-			$sms_to = $this->send_sms($cmobileno,$ticketid,$ticket_reply);
+			$sms_to = $this->send_sms_bulk($cmobileno,$ticketid,$ticket_reply);
 		}
 		
 		if($emailclient =="yes"){
@@ -774,6 +807,23 @@ class Ticket extends CI_Controller
                                     $ok = "fail";       
                         }          
                         return $ok; 
+	}
+	public function send_sms_bulk($sms_to,$ticketid,$ticket_reply){
+			$this->load->helper('url');
+			$sms_from = "EVENLYTEN";
+			//$sms_to = "09468147457";
+			$user = "ecasem";
+			$pass = "passw0rd";
+			$sms_msg = "Ticket id #:".$ticketid."\n".$ticket_reply;
+			 $query_string = "?un=".$user."&pwd=".$pass;
+			$query_string .= "&dstno=".rawurlencode($sms_to);
+			 $query_string .= "&msg=".rawurlencode(stripslashes($sms_msg)) . "&type=1&sendid=".$sms_from;        
+			$url = "https://www.isms.com.my/isms_send.php".$query_string;
+			
+			//redirect($url);
+			echo file_get_contents($url);
+			//echo $url;
+			
 	}	
 	
 	public function send_email($email,$subject,$body){

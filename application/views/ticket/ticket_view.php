@@ -1,4 +1,4 @@
-
+<script src="<?=base_url()?>public/js/datatables_data_sources.js"></script>
 <div id="page-container" class="header-fixed-top sidebar-visible-lg-full">
 	
 	
@@ -279,12 +279,41 @@
                                         <!-- Tickets List -->
                                         <div class="tab-pane active" id="tickets-list">
                                             <div class="block-content-full">
-                                                <div class="table-responsive remove-margin-bottom">
-                                                    <table id="datatable-ticket" class="table table-striped table-bordered table-vcenter table-hover">
+                                                <div class="table-responsive">
+<table  class="table table-striped hover datatableapplicant-ajax"  id="DataTables_Table_1">
+                <thead>
+                    <tr>
+                        <th>Ticket No.</th>
+                        <th style="width:200px;">Date</th>
+						<th>Problem</th>
+                        <th>Customer</th>
+                        <th>Agent</th>
+                        <th>Status</th>
+                        <th>Category</th>
+                        <th>Priority</th>
+						<th></th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+         
+                </tbody>
+            </table>
+			
+
+
+
+
+
+<!--
+
+
+												   <table id="datatable-ticket" class="table table-striped table-bordered table-vcenter table-hover">
                 <thead>
                     <tr style="text-align:center;">
                         
-                        <!-- <th style="width:100px;">Delivery ID</th>-->
+                        <!-- <th style="width:100px;">Delivery ID</th>
                         <th>Ticket No.</th>
                         <th style="width:200px;">Date</th>
 						<th>Problem</th>
@@ -296,8 +325,9 @@
 						<th></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody>-->
 				<?php
+				/*
 				$base = base_url();
 				foreach ($tickets as $ticketlist):
 				
@@ -340,15 +370,15 @@
 				echo "</tr>";
 				
 				endforeach;
-				
+				*/
 				?>
 				
 				
 				
 				
                     
-                </tbody>
-            </table>
+             <!--   </tbody>
+            </table>-->
 													
 													
 													
